@@ -1,0 +1,82 @@
+=============================================================================
+	README file for the example files encoder.xxx
+=============================================================================
+
+
+Description:	This network learns to code 8 units to 3 units and encode 
+============	3 units to 8 units.
+
+The task of an n-m-n-encoder network is to code a 1-of-n coding of n
+input units to m = log(n) hidden units and to encode the outputs of
+these m units again to a 1-of-n representation of n units.
+
+What makes the problem interesting is that the network is
+required to have a small number of hidden units.
+Note that these input and output values are internally treated as real
+values by the network, although the problem is a binary problem.
+
+Encoders with m = log(n) are called 'tight' encoders, 
+	 with m < log(n) are called 'supertight' encoders, 
+	 with m > log(n) are called 'loose' encoders.
+
+Note that obviously for this problem no shortcut connections from
+input to output are allowed.
+
+
+Pattern-Files:	encoder.pat
+==============
+
+Each of the eight input patterns consists of one '1' at Position i and
+'0' at the remaining positions. The output consists of the identical
+pattern, therefore the mapping to be learned is the identity
+mapping. 
+
+
+Network-Files:	encoder.net
+==============
+
+
+Config-Files:	encoder.cfg
+=============
+
+
+Hints:
+======
+
+The following table shows some learning functions one may use to train
+the network. In addition, it shows the learning-parameters and the
+number of cycles we needed to train the network successfully. These
+parameters have not been obtained with extensive studies of
+statistical significance. They are given as hints to start your own
+training sessions, but should not be cited as optimal or used in
+comparisons of learning procedures or network simulators. Surely you
+can do better...
+
+Learning-Function               Learning-Parameters       Cycles
+
+Std.-Backpropagation            2.0                         750
+Backpropagation with Momentum   0.8  0.6   0.1              300
+Quickprop                       0.2  1.75  0.0001            75  
+Rprop                           0.2                          75
+
+You may easily build your own n-m-n encoder networks either by adding
+or deleting hidden units or by using the BIGNET tool from the info
+panel.
+
+To create the 8-4-8 encoder by adding a hidden unit select one hidden
+unit with left mouse button (it turns yellow), make it the curent
+target unit by pressing the middle mouse button and enter 'u c a'
+(units copy all) on the keyboard while the mouse pointer is inside the
+2D display window. This creates a duplicate of the selected hidden
+unit with all input and output connections copied from the
+original. Now initialize the network and train the enlarged 8-4-8
+network. Try also the 8-2-8 encoder!
+
+Note that the time to train an n-(log n)-n encoder grows exponentially
+with n. A 128-7-128 encoder can still be trained with SNNS, larger
+values give problems.
+
+
+=============================================================================
+	End of README file
+=============================================================================

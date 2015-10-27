@@ -1,0 +1,106 @@
+/*****************************************************************************
+  FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/xgui/sources/README,v $
+  SHORTNAME      : README
+  SNNS VERSION   : 4.2
+
+  PURPOSE        : Readme File for SNNS xgui
+  NOTES          :
+
+  AUTHOR         : Guenter Mamier
+  DATE           : 20.04.1994
+
+  CHANGED BY     : 
+  RCS VERSION    : $Revision: 2.5 $
+  LAST CHANGE    : $Date: 1998/03/13 17:35:34 $
+
+    Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
+    Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
+
+******************************************************************************/
+
+
+This Directory contains the following files:
+
+README          :       This file
+bn_JordElm.c	:	the BIGNET Jordan-Elman panel & functions 
+bn_TD bignet.c 	:	the BIGNET time delay panel & functions 
+bn_art1.c  	:	the BIGNET ART1 panel & functions 
+bn_art2.c  	:	the BIGNET ART2 panel & functions 
+bn_artmap.c  	:	the BIGNET ARTMAP panel & functions 
+bn_assoz.c	:	the BIGNET autoassoziative memory panel & functions 
+bn_basics.c  	:	subroutines common to all BIGNET tools 
+bn_bighop.c	:       the BIGNET panel & functions for hopfield networks 
+bn_bignet.c  	:	the BIGNET feed forward panel & functions 
+bn_kohonen.c	:	the BIGNET kohonen panel & functions
+cc_main.c  	:	cascade correlation control panel 
+d3_anageo.c  	:	3-D matrix operations 
+d3_disp.c  	:	event loop for 3-D display 
+d3_dither.c  	:	color rastering 
+d3_draw.c  	:	high level drawing functions 
+d3_fonts.c  	:	text output control 
+d3_global.c  	:	global variables for 3-D 
+d3_graph.c  	:	low level drawing functions 
+d3_light.c  	:	illumination panel 
+d3_links.c  	:	3-D link display panel 
+d3_lists.c  	:	3-D list managenemt 
+d3_main.c  	:	3-D interface handling 
+d3_model.c  	:	solid/wire display setting 
+d3_move.c  	:	rotation,translation and scaling 
+d3_pannels.c  	:	3-D control panel 
+d3_point.c  	:	3-D pixel output 
+d3_project.c  	:	3-D projection panel 
+d3_setup.c  	:	3-D setup panel 
+d3_shade.c  	:	shading algorithm 
+d3_units.c  	:	3-D unit setup panel 
+d3_xUtils.c  	:	X window routine interface 
+d3_zValue.c  	:	z-value input panel 
+d3_zgraph.c  	:	z-buffer functions 
+net_analyzer.c  :	routines for the network analyzer
+o_graph.c  	:	plotting of the error graph 
+pr_main.c	:	all functions for the network pruning panel
+ui_action.c  	:	editor actions 
+ui_class.c	:	functions for the class distribution panel
+ui_colEdit.c  	:	changing of the display colors 
+ui_color.c  	:	handles the color maps 
+ui_config.c  	:	load & save of configurations 
+ui_confirmer.c  :	handling of the confirmer 
+ui_control.c  	:	creation of the control panel 
+ui_controlP.c  	:	callbacks and handling of the control panel 
+ui_display.c  	:	aministration of displays 
+ui_displwght.c  :	implements the Hinton- and WV-diagrams 
+ui_edit.c  	:	editing of f-types and sites 
+ui_event.c  	:	event handler for mouse or window events 
+ui_file.c  	:	creation of the file panel 
+ui_fileP.c  	:	load, save (high level) 
+ui_funcdispl.c  :	displays the activation and output functions 
+ui_info.c  	:	creation of the info panel 
+ui_infoP.c  	:	callbacks and handling of the info panel 
+ui_inversion.c  :	handels the inversion display & algorithm 
+ui_key.c  	:	event handler for keyboard 
+ui_kohonen.c	:	handels the kohonen display
+ui_layer.c  	:	creation of layer popups 
+ui_layerP.c 	:	handling of the layer popup 
+ui_lists.c  	:	administration of the list popup 
+ui_main.c  	:	initializing 
+ui_mainP.c  	:	windows and popups, help facility 
+ui_maspar.c  	:	maspar user interface 
+ui_netGraph.c  	:	drawing of network elements (mid level) 
+ui_netUpdate.c  :	drawing of the network, whole or parts (high level) 
+ui_print.c  	:	creation and handling of the print panel 
+ui_result.c 	:	handling of the result file generation 
+ui_selection.c  :	administration of the selection 
+ui_setup.c  	:	creation of the setup panel 
+ui_setupP.c  	:	administration of the setup panel 
+ui_status.c  	:	status information in the manager panel 
+ui_textP.c  	:	text output (stdout, Log file) 
+ui_utilP.c  	:	utility functions 
+ui_xGraphic.c  	:	X graphic interface (low level) 
+ui_xWidgets.c  	:	handling of widgets 
+
+ui.h  		:	datatypes, definitions 
+
+
+The .h  files are the correspondent public headers
+The .ph files are the correspondent private headers
+
+

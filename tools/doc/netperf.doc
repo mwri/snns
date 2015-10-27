@@ -1,0 +1,49 @@
+                  ===============================
+                  Description of the tool NETPERF
+                  ===============================
+
+This is a benchmark program for SNNS. Propagtion and
+backpropagation tests are performed.
+
+synopsis: netperf
+
+
+example:
+
+unix >netperf
+
+produces
+
+  SNNS 3D-Kernel V3.1000
+  -----  Benchmark Test  -----
+
+  Filename of the network file: ../../../examples/nettalk.net
+  Loading the network ...
+
+  Network name: nettalk1
+  No. of units       : 349
+  No. of input units : 203
+  No. of output units: 26
+  No. of sites: 0
+  No. of links: 27480
+
+  Learning function: Std_Backpropagation
+  Update function  : Topological_Order
+
+  Do you want to benchmark
+  Propagation [1] or
+  Backpropagation [2] ?
+  Input: 1
+
+  Choose no. of cycles: 100
+
+  Begin propagation ...
+
+
+  No. of units updated: 34900
+  No. of sites updated: 0
+  No. of links updated: 2748000
+  CPU Time used: 3.05 seconds
+
+  No. of connection per second (CPS): 9.0098e+05
+

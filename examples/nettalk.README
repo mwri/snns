@@ -1,0 +1,80 @@
+=============================================================================
+	README file for the example files nettalk.xxx
+=============================================================================
+
+
+Description:	The NETtalk network, a famous feedforward-network
+============	
+
+This network is a lookalike to the nettalk network, a famous
+feedforward-network, developed by T.J. Sejnowski and C.R. Rosenfeld:
+
+T.J. Sejnowski and C.R. Rosenfeld:NETtalk: a parallel network that
+learns to read aloud, The Johns Hopkins Univ. EE and
+Comp. Sc. Technical Report JHU/EECS-86/01, 32 pp., also in:
+J.A. Anderson, E. Rosenfeld, Neurocomputing, Foundations of Resarch,
+MIT Press, 1988
+
+The nettalk network given here is NOT the fully trained NETtalk
+network, but a lookalike with the same topology (same number of units,
+same connectivity, same number of weights). We use this network mainly
+for benchmarking, since the nettalk network has become a de facto
+standard benchmarking network.
+
+
+Pattern-Files:	nettalk.pat
+==============
+
+The pattern file nettalk.pat is NOT the original NETtalk pattern file
+but also a smaller lookalike with a similar statistical distribution
+of input bits set to '1'.  See the paper cited above for the real
+NETtalk data and input/output coding.
+
+This pattern file, which we use both for training and test of 'raw
+speed' backpropagation benchmarks of SNNS on different machines,
+operating systems and compilers, consists of only 200 input patterns,
+whereas the original NETtalk data consists of 1000 input patterns
+taken from an even larger dictionary of approx. 20.000 input patterns.
+Since convergence of the algorithm doesn't matter in backpropagation
+implementation speed benchmarks this is no problem.
+
+
+Network-Files:	nettalk.net
+==============
+
+The nettalk network consists of
+	203 input units
+	120 hidden units
+	 26 output units
+All layers are fully connected without shortcut connections.
+
+
+Config-Files:	nettalk.cfg
+=============
+
+Since this is no 'real' application and data, it is not too
+interesting to view the network. The configuration file nettalk.cfg is
+for those who want to view it anyway.
+
+
+Hints:
+======
+
+We usually call nettalk.net from the tool 'netperf', a benchmarking
+version of SNNS without graphical user interface but with the full and
+current SNNS kernel. It is supplied with SNNS in the tools directory.
+We usually train and test nettalk for 10 cycles. Since convergence is
+not important, the learning parameters can be set to arbitrary (small)
+values or even be set to 0.
+
+Performance numbers for SNNS supplied by external testers should best
+be obtained the same way. If you send us the training and recall speed
+of SNNS on your machine for this network, please specify in detail the
+SNNS version, machine model (maker, type), main memory size, operating
+system version, compiler and compiler optimization level at
+installation of SNNS.
+
+
+=============================================================================
+	End of README file
+=============================================================================

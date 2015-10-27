@@ -1,0 +1,21 @@
+This file documents changes since the first release.
+
+2004-06-04:
+- Joined getFirstSiteTableEntry and getNextSiteTableEntry to
+  getSiteTable
+- setFirstSite/setNextSite throw exceptions on error now
+- Functions which return krui_err are allowed to return positive values now
+- getFirstPredUnitAndData/getNextPredUnitAndData return 0 for internal values
+  now when no unit is found
+- areConnected now returns the strength or None, no tuple  
+- getFTypeName now correctly handles a NULL name (which should never exist if
+  the comments in the kernel were true)
+- same problem with getFTypeActFuncName, getFTypeOutFuncName, getFTypeSiteName  
+- deleteFTypeEntry didn't do anything
+- DefTrainSubPat can now be called without arguments
+- same for DefShowSubPat
+- deleteUnitList now also accepts mutiple parameters instead of a single
+  sequence
+- same for learnAllPatterns, learnAllPatternsFF, initializeNet, updateNet
+  setClassDistribution
+- Extended PyDoc documentation significantly

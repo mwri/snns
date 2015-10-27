@@ -1,0 +1,42 @@
+**********************************************************************
+                       SNNSv4.2 Known Problems
+**********************************************************************
+
+There  are  a number of  problems  that  we know  about,  but which we
+haven't had time to fix yet. Among them are:
+
+- Some  HP machines have  problems with  the  bignet panel  for Jordan
+  networks. There have been several segmentations faults reported.
+  
+- When  converting a  netork to C-Code with snns2c, special units will
+  be  ignored. This means,  that when  converting a  network  on which
+  input   pruning has been   performed, the resulting  C function will
+  accept only patterns with less input values.
+  
+  Example: A  26-10-35 network was pruned, and  consequently lost 3 of
+  its input units (Note that they are still represented in the network
+  file  as  "special input"  units).   After converting the  resulting
+  network  to C code  you  can call  this  function only with 23 input
+  values. Which of the original 26 values have  to be skipped is to be
+  determined by the user!
+
+
+**********************************************************************
+                           REPORTING BUGS
+**********************************************************************
+
+If you really need to report a bug you should run 
+
+        make bugreport
+
+in <SNNSDIR>. This command ensures, that your Makefiles are up to date
+and prints out all critical definitions.  If you see, that the SNNS is
+reconfigured during this operation, you must recompile SNNS and check,
+if the   bug is still  there  before complaining  about problems. Also
+refer to Readme.install  to learn more  about how to change C-compiler
+usage and compile flags.
+
+The output  from the  above  command should be   included in your  bug
+report, so we don't need to ask you about your system characteristics.
+
+Send your bugreport to SNNS-Mail-Owner@Informatik.Uni-Tuebingen.DE

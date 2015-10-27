@@ -1,0 +1,377 @@
+=============================================================================
+			Description of the tool SNNSBAT
+=============================================================================
+
+
+                           Running  SNNS  as  Batch  Job
+                           -----------------------------
+
+
+Since training a neural network may require several hours of CPU time,
+it is advisable to perform this task as a batch job during low usage
+times.  SNNS offers the program snnsbat for this purpose. It is
+basically an additional interface to the kernel that allows easy
+background execution. Its flexible setup allows for a variety of
+possible execution modes which can be easily defined in a
+configuration file.  All actions and messages are recorded in a log
+file for later verification of results.
+
+
+
+The Snnsbat Environment
+-----------------------
+
+
+snnsbat runs very dependable even on instable system configurations
+and is secured against data loss due to system crashes, network
+failures etc..  On UNIX based systems the program may be terminated
+with the command 'kill -15' without loosing the currently computed
+network.
+
+
+The calling syntax of snnsbat is:
+
+            snnsbat [< configuration_file >[< log_file >] ]
+
+
+This call starts snnsbat in the foreground. On UNIX systems the
+command for background execution is `at', so that the command line
+
+            echo 'snnsbat default.cfg log.file' j at 22:00
+
+would start the program tonight at 10pm.
+
+
+If the optional file names are omitted,snnsbat tries to open the
+configuration file `./snnsbat.cfg' and the protocol file
+`./snnsbat.log'.
+
+
+
+Using Snnsbat
+-------------
+
+The batch mode execution of SNNS is controlled by the configuration
+file.  It contains entries that define the network and parameters
+required for program execution.  These entries are tuples (mostly
+pairs) of a keyword followed by one or more values.  There is only one
+tuple allowed per line, but lines may be separated by an arbitrary
+number of comment lines. Comments start with the number sign '#'. The
+set of given tuples specify the actions performed by SNNS in one
+execution run. An arbitrary number of execution runs can be defined in
+one configuration file, by separating the tuple sets with the keyword
+'PerformActions:'. Within a tuple set, the tuples may be listed in any
+order. If a tuple is listed several times,values that are already read
+are overwritten. The only exception is the key 'Type:',which has to be
+listed only once and as the first key. If a key is omitted, the
+corresponding value(s) are assigned a default.
+
+
+
+Here is a listing of the tuples and their meaning:
+
+
+
+  Key                     Value         Meaning                                          
+  ----------------------------------------------------------------------------
+  InitFunction:           <string>      Name of the initialization function. 
+
+  InitParam:              <float>       'NoOfInitParam' parameters for the ini-
+                                        tialization function,
+                                        separated by blanks.     
+
+  LearnParam:             <float>       'NoOfLearnParam'  parameters  for  the
+                                        learning function, separated by blanks. 
+
+  LearnPatternFile:       <string>      Filename of the learning patterns.   
+
+  MaxErrorToStop:         <float>       Network  error  when  learning  can  be
+                                        halted.
+
+  MaxLearnCycles:         <int>         Maximum number of learning cycles to be
+                                        executed.                               
+
+  NetworkFile:            <string>      Filename of the net to be trained. 
+
+  NoOfInitParam:          <int>         Number of parameters for the initializa-
+                                        tion function.
+
+  NoOfLearnParam:         <int>         Number of parameters for the learning
+                                        function.
+
+  NoOfVarDim:		  <int> <int>   Number of variable dimensions of the 
+					input and output patterns.
+
+  PerformActions:         none          Execution run separator.
+
+  ResultFile:             <string>      Filename of the result file. 
+
+  ResultIncludeInput:     [ YES j NO ]  Flag for inclusion of input
+					patterns in the result file.       
+
+  ResultIncludeOutput:    [ YES j NO ]  Flag for inclusion of output learning 
+					patterns in the result file.                      
+
+  ResultMinMaxPattern:    <int> <int>   Number of the first and lastpattern to
+					be used for result file generation.  
+
+  Shuffle:                [ YES j NO ]  Flag for pattern shuffling.
+
+  SubPatternISize:	  <int>		NoOfVarDim[1] int values that specify
+					the shape of the sub patterns of each 
+					input pattern.
+
+  SubPatternIStep:	  <int>		NoOfVarDim[1] int values that specify
+					the shifting steps for the sub patterns
+					of each input pattern.
+
+  SubPatternOSize:	  <int>		NoOfVarDim[2] int values that specify
+					the shape of the sub patterns of each 
+					output pattern.
+
+  SubPatternOStep:	  <int>		NoOfVarDim[2] int values that specify
+					the shifting steps for the sub patterns
+					of each output pattern.
+
+  TestPatternFile:        <string>      Filename of the test patterns.
+
+  TrainedNetworkFile:     <string>      Filename where the net should be stored
+                                        after training / initialization. 
+
+  Type:                   <string>      The type of grammar that corresponds to
+                                        this file. Valid types are:
+                                        'SNNSBATCH 1': performs only one 
+                                        	       execution run.
+                                        'SNNSBATCH 2': performs multiple 
+						       execution runs.
+
+Please note the mandatory colon after each key and the upper case of
+several letters.
+
+snnsbat may also be used to perform only parts of a regular network
+training run. If the network is not to be initialized,training is not
+to be performed, or no result file is to be computed, the
+corresponding entries in the configuation file can be omitted.
+
+For all keywordsthe string '<OLD>' is also a valid value. If <OLD> is
+specified,the value of the previous execution run is kept. For the
+keys 'NetworkFile:' and 'LearnPatternFile:' this means, that the
+corresponding files are not read in again. The network (patterns)
+already in memory are used instead, thereby saving considerabe
+execution time.  This allows for a continous logging of network
+performance. The user may, for example, load a network and pattern
+file, train the network for 100 cycles, create a result file, train
+another 100 cycles, create a second result file, and so forth.  Since
+the error made by the current network in classifying the patterns is
+rep orted in the result file, the series of result files document the
+improvement of the network performance.
+
+The following table shows the behavior of the program caused by
+omitted entries:
+
+
+                                       
+  missing key                resulting behavior                                                     
+  ----------------------------------------------------------------------------
+  InitFunction:              The net is not initialized.  
+  InitParam:                 Initialization function gets only zero
+			     values as parameters.        
+  LearnParam:                Learning function gets only zero values as 
+			     parameters.              
+  LearnPatternFile:          Abort with error message if more than 0 learning 
+			     cycles are specified. Initialization can be per- 
+			     formed if init function does not require patterns.
+  MaxErrorToStop:            Training runs for 'MaxLearnCycles:' cycles.
+  MaxLearnCycles:            No training takes place. If training is supposed 
+			     to run until MaxErrorToStop, a rather huge number
+			     should be supplied here. (skipping this entry 
+			     would inhibit training completely).       
+  NetworkFile:               Abort with error message.
+  NoOfInitParam:             No parameters are assigned to the initialization 
+			     function. Error message from SNNS kernel possible.
+  NoOfLearnParam:            No parameters are assigned to the learning 
+			     function.  Error message from SNNS kernel possible.
+  NoOfVarDim:		     Network can not handle variable pattern sizes.
+  PerformActions:            Only one execution run is performed. Repeated 
+			     keywords lead to deletion of older values.
+  ResultFile:                No resultfile is generated.
+  ResultIncludeInput:        The resultfile does NOT contain input Patterns.
+  ResultIncludeOutput:       The resultfile DOES contain learn output Patterns.
+  ResultMinMaxPattern:       All patterns are propagated.
+  Shuffle:                   Patterns are not shuffled.
+  TestPatternFile:           Result file generation uses the learning patterns.
+ 			     If they are not specified either, the program is 
+			     aborted with an error message when trying to 
+			     generate a result file. 
+  TrainedNetworkFile:        Network is not saved after training / init. It is
+			     used, however, for result file generation.  
+  Type:                      Abort with error message.  
+
+
+Here is a typical example of a configuration file:
+
+
+
+    #
+    Type: SNNSBATCH_2
+    #
+    # If a key is given twice, the second appearence istaken.
+    # Keys that are not required for a special run maybe omitted.
+    # If a key is ommited but required, a default valueis assumed.
+    # The lines may be separated with comments.
+    #
+    # Please note the mandatory file type specificationat the begining and
+    # the colon follwing the key.
+    #
+    #######################################################################
+    NetworkFile: /home/SNNSv3.0/examples/letters.net
+    #
+    InitFunction: Randomize_Weights
+    NoOfInitParam: 2
+    InitParam: -1.0 1.0
+    #
+    LearnPatternFile: /home/SNNSv3.0/examples/letters.pat
+    NoOfLearnParam: 2
+    LearnParam: 0.8 0.3
+    MaxLearnCycles: 100
+    MaxErrorToStop: 1
+    Shuffle: YES
+    #
+    TrainedNetworkFile: trained_letters.net
+    ResultFile: letters1.res
+    ResultMinMaxPattern: 1 26
+    ResultIncludeInput: NO
+    ResultIncludeOutput: YES
+    #
+    #This execution run loads a network and pattern file, initializes the
+    #network, trains it for 100 cycles (or stops, if then error is less
+    #than 0.01), and finally computes the result file letters1.
+    PerformActions:
+    #
+    NetworkFile: <OLD>
+    #
+    LearnPatternFile: <OLD>
+    NoOfLearnParam: <OLD>
+    LearnParam: <OLD>
+    MaxLearnCycles: 100
+    MaxErrorToStop: 1
+    Shuffle: YES
+    #
+    ResultFile: letters2.res
+    ResultMinMaxPattern: <OLD>
+    ResultIncludeInput:  <OLD>
+    ResultIncludeOutput: <OLD>
+    #
+    #This execution run continues the training of the already loaded file
+    #for another 100 cycles before creating a second result file.
+    #
+    PerformActions:
+    #
+    NetworkFile: <OLD>
+    #
+    LearnPatternFile: <OLD>
+    NoOfLearnParam: <OLD>
+    LearnParam: 0.2 0.3
+    MaxLearnCycles: 100
+    MaxErrorToStop: 0.01
+    Shuffle: YES
+    #
+    ResultFile: letters3.res
+    ResultMinMaxPattern: <OLD>
+    ResultIncludeInput:  <OLD>
+    ResultIncludeOutput: <OLD>
+    TrainedNetworkFile: trained_letters.net
+    #
+    #This execution run concludes the training of the already loaded file.
+    #After another 100 cycles of training with changed learning
+    #parameters the final network is saved to a file and a third result
+    #file is created.
+    #
+
+
+
+The file <log_file> collects the SNNS kernel messages and contains
+statistics about running time and speed of the program. An example
+protocol file is listed in appendix C of the user manual.
+
+
+If the <log_file> command line parameter is omitted, snnsbat opens the
+file `snnsbat.log' in the current directory.  To limit the size of this
+file, a maximum of 100 learning cycles are logged. This means, that for
+1000 learning cycles a message will be written to the file every 10
+cycles.
+
+
+If the time required for network training exceeds 30 minutes of CPU
+time, the network is saved. The log file then shows the message:
+
+
+   #####   Temporary  network  file  'SNNS_Aaaa00457'  created.   #####
+
+
+Temporay networks always start with the string `SNNS_'. After 30 more
+minutes of CPU time, snnsbat creates a second security copy. Upon normal
+termination of the program, these copies are deleted from the current
+directory. The log file then shows the message:
+
+
+   #####   Temporary  network  file  'SNNS_Aaaa00457'  removed.   #####
+
+
+In an emergency (powerdown, kill, alarm, etc.), the current network is
+saved by the program. The log file, resp. the mailbox, will later show an
+entry like:
+
+
+      Signal  15  caught,  SNNS  V3.0  Batchlearning  terminated.
+
+
+
+      SNNS  V3.0  Batchlearning  terminated  at  Tue  Mar  23  08:49:04  1993
+      System:   SunOS  Node:   matisse  Machine:   sun4m
+      Networkfile  './SNNS_BAAa02686'  saved.
+      Logfile  'snnsbat.log'  written.
+
+
+
+Calling Snnsbat
+---------------
+
+
+snnsbat may be called interactively or in batch mode.  It was designed,
+however, to be called in batch mode. On Unix machines, the command `at'
+should be used, to allow logging the program with the mailbox.
+However, `at' can only read from standard input, so a combination of
+`echo' and `pipe' has to be used.
+
+Three short examples for Unix are given here, to clarify the calls:
+
+
+      unix>echo 'snnsbat mybatch.cfg mybatch.log' | at 21:00 Friday
+
+
+starts snnsbat next Friday at 9pm with the parameters given in
+mybatch.cfg and writes the output to the file mybatch.log in the current
+directory.
+
+
+      unix>echo 'snnsbat SNNSconfig1.cfg SNNSlog1.log' | at 22
+
+
+starts snnsbat today at 10pm
+
+
+      unix>echo 'snnsbat' | at now + 2 hours
+
+
+starts snnsbat in 2 hours and uses the default files snnsbat.cfg and
+snnsbat.log
+
+The executable is located in the directory
+`.../SNNSv3.1/tools/bin/<machine_type>/'.  The sources of snnsbat can be
+found in the directory `.../SNNSv3.1/tools/sources/'.  An example
+configuration file was placed in `.../SNNSv3.1/examples'.
+
+
+see also SNNS User Manual v3.1  Chapter 10
+

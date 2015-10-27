@@ -1,0 +1,218 @@
+dnl
+dnl FILE          : $Source: /projects/higgs1/SNNS/CVS/SNNS/configuration/configure.in,v $
+dnl SHORTNAME     : configure.in
+dnl
+dnl PURPOSE       : basic input file for autoconf to create configure
+dnl
+dnl AUTHOR        : Michael Vogt
+dnl DATE          : 26.2.98
+dnl RCS VERSION   : $Revision: 2.7 $
+dnl LAST CHANGE   : $Date: 1998/03/18 15:24:13 $
+dnl
+dnl Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
+dnl Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
+dnl
+dnl Process this file with autoconf to produce a configure script.
+dnl
+
+dnl transfer current revision to created configure file and check for
+dnl the license file to ensure to be run in the right directory
+AC_REVISION($Revision: 2.7 $)
+AC_INIT(Readme.license)
+
+echo "***********************************************************************"
+echo "    This is SNNS Version 4.2"
+echo "    Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG"
+echo "    Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG"
+echo ""
+echo "    Running the automated system configuration"
+echo "    To get help:  read the file Readme.install"
+echo "                  run 'configure --help'"
+echo "***********************************************************************"
+
+dnl this is the place where all C defines should be collected
+AC_CONFIG_HEADER(config.h:configuration/config.hin)
+
+snnsdir=`pwd`
+dnl this is the place where some additional configuration files may be found
+AC_CONFIG_AUX_DIR($snnsdir/configuration)
+
+dnl define the make variable MAKE for nested make calls
+AC_PROG_MAKE_SET
+
+dnl determine the canonical system type
+AC_CANONICAL_HOST
+AC_SUBST(host)
+
+dnl define the installation directories
+AC_PREFIX_DEFAULT(/usr/local)
+AC_ARG_ENABLE(global,
+--enable-global           ignore the default SNNS installation directories 
+                          kernel|tools|xgui/bin/<host> and use the 
+                          --prefix definition instead,
+global_install="yes", global_install="no")
+if test "$global_install" = "yes"; then
+    kernelbinext=""
+    toolsbinext=""
+    xguibinext=""
+    hostbinext=""
+else
+    prefix=`pwd`
+    kernelbinext="/kernel"
+    toolsbinext="/tools"
+    xguibinext="/xgui"
+    hostbinext="/"$host
+fi
+AC_SUBST(kernelbinext)
+AC_SUBST(toolsbinext)
+AC_SUBST(xguibinext)
+AC_SUBST(hostbinext)
+
+AC_SUBST(snnsdir)
+
+dnl check for enzo installation
+AC_ARG_ENABLE(enzo,
+--enable-enzo             prepare SNNS kernel for linking with ENZO,
+ENZOFLAGS="-D__ENZO__", ENZOFLAGS="")
+AC_SUBST(ENZOFLAGS)
+
+dnl Checks for the existence of some programs
+AC_PROG_CC
+AC_PROG_CXX
+AC_PATH_XTRA
+AC_PROG_INSTALL
+AC_PROG_MAKE_SET
+AC_PROG_RANLIB
+
+AC_CHECK_PROG(MAKEDEPEND, makedepend, makedepend, :)
+if eval "test $MAKEDEPEND = \":\""; then
+    AC_MSG_WARN('makedepend' is not installed on your system. You don't)
+    AC_MSG_WARN(need to install 'makedepend' now to compile SNNS but)
+    AC_MSG_WARN(you need it if you want to run 'make depend' in any of)
+    AC_MSG_WARN(the sources directories.)
+fi
+
+AC_CHECK_PROG(BISON, bison, bison, :)
+if eval "test $BISON = \":\""; then
+    AC_MSG_WARN('bison' is not installed on your system.)
+    AC_MSG_WARN('yacc' will not work.)
+    AC_MSG_WARN(You don't need to install 'bison' now to compile SNNS but)
+    AC_MSG_WARN(you need 'bison' after any changes to any grammar file)
+    AC_MSG_WARN(or after 'make maintainer-clean' in any sources directory.)
+else
+    AC_MSG_CHECKING(for version of bison)
+    bison_version=`$BISON --version`
+    AC_MSG_RESULT($bison_version)
+    warn_bison=yes
+    AC_TRY_RUN(
+	#include <stdlib.h>
+	main() 
+	{ 
+	    char *version = "$bison_version";
+	    char *ptr;
+	    ptr = version;
+	    while (*ptr != '\0') ptr++;
+	    while (*ptr != ' ' && ptr > version) ptr--;
+	    ptr++;
+	    return (atof(ptr) < 1.22);
+	},
+        warn_bison=no, warn_bison=yes, warn_bison=dontknow)
+    if test "$warn_bison" = "yes"; then
+	bison_flag="+a"
+        AC_MSG_WARN(It seems like you have bison version 1.22 or older)
+	AC_MSG_WARN(We try to handle this but better refer to Readme.install)
+    elif test "$warn_bison" = "dontknow"; then
+	bison_flag="-p"
+        AC_MSG_WARN(Your 'bison' version is not recognized properly.)
+	AC_MSG_WARN(We now assume a version of 1.22 or newer.)
+	AC_MSG_WARN(If this is not true you will probably have to change)
+        AC_MSG_WARN(the definition of BISONFLAGS as given in Makefile.def)
+        AC_MSG_WARN(Please refer to Readme.install first.)
+    else
+	bison_flag="-p"
+    fi
+fi
+AC_SUBST(BISON)
+AC_SUBST(bison_flag)
+
+AC_CHECK_PROG(XGRABSC, xgrabsc, xgrabsc, :)
+if eval "test $XGRABSC != \":\""; then
+    AC_DEFINE(HAVE_XGRABSC)
+fi
+
+AC_PROG_LEX
+if eval "test $LEX != \"flex\""; then
+    AC_MSG_WARN('flex' is not installed on your system. 'lex' won't work.)
+    AC_MSG_WARN(You don't need to install 'flex' now to compile SNNS)
+    AC_MSG_WARN(but you definately need 'flex' after changes to any)
+    AC_MSG_WARN(scanner file or after 'make maintainer-clean'.)
+    AC_MSG_WARN(Please refer to Readme.install first.)
+    FLEX=":"
+else
+    FLEX=$LEX
+fi
+if eval "test -z \"$LEXLIB\""; then
+    AC_MSG_WARN(It seems like we found flex but not the corresponding)
+    AC_MSG_WARN(library '-lfl'. This looks like an incomplete 'flex')
+    AC_MSG_WARN(installation.)
+    LEXLIB=-ll
+fi
+if eval "test $LEXLIB = \"-ll\""; then
+    AC_MSG_WARN(Since we couldn't find any -lfl library we plan to link)
+    AC_MSG_WARN(with -ll instead. The provided SNNS scanners are based on)
+    AC_MSG_WARN(flex output. So we do not guarantee that this will work.)
+    AC_MSG_WARN(Hope the best!)
+fi
+AC_SUBST(FLEX)
+
+dnl Checks for header files.
+AC_HEADER_STDC
+AC_HEADER_SYS_WAIT
+AC_HEADER_DIRENT
+AC_CHECK_HEADERS(fcntl.h limits.h sys/file.h sys/time.h unistd.h values.h)
+
+dnl Checks for typedefs, structures, and compiler characteristics.
+AC_C_CONST
+AC_TYPE_SIZE_T
+
+dnl Checks for library functions.
+AC_FUNC_ALLOCA
+AC_TYPE_SIGNAL
+AC_FUNC_MEMCMP
+AC_CHECK_FUNCS(getcwd strdup lrand48)
+
+AC_OUTPUT(Makefile.def:configuration/Makefile.din)
+
+echo "***********************************************************************"
+echo "SNNSv4.2 is now ready to be compiled. Please read carefully all"
+echo "warning and error messages above if there are any of them. Please"
+echo "refer to the file Readme.install if you see any problems."
+echo ""
+echo "You can now"
+echo ""
+echo "make compile      to compile all parts of SNNS"
+echo "make install      to compile, strip, and install all parts of SNNS"
+echo "make clean        to cleanup all source directories after installation"
+echo "make uninstall    to remove all installed parts of SNNS"
+echo ""
+echo "For your convenience the following sub targets exist for the top level:"
+echo ""
+echo "make install-tools    (implies compiling the kernel)"
+echo "make install-xgui     (implies compiling the kernel)"
+echo "make install-man"
+echo ""
+echo "make clean-kernel"
+echo "make clean-tools"
+echo "make clean-xgui"
+echo ""
+echo "make uninstall-kernel"
+echo "make uninstall-tools"
+echo "make uninstall-xgui"
+echo "make uninstall-man"
+echo ""
+echo "After installation the programs can be found in"
+echo "    "$prefix$xguibinext"/bin"$hostbinext"    (xgui)"
+echo "    "$prefix$toolsbinext"/bin"$hostbinext"   (tools)"
+echo ""
+echo "And now: Good luck and have fun!"
+echo "***********************************************************************"

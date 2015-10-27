@@ -1,0 +1,44 @@
+=============================================================================
+	This file contains data to test the learning functions
+=============================================================================
+
+Network-Files:	bdg_TDNN_untrained.net
+==============	
+
+Pattern-Files:	bdg_TDNN.pat
+==============	
+
+Description:	- load network bdg_TDNN_untrained.net	
+============	- load patterns bdg_TDNN.pat	
+		- do NOT press init button
+		- set cycles to 50
+		- set shuffle off 
+		- for each test set:
+			- set learing function given in test set.
+			- set learning parameters given in test set.
+			- set update function given in test set.
+			- set update parameters given in test set.
+			- press the all button
+			- compare the results with the given results 
+			- reload network bdg_TDNN_untrained.net	
+
+Test set 1)
+===========
+
+learning function  : TimeDelayBackprop	  0.4   0.0   0.0   0.0   0.0
+update function    : TimeDelay_Order	  0.0   0.0   0.0   0.0   0.0
+
+  epoch:         SSE            MSE            SSE/o-units
+
+     50:      20.87144        0.77302           6.95715
+     45:      10.76420        0.39867           3.58807
+     40:       5.33958        0.19776           1.77986
+     35:       2.48686        0.09211           0.82895
+     30:       1.32989        0.04926           0.44330
+     25:       0.82353        0.03050           0.27451
+     20:       0.56929        0.02108           0.18976
+     15:       0.42422        0.01571           0.14141
+     10:       0.33306        0.01234           0.11102
+      5:       0.27151        0.01006           0.09050
+      1:       0.23536        0.00872           0.07845
+

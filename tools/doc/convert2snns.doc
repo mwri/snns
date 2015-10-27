@@ -1,0 +1,63 @@
+                  ====================================
+                  Description of the tool CONVERT2SNNS
+                  ====================================
+
+ In order to work with the KOHONEN tools in SNNS you need a pattern file
+ and a network file with a special format.
+ Convert2snns will accomplish three important things: 
+
+ - Creation of a 2-dimensional Kohonen Feature Map with n Components
+ - Weightfiles are converted in a SNNS compatible .net file
+ - A file with raw patterns is converted in a .pat file
+
+ When working with convert2snns, you need 3 files 
+
+ 1) A control file, containing the configuration of the network
+ 2) A file with weight vectors
+ 3) A file with raw patterns
+ 
+ ***** setup of a control file *****
+ 
+ Each line of the controlfile begins with a KEYWORD followed by the
+ respective declaration. The succession of KEYWORDS is arbitrary.
+
+ Example of a control file:
+
+ PATTERNFILE                 eddy.in     ** 
+ WEIGHTFILE                  eddy.dat    
+ XSIZE                       18          <-
+ YSIZE                       18          <-
+ COMPONENTS                  8           <-
+ PATTERNS                    47          **
+
+ For the creation of a .net file you need at least the statements marked <-
+ and for the .pat file additionally the statements marked **!
+ Omitting the WEIGHTFILE will initialize the weights of the network with 0.
+
+ See cube.cont for an example of a control file.
+
+
+ ***** structure of a WEIGHTFILE *****
+ 
+ The WEIGHTFILE is a simple ASCII file, containing the weight vectors row
+ by row. Besides, each vector is stored component by component.
+
+ 
+ ***** structure of a PATTERNFILE *****
+
+ The PATTERNFILE contains in each line the components of a pattern.
+
+ 
+ When convert2snns has finished the conversion it will ask for the
+ name of the NETWORK and PATTERNS to be saved.
+ Example:     cube        cube    (without suffix!), 
+ resulting in cube.net and cube.pat 
+ 
+ For bugs contact:    seemann@peanuts.informatik.uni-tuebingen.de
+
+ last change: July 8 1993
+
+
+
+
+

@@ -1,0 +1,63 @@
+.TH snns2c 1 "" "" SNNS
+
+.SH NAME
+
+.B snns2c
+\- compiler to transform a trained neural network into a C-routine
+
+.SH SYNOPSIS
+
+.B snns2c
+.IR network-file " [ " C-filename " [ "function-name " ] ]"
+
+.SH OPTIONS
+.B network-file
+.RS 
+the name of the SNNS network description file
+.RE
+
+.B C-filename
+.RS
+name of the output file
+.RE
+
+.B function-name 
+.RS
+name of the procedure in the output file. 
+.RE
+
+.SH DESCRIPTION
+This tool transforms an SNNS network file into an compilable C
+source. It reads a network file
+.IR network-file " and generates a C source file named " C-filename.
+The network can then be called as a function
+.IR function-name " from any C program. If the parameter " function-name
+.RI "is missing, the name of " C-filename 
+is taken without the ending ".c". If this parameter is also missing,
+the name of the network file is chosen and fitted with a new
+ending for the output file. This name without ending is also used for
+the function name.
+
+It is not possible to train the generated net, SNNS has to be used for
+this purpose.  After completion of network training with SNNS, the
+tool 
+.B snns2c
+is used to integrate the trained network as a C function into a
+separate application. 
+
+.SH SEE ALSO
+The SNNS user manual under the SNNS installation directory or the
+hypertext manual at
+http://www-ra.informatik.uni-tuebingen.de/SNNS/UserManual/UserManual.html
+
+.BR xgui (1)
+graphical user interface for SNNS
+
+.BR batchman (1)
+batch execution interface for SNNS
+
+.BR snns (1)
+description of the whole package
+
+.SH AUTHOR
+Guenter W. Mamier

@@ -1,0 +1,191 @@
+                 ===============================
+                 Description of the tool ANALYZE
+                 ===============================
+
+With the program 'analyze' it is possible to analyze result files
+that have been created by SNNS. The result files that are to be
+analyzed must contain the 'teaching output' and the 'output' of the
+network. The 'input patterns' can also be included but have no effect.
+
+Depending upon an 'analyzing function', ANALYZE checks whether
+patterns are classified correctly, incorrectly, or not at all by the
+neural network.  Optionally it is possible to define which patterns
+numbers (classified correctly, incorrectly, or unclassified) are going
+to be returned by ANALYZE.
+
+Synopsis:
+---------
+
+analyze [-options]
+
+
+The following options are possible to be chosen in any order:
+--------------------------------------------------------------
+
+-w		: numbers of patterns which were classified wrong are
+		  printed (default)
+-r		: numbers of patterns which were classified right are
+		  printed 
+-u		: numbers of patterns which were not classified are
+		  printed
+-a		: same as -w -r -u
+-v		: verbose output. Each printed number is preceded by
+		  one of the words 'wrong', 'right' or 'unknown'
+		  depending on the result of the classification
+-s		: A statistic information containing the count of
+		  wrong, right and not classified patterns and the
+		  total network error is printed.
+		  options -w -r -u -a and -v are ignored
+-c              : same as -s, but statistics for each output unit (class)
+                  is displayed.
+		  options -w -r -u -a and -v are ignored
+-i <file name>	: name of the 'result file' which is going to be
+		  analyzed (default is standard input)
+-o <file name>	: name of the file which is to be produced by ANALYZE
+		  (default is standard output) 
+-e <function>	: defines the name of the 'analyzing function'
+		  (descriptions see below) possible names are:
+			402040
+			WTA
+			band
+		  (default is 402040)
+-l <real value>	: first parameter of the analyzing function
+		  (default values and description see below)
+-h <real value>	: second parameter of the analyzing function
+		  (default values and description see below)
+
+Starting ANALYZE without giving any options is equivalent to
+	analyze -w -e 402040 -l 0.4 -h 0.6
+while input and output files are standard input and standard output
+
+
+'analyzing functions'
+---------------------
+
+402040:
+-------
+A pattern is classified correctly if:
+	the output of exactly one output unit is >= h		AND
+	the 'teaching output' of this unit is the maximum
+	'teaching output' of the pattern			AND
+	the output of all other output units is <= l
+
+A pattern is classified incorrectly if:
+	the output of exactly one output unit is >= h		AND
+	the 'teaching output' of this unit is NOT the maximum
+	'teaching output' of the pattern			AND
+	the output of all other output units is <= l
+
+A pattern is unclassified in all other cases.
+
+Default values used for l and h are: l=0.4  h=0.6
+(These default values represent the well known 40-20-40 rule if the
+teaching output of the network lies between 0.0 and 1.0.)
+
+WTA:
+----
+A pattern is classified correctly if:
+	there exists an output unit whose output value is 
+	greater than the output value of all other output units
+	(this output value is supposed to be o)			AND
+	o > h							AND
+	the 'teaching output' of this unit is the maximum
+	'teaching output' of the pattern			AND
+	the output of all other output units is < a - l
+
+A pattern is classified incorrectly if:
+	there exists an output unit whose output value is 
+	greater than the output value of all other output units
+	(this output value is supposed to be o)			AND
+	o > h							AND
+	the 'teaching output' of this unit is NOT the maximum
+	'teaching output' of the pattern			AND
+	the output of all other output units is < a - l
+
+A pattern is unclassified in all other cases.
+
+Default values used for l and h are: l=0.0 h=0.0
+(These default values represent the well known winner takes all rule)
+
+band:
+-------
+A pattern is classified correctly if:
+	for all output units
+        the output is >= the teaching output - low	        AND
+        the output is <= the teaching output + high          
+
+A pattern is classified incorrectly if:
+	for all output units
+        the output is <= the teaching output - low	        OR
+        the output is >= the teaching output + high          
+
+A pattern is unclassified in all other cases.
+
+Default values used for l and h are: l=0.1 h=0.1
+
+
+Examples:
+---------
+
+analyze -s -i demo1.res -o demo1.no
+
+analyzes the result file 'demo1.res' producing the output file
+'demo1.no' which might look like this (or similar):
+
+STATISTICS ( 4 patterns )
+wrong   :  0.00 %  ( 0 pattern(s) )
+right   : 75.00 %  ( 3 pattern(s) )
+unknown : 25.00 %  ( 1 pattern(s) )
+error   : 0.379660
+
+
+
+analyze -w -u -v -e WTA -l 0.0 -h 0.2 < demo2.res
+
+analyzes the result file 'demo2.res' which is redirected to standard
+input using the analyzing function WTA with the parameters l=0.0 and
+h=0.2. The output is printed to the terminal. It contains numbers of
+the patterns which were unclassified or classified wrong including the
+words 'wrong' or 'unknown'. The output might look like this:
+
+wrong   : 7
+unknown : 9
+unknown : 10
+
+
+
+analyze -r -i demo3.res -o demo3.no
+
+analyzes the result file 'demo3.res' writing the output file
+'demo3.no' which exclusively includes numbers of right classified
+patterns. The file might look like this:
+
+34
+56
+123
+281
+
+analyze -i demo4.res -c
+
+analyzes the result file 'demo4.res' writing the output to standard output,
+displaying only statistics for each class.
+
+STATISTICS FOR CLASS NO. : 0 
+wrong   :  0.00 %  ( 0 pattern(s) )
+right   : 100.00 %  ( 1 pattern(s) )
+unknown :  0.00 %  ( 0 pattern(s) )
+
+STATISTICS FOR CLASS NO. : 1 
+wrong   :  0.00 %  ( 0 pattern(s) )
+right   : 100.00 %  ( 2 pattern(s) )
+unknown :  0.00 %  ( 0 pattern(s) )
+
+STATISTICS FOR CLASS NO. : 2 
+wrong   :  0.00 %  ( 0 pattern(s) )
+right   : 100.00 %  ( 1 pattern(s) )
+unknown :  0.00 %  ( 0 pattern(s) )
+
+STATISTICS FOR CLASS NO. : 3 
+wrong   :  0.00 %  ( 0 pattern(s) )
+right   : 50.00 %  ( 1 pattern(s) )
+unknown : 50.00 %  ( 1 pattern(s) )

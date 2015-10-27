@@ -1,0 +1,118 @@
+=============================================================================
+	README file for all example files
+=============================================================================
+
+
+README.all		this file
+
+art1_letters.README	ART1 letters network
+art1_letters.cfg
+art1_letters.net
+art1_letters.pat
+art1_letters3D.cfg
+
+art2_tetra.README	ART2 network to classify the points as corners
+art2_tetra.cfg		\ of a tetrahedron
+art2_tetra.net
+art2_tetra_high.pat
+art2_tetra_low.pat
+art2_tetra_med.pat
+
+artmap.README		ARTMAP letter recognition network
+artmap.cfg
+artmap.net
+artmap_test.pat
+artmap_train.pat
+
+bdg_TDNN.README		Time-delay network (TDNN) for the recognition of the
+bdg_TDNN.cfg		consonants 'b', 'd', 'g'
+bdg_TDNN.net
+bdg_TDNN.pat
+bdg_variable.pat
+
+default.cfg		default configuration file
+
+eight_016.pat
+eight_160.pat
+eight_elman.README	Elman network (partially recurrent network)
+eight_elman.cfg
+eight_elman.net
+eight_jordan.README	rdan network (partially recurrent network)
+eight_jordan.cfg
+eight_jordan.net
+
+encoder.README		8-3-8 encoder network
+encoder.cfg
+encoder.net
+encoder.pat
+
+font.README		feedforward network which recognizes printed characters
+font.cfg
+font.net
+font.pat
+
+laser.README		extended hierarchical Elman network for laser
+laser.cfg		\ intensity prognosis
+laser.net
+laser_1000.pat
+laser_999.pat
+
+letseq.README		letter sequence prediction task 
+letseq_elman.cfg
+letseq_elman.net	Elman network for letter sequence prediction
+letseq_h_elm.cfg
+letseq_h_elm.net	hierarchical Elman network for the above
+letseq_test.pat
+letseq_train.pat
+
+letters.README		toy letter recognition network
+letters.cfg
+letters.net
+letters.pat
+letters.res
+letters3D.cfg
+letters3D.net		toy letter recognition network with 3D display
+
+nettalk.README		NETtalk network (lookalike)
+nettalk.cfg
+nettalk.net
+nettalk.pat
+
+patmat.README		toy pattern matching network
+patmat.cfg
+patmat.net
+patmat.pat
+
+snnsbat1.cfb		SNNS batch configuration file
+snnsbat2.cfb		SNNS batch configuration file
+
+som_cube.README		Self-organizing map cube example
+som_cube.cfg
+som_cube.cont
+som_cube.net
+som_cube.pat
+som_cube_norm.pat
+
+watch.README		example of using neural networks for image processing
+watch.cfg		\ (demonstrates new subpattern processing capability)
+watch.net
+watch.pat
+watch_2out.README	advanced example of using neural networks
+watch_2out.cfg		\ for image processing with sub
+watch_2out.net
+watch_2out.pat
+watch_edge.pgm
+watch_edge_invert.pgm
+watch_orig.pgm
+
+xor.README		network shows how to train the XOR-problem 
+xor.net
+xor.pat
+xor_rec.cfg
+xor_rec.net		recurrent network version of the XOR-problem
+xor_rec1.pat
+xor_rec2.pat
+
+=============================================================================
+	End of README file
+=============================================================================

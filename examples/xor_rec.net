@@ -1,0 +1,64 @@
+SNNS network definition file V1.4-3D
+generated at Mon Apr 25 16:25:19 1994
+
+network name : xor-rec
+source files :
+no. of units : 7
+no. of connections : 10
+no. of unit types : 2
+no. of site types : 2
+
+
+learning function : QPTT
+update function   : BPTT_Order
+
+
+site definition section :
+
+ site name | site function
+-----------|------------------
+ inhibit   | Site_Pi
+ excite    | Site_WeightedSum
+-----------|------------------
+
+
+type definition section :
+
+name          | act func     | out func     |sites
+--------------|--------------|--------------|---------
+outType       | Act_Logistic | Out_Identity |
+LongeroutType | Act_Logistic | Out_Identity |
+--------------|--------------|--------------|---------
+
+
+unit default section :
+
+act      | bias     | st | subnet | layer | act func     | out func
+---------|----------|----|--------|-------|--------------|-------------
+ 0.00000 |  0.00000 | h  |      0 |     1 | Act_Logistic | Out_Identity 
+---------|----------|----|--------|-------|--------------|-------------
+
+
+unit definition section :
+
+no. | typeName      | unitName | act      | bias     | st | position | act func | out func | sites
+----|---------------|----------|----------|----------|----|----------|----------|----------|---------
+  1 |               | in_1     |  0.00000 |  0.00000 | i  |  3, 9, 0 |||
+  2 |               | in_2     |  1.00000 |  0.00000 | i  |  8, 9, 0 |||
+  3 |               | hidden   |  0.18115 | -1.47451 | h  |  2, 3, 0 |||
+  4 |               | hidden   |  0.75848 |  1.09512 | h  | 10, 3, 0 |||
+  5 |               | hidden   |  0.02989 | -0.23293 | h  |  6, 3, 0 |||
+  6 |               | result   |  0.00807 |  3.11764 | o  |  6, 0, 0 |||
+  7 |               | reset    |  1.00000 | -0.04932 | i  | 14, 9, 0 |||
+----|---------------|----------|----------|----------|----|----------|----------|----------|---------
+
+
+connection definition section :
+
+target | site    | source:weight
+-------|---------|------------------------------------------------------------------------------------------------------------
+     3 |         | 1: 5.11832, 2:-0.03407
+     4 |         | 1:-1.10812, 2: 0.04923
+     5 |         | 3: 6.78279, 4:-5.46761, 5:-0.43046
+     6 |         | 5:-9.03160, 3: 1.50450, 4: 0.61079
+-------|---------|------------------------------------------------------------------------------------------------------------

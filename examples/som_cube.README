@@ -1,0 +1,77 @@
+=============================================================================
+	README file for the example files som_cube.xxx
+=============================================================================
+
+
+Description:	Self-organizing map cube example
+============	
+
+The files som_cube.xxx describe network and pattern files used to
+demonstrate the use of the self-organizing map (SOM, Kohonen map) in
+SNNS. The eight training patterns are the verteces of a
+three-dimensional cube of size 2x2x2 centered at the origin, with
+vertex coordinates from (-1, -1, -1) to (1, 1, 1).
+The self-organizing map is a two-dimensional 16x16 grid of neurons.
+The three-dimensional input vectors are mapped to different positions
+of the two-dimensional map.
+
+See the user manual for a more detailed description of the SOM
+implementation in SNNS and its usage.
+
+
+Network-Files:	som_cube.net
+==============
+
+This network file contains a trained SOM network for the cube verteces
+task described above. The self-organizing map is a two-dimensional
+16x16 grid of neurons. The standard configuration file for this
+network is som_cube.cfg (one 2D display only).
+
+
+Pattern-Files:	som_cube.pat
+==============	
+
+The eight training patterns (only input patterns, no output pattern)
+are the verteces of a three-dimensional cube of size 2x2x2 centered at
+the origin, with vertex coordinates from (-1, -1, -1) to (1, 1, 1).
+
+
+Miscellaneous:	som_cube.cont
+==============
+
+The file  som_cube.cont is a control file for the tool convert2snns
+(in the SNNS tools subdirectory) to create a SOM  with 3 components
+and grid 16x16.
+
+
+Hints:
+======
+
+Note to open the control panel before opening the special Kohonen
+panel. This special panel allows you to view vector component maps of
+any input dimension of the map.
+
+Note one point of frequent confusion: The button WINNER in the Kohonen
+panel tests *all* patterns of the currently active pattern file and for
+each winner neuron it displays the pattern number of the input pattern
+for which the neuron was winner, on top of the neuron. To see these
+numbers you must have specified "units top : ON SHOW winner" in the
+SETUP panel of the 2D network display window.  (These numbers are
+better recognized if the neuron grid is made smaller and the values
+displayed at the bottem of the neurons are switched off).
+
+If a neuron is actived twice as winner for different input patterns,
+the later input pattern number overwrites the earlier number.
+Therefore, it may happen that not all pattern numbers appear on top of
+the neurons.
+
+The confusion stems from the fact that upon pressing the WINNER button
+in the Kohonnen panel, *all* patterns are tested and the activation of
+the last input pattern is displayed in the 2D display. This is always
+the same input pattern and the same Kohonen neuron, regardless of what
+pattern has been specified in the remote panel before.
+
+
+=============================================================================
+	End of README file
+=============================================================================

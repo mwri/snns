@@ -1,0 +1,104 @@
+=============================================================================
+	README file for the example files laser.xxx
+=============================================================================
+
+
+Description:	extended hierarchical Elman network
+============	for the task to predict the intensity of a NH3-laser
+
+The task of this partially recurrent network is to predict the light
+intensity of an NH3-laser in its chaotic state.  This data was taken
+from the Santa Fe Time Series Analysis and Prediction Competition,
+time series A. The data is described in more detail there.
+
+Here it suffices to say that the data values were originally integeger
+values in the range [0..255] which were scaled linearly by division by
+255, to fit them to the range [0..1] of the standard logistic
+activation function used in this network.
+
+The single input unit is assigned the laser intensity at the current
+time t and the network predicts the laser intensity at time t+1 at its
+output unit.
+
+See the user manual for a more detailed description of extended
+hierarchical Elman networks and their usage.
+
+
+Network-Files:	laser.net
+==============
+
+This network file contains a trained elman network for the task to
+predict the predict the intensity of a NH3-laser as stated above.
+The network consists of the following layers
+	1 input unit
+	8 hidden units in hidden layer 1
+	8 context units in context layer 1
+	8 hidden units in hidden layer 2
+	8 context units in context layer 2
+	1 output unit
+
+All feedforward-layers (input, hidden 1, hidden 2, output) are fully
+connected, each hidden unit has a fixed connection to its context unit,
+each context unit is connected to every hidden unit with the
+corresponding layer number, 
+each context unit has a fixed recursive connection to itself.
+
+The configuration file for this network is laser.cfg (one 2D display
+only).
+
+
+Pattern-Files:	laser_999.pat
+==============	laser_1000.pat
+
+These files contain 999 resp. 1000 training patterns with one input
+and one output unit each. They are the scaled data of the laser
+intensity prediction time series described above.  The pattern files
+differ only in the number of patterns they contain, indicated in the
+name of the pattern file.
+
+
+Hints:
+======
+
+The easiest way to create hierarchical Elman networks is with the BIGNET
+panel from the info panel. All network parameters can then be
+specified in a special Elman network creation panel called
+with the respective button in the BIGNET panel.
+
+If you want to train your own Elman network from scratch,
+note to set the proper initialization function and initialization
+parameters.
+
+Remember to set the update function to JE_Order or JE_Special,
+depending on your task (see the SNNS user manual for more details).
+
+You may choose between four different learning functions. The network
+shown here was trained for 10000 cycles with JE_BP (Backpropagation
+for Jordan and Elman networks) with a learning rate of 0.2.
+
+The behaviour of this network can very nicely be visualized with the
+network analyzer tool which can be called from the info panel with the
+GUI button as ANALYZER. Then proceed as follows:
+Press ON and LINE (so that both buttons are highlighted) from the
+buttons at the right.
+Press SETUP and choose T-Y graph from the network analyzer setup panel.
+Choose the following values for axis, min, max, unit, grid:
+	t	0.0,  1000, - ,  10
+	y	0.0,  1.0,  18,  10
+
+This specifies the display area to be a time series with y values in
+the range [0, 1] and the outputs of neuron 18 for y (the single output
+unit of the hierarchical elman network).
+
+Choose m-test: 100 in this network analyzer setup panel to test 100
+patterns in a multiple inputs test sequence (You may also choose to test
+more or less input patterns.
+
+Finally, press the button M-TEST to test the trained network for the
+number of input patterns specified. The predicted time series is then
+displayed in the network analyzer tool.
+
+
+=============================================================================
+	End of README file
+=============================================================================

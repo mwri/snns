@@ -1,0 +1,83 @@
+=============================================================================
+	README file for the example files watch_2out.xxx
+=============================================================================
+
+
+Description:	This network is an advanced example of using neural networks
+============	for tasks of image processing.
+
+The network performs a 3x3 image convolution. The task was to detect
+edges like the sobel operator does in conventional immage processing.
+This example is derived from watch.xxx. The difference is that now
+also the absence of an edge is detected. Also the first hidden layer
+is of special funtionality.
+
+
+Pattern-Files:	watch_2out.pat
+==============	
+
+The pattern file watch.pat contains one single pattern pair which
+consists of three images: The input pattern represents an image of size
+171x223 and the output pattern represents two images of size 169x221.
+This is an example for a pattern file with two variable dimensions.
+However, since there is only one pattern pair there is in fact no real
+variety in size between different patterns. SNNS is able to cut small
+parts out of variable sized patterns and to feed them into the network
+during learning and test (see Hints:)
+
+For easier understanding the two original images (input and output
+image) are included in the SNNS distribution: watch_orig.pgm is a pgm
+image file which shows a watch. watch_edge.pgm is the corresponding
+edge image. watch_edge_invert.pgm is the inverted edge image. You need
+a standard image viewer (like xv) to view these images.
+
+
+Network-Files:	watch_2out.net
+==============	
+
+The network contains a trained network file with the following topology:
+	9 input neurons (organized as 3x3 input mask)
+	3 special hidden neurons, representing two sobel convolution
+		kernels and one laplacian kernel (fixed input weights)
+	7 hidden neurons
+	2 output neuron
+
+
+Config-Files:	watch_2out.cfg
+=============
+
+This network uses one 2D display in its standard configuration.
+
+
+Hints:
+======
+
+To use this network and pattern file you need to define a sub pattern
+scheme with the SNNS remote panel: You need to tell SNNS how to cut
+sub patterns out of the image patterns. Open the sub pattern panel and
+insert the following values:
+
+		Input				Output
+		Size	Step			Size	Step
+dim 1:		3	5			1	5
+dim 2:		3	5			1	5
+
+You need to define a 3x3 input size since the network is also of these
+dimensions. Note that the output size is 1x1 although the network
+contains two output neurons. This is valid since the output pattern
+consists of a two dimensional field of elements with two values (see
+field 'No. of output units' in header of watch_2out.pat).
+
+The step size of 5 is recommended to avoid long training
+cycles during experimentation. In any case you should define equal
+step sizes for the input and the output part of one dimension.
+Otherwise the cut output sub pattern does not correspomd to the input
+sub pattern and the network will not learn.
+
+For more information about sub pattern handling please refer to the
+user manual.
+
+
+=============================================================================
+	End of README file
+=============================================================================

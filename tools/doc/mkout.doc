@@ -1,0 +1,26 @@
+                  =============================
+                  Description of the tool MKOUT
+                  =============================
+
+This programs writes a snns output pattern to stdout.
+Use this program together with mkpat and mkhead to produce
+pattern files from raw files in a shell script.
+
+synopsis: mkout <#units> <active_unit>
+
+   where #units       is the number of output units
+         active_unit  the unit which has to be activated
+
+example:
+
+unix >mkout 26 2
+
+produces
+
+  0.000 1.000 0.000 0.000 0.000 0.000 0.000 0.000 
+  0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 
+  0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 
+  0.000 0.000 
+
+
+

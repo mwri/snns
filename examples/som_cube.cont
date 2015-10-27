@@ -1,0 +1,10 @@
+# Control file for convert2snns
+# 
+# PURPOSE: create a SOM with 3 components and grid 16x16
+#
+# NOTE:    since the WEIGHTFILE is omitted, the competitive layer 
+#          (hidden layer) is initialized with 0.0
+XSIZE       16          
+YSIZE       16          
+COMPONENTS   3           
+

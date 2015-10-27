@@ -1,0 +1,75 @@
+************************************************************************
+Example: artmap.xxx	ARTMAP letters network
+************************************************************************
+
+Problem description:
+====================
+
+The ARTMAP letters network shows the supervised classification of
+input patterns by an ARTMAP network. The ARTMAP network consits of two
+ART1 networks combined by a MAP-field. The input patterns are similar
+to the patterns of the 'letters' pattern file, except that these
+patterns are in 'complement coding' notation, i.e. there exists an
+original 5x7 input matrix representing capital letters and its
+inverse, combined into (5*7)+(5*7) = 70-dimensional vector.  The
+desired output is coded by the last 5 elements of each input pattern,
+giving a 75-dimensional input pattern alltogether.  (for
+implementation reasons this desired output is given here as an
+additional component of the input).
+
+See the SNNS user manual for a more detailed description of the ARTMAP
+implementation in SNNS.
+
+
+Pattern-Files:	artmap.pat
+==============
+
+The pattern-file letters.pat contains 26 binary input patterns with values
+of 0 and 1 representing capital letters in a 5x7 input matrix.
+
+
+Network-Files:	artmap.net
+==============
+
+This network file contains a trained ARTMAP network for the letter
+classification task described above. The standard configuration file
+for this network is artmap.cfg (one 2D display only).
+
+You may generate your own ARTMAP network with the BIGNET tool from the
+Info-Panel of SNNS. This automatically generates all units and the
+necessary connections.
+
+Because the unit types and link structure are highly specialized in
+ARTMAP we strongly urge you only to use this tool to generate ARTMAP
+networks in SNNS.
+
+
+Config-Files:	artmap.cfg	
+=============	
+
+
+Result-Files:	(none)
+=============
+
+
+Hints:
+======
+
+Read the chapter about ARTMAP in the SNNS manual very carefully!
+
+Note that ARTMAP needs a special network initialization function 
+	(REMOTE panel: OPTIONS select init function: ARTMAP_Weights).
+Note that there exist two different ARTMAP update functions: 
+	(REMOTE panel: OPTIONS select update function: ARTMAP_Synchronous
+						or     ARTMAP_Stable)
+Note that ARTMAP needs a special learning function:
+	(REMOTE panel: OPTIONS select learning function: ARTMAP)
+These should already be set when loading the example ARTMAP network.
+
+
+There exists additional documentation in form of the diploma
+thesis of Kai-Uwe Herrmann (in German), available via anon. ftp
+from our public ftp server ftp.informatik.uni-stuttgart.de under
+/pub/SNNS/NN-papers-german/herrmann_kaiuwe_DA.ps.Z
+
+************************************************************************

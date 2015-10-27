@@ -1,0 +1,78 @@
+=============================================================================
+	README file for the example files letters.xxx
+=============================================================================
+
+
+Description:	This network is a toy letter recognition network.
+============	
+
+This network is one of our favourite networks to display the SNNS user
+interface, because all windows conveniently fit onto the screen. It is
+NOT an example of a 'real world' letter recognition network. The
+network input is are 5x7 binary input matrix. The network has 10
+hidden units in one hidden layer which are fully connected to the
+input and to the output units. The 26 output units each represent one
+captial letter and show an output of 1 if the input pattern is of the
+proper class, else 0.
+
+
+Pattern-Files:	letters.pat
+==============	
+
+The pattern-file letters.pat contains 26 training patterns (one
+exemplar of each capital letter). The patterns here have binary values
+of 0 and 1 but SNNS treats all inputs and outputs as real valued.
+
+Because each pattern is given only once and there are no noisy
+patterns this pattern file cannot be used for generalization.
+
+
+Network-Files:	letters.net
+==============	letters3D.net
+
+Both networks contain trained network files with the same topology.
+	35 input neurons
+	10 hidden neurons
+	26 output neurons
+They differ only in their assignment of neurons to SNNS display layers
+and the use of a 2D or 3D display in the configuration file. The
+first network letters.net uses one 2D display only, letters3D.net
+several 3D displays and a 3D display.
+
+
+Config-Files:	letters.cfg
+=============	letters3D.cfg
+ 
+The configuration file letters.cfg uses one 2D display only,
+letters3D.cfg several 3D displays and a 3D display.
+
+
+Topology: 35 Input-Neurons
+          10 Hidden-Neurons
+          26 Output-Neurons
+
+
+Hints:
+======
+
+The following table shows some learning functions one can use to train
+the network. In addition, it shows the learning parameters and the
+number of cycles needed to train the network successfully.
+
+These parameters have not been obtained with extensive studies of
+statistical significance. They are given as hints to start your own
+training sessions, but should not be cited as optimal or used in
+comparisons of learning procedures or network simulators.
+
+
+Learning-Function               Learning-Parameters       Cycles
+
+Std.-Backpropagation            2.0                      150
+Backpropagation with Momentum   0.8  0.6   0.1           100
+Quickprop                       0.2  1.75  0.0001         50  
+Rprop                           0.2                       50
+
+
+=============================================================================
+	End of README file
+=============================================================================

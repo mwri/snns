@@ -1,0 +1,92 @@
+=============================================================================
+	README file for the example files eight_elman.xxx
+=============================================================================
+
+
+Description:	Elman network (partially recurrent network)
+============	for the task to learn the shape of a lying figure '8'.
+
+The task of this partially recurrent network is to predict the shape
+of a lying figure '8'. The problem is described in detail in 
+
+J.L. Elman: Finding Structure in Time. Cognitive Science, 14:179-211, 1990
+
+The two input units code the (x, y)-Position of the current point of
+the curve, the output units the (x', y')-Position of the next
+point. Usually 16 points (patterns) are used to approximate the shape
+of the figure 8, the central crossing point (0.5, 0.5) appearing
+twice, depending on which direction the stroke takes. The difficulty
+for the network arises from the input pattern of this central crossing
+point for which the network must predict two different successors
+(output patterns) depending on the previous point.
+
+See the user manual for a detailed description of Elman networks and
+their usage.
+
+
+Network-Files:	eight_elman.net
+==============
+
+This network file contains a trained elman network for the task to
+predict the figure of a lying eight described above. The standard
+configuration file for this network is eight_elman.cfg (one 2D display
+only).
+
+
+Pattern-Files:	eight_016.pat
+==============	eight_160.pat
+
+The pattern files differ only in the number of patterns they contain,
+indicated in the name of the pattern file. The larger file consists of
+10 concatenations of the smaller one
+
+
+Hints:
+======
+
+The easiest way to create Jordan or Elman networks is with the BIGNET
+panel from the info panel. All network parameters can then be
+specified in a special Jordan or Elman network creation panel called
+with the respective button in the BIGNET panel.
+
+If you want to train your own Elman or Jordan network from scratch,
+note to set the proper initialization function and initialization
+parameters.  In this example, we use the following values:
+ 1.0,  -1.0,  0.3,  1.0,  0.5  (5 parameters).
+
+Remember to set the update function to JE_Order or JE_Special,
+depending on your task (see the SNNS user manual for more details).
+
+You may choose between four different learning functions. They are
+given here with some values for the learning parameters for which the
+training is relatively fast
+
+			1st	2nd	3rd	4th	5th
+JE_BP (Backprop)	0.2
+JE_BP_Momentum		0.2	0.5
+JE_Quickprop		0.3	2.0	0.0001
+JE_Rprop		0.1	50.0
+
+The behaviour of this network can very nicely be visualized with the
+network analyzer tool which can be called from the info panel with the
+GUI button as ANALYZER. The proceed as follows:
+Press ON and LINE (so that both buttons are highlighted) from the
+buttons at the right.
+Press SETUP and choose X-Y graph from the network analyzer setup panel.
+Choose the following values for axis, min, max, unit, grid:
+	x	0.0,  1.0,  11,  10
+	y	0.0,  1.0,  12,  10
+This specifies the display area to be [0, 1] x [0, 1] and the outputs
+of neurons 11 and 12 for x and y (the output units of the elman
+network).
+Choose m-test: 16 in this network analyzer setup panel to test 16
+patterns in a multiple inputs test sequence (You may also choose to test
+more or less input patterns.
+
+Finally, press the button M-TEST to test the trained network for the
+number of input patterns specified.
+
+
+=============================================================================
+	End of README file
+=============================================================================

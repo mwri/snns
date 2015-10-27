@@ -1,0 +1,116 @@
+.TH xgui 1 "" "" SNNS
+
+.SH NAME
+
+.B xgui 
+\- graphical front end to the neural network simulation package SNNS
+
+.SH SYNOPSIS
+
+.B xgui
+.RI [ netfile ".net  [ " pattern ".pat  [ " config 
+.RI ".cfg ] ] ]  [ " options " ]"
+
+.SH OPTIONS
+.BI -font " name"
+.RS 
+font for the simulator. Available fonts can be detected with the
+.RB program " xfontsel" (1X)
+.RE
+
+.BR -dfont " name"
+.RS
+font for the displays. Available fonts can be detected with the
+.RB program " xfontsel" (1X).
+.RE
+
+.B -mono
+.RS
+black & white graphics on color screens.
+.RE
+
+.B -help 
+.RS
+print usage information and exit.
+.RE
+
+.IB netfile .net 
+.RS
+name of a network file to be loaded at startup. It must have the
+extension ".net" 
+.RE
+
+.IB pattern .pat 
+.RS
+name of a pattern file to be loaded at startup. This name must be
+given after the network name and must have the extension ".pat".
+.RE
+
+.IB  config .cfg 
+.RS
+name of a configuration file to be loaded at startup. This name must be
+given after the pattern file name and must have the extension ".cfg".
+.RE
+
+.SH DESCRIPTION
+The usual mode for working with the SNNS neural network simulator is
+via the graphical user interface provided by this program. It is an
+X11R5 based environment, which gives the user full information about,
+and full control over the network. A multitude of specialized windows
+may be opened simultaneously, displaying detailed information about
+the current state of the network. The network behavior is controlled
+in the so called 
+.B Control Panel, 
+just like with a remote control. All major network actions like
+initialization, learning, testing etc. may be started or halted from
+here. One or more 
+.B Display panels 
+give the user a 2D view of the network. Networks may also be created
+or modified in these windows with the help of the graphical network
+editor. By giving sequences of control keys or making selections from
+popup menues, groups of units and links can be created, modified or
+deleted. This allows for easy creation of large, complicated
+networks. Large regular networks can be constructed in the
+.B Bignet panel.
+Other available windows include displays for Hinton diagrams
+of the network weights, a graphical tracer of the network error during
+learning, a 3D display of the network, a network analyzing tool,
+activation function displays, as well as an 
+.B Info panel. 
+The latter one also allows to change the values of any unit or link at any time.
+Generated networks can be both printed as a Postscript file and stored
+in a network file for later reuse. 
+
+.SH FILES
+.B default.cfg
+.RS
+default configuration of the windows. This file should be located in
+the current working directory, or in the directory defined by the
+environment variable
+.B XGUILOADPATH
+.RE
+
+.B help.hdoc
+.RS
+help text for xgui and the graphical network editor. This file should
+also be located in the current working directory, or in the directory
+defined by the environment variable
+.B XGUILOADPATH
+.RE
+
+.SH SEE ALSO
+The SNNS user manual under the SNNS installation directory or the
+hypertext manual at                                              
+http://www-ra.informatik.uni-tuebingen.de/SNNS/UserManual/UserManual.html
+
+.BR batchman (1)
+batch execution interface for SNNS
+
+.BR snns2c (1)
+compiler to transform a trained neural network into a C-routine
+
+.BR snns (1)
+description of the SNNS package
+
+.SH AUTHOR
+Guenter W. Mamier

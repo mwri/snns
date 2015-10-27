@@ -1,0 +1,52 @@
+=============================================================================
+	README file for the example files dlvq_ziff.xxx
+=============================================================================
+
+
+Description:	This network is a toy digit recognition network.
+============	
+
+This network is demonstration of the dlvq learning algorithm.
+The untrained network (dlvq_ziff.net) has an 16x16 input layer and 1 output unit.
+The trained network (dlvq_ziff_trained.net) has an 16x16 input layer, an 10x1  hidden layer and 1 output unit.
+
+Pattern-Files:	dlvq_ziff_100.pat
+==============	
+
+The pattern-file dlvq_ziff_100.pat contains 100 training patterns (a random
+number of each digit)
+
+Network-Files:	dlvq_ziff.net
+==============	dlvq_ziff_trained.net
+
+Config-Files:	dlvq_ziff.cfg
+=============	
+ 
+Topology: 256 Input-Neurons
+          (10) Hidden-Neurons (only for the trained net)
+          1 Output-Neuron
+
+
+Hints:
+======
+
+The following table shows the learning functions one can use to train
+the network. In addition, it shows the learning parameters and the
+number of cycles needed to train the network successfully.
+
+These parameters have not been obtained with extensive studies of
+statistical significance. They are given as hints to start your own
+training sessions, but should not be cited as optimal or used in
+comparisons of learning procedures or network simulators.
+
+
+Learning-Function               Learning-Parameters       Cycles
+
+Dynamic_LVQ            		0.03 0.03 10              1
+
+
+Dynamic_LVQ needs for training exactly one Output-Unit.
+The Init-Funktion must be DLVQ_Weights.
+=============================================================================
+	End of README file
+=============================================================================

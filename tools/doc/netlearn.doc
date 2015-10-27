@@ -1,0 +1,123 @@
+                  ================================
+                  Description of the tool NETLEARN
+                  ================================
+
+This program is a SNNS kernel backpropagation test program.
+It's a demo for using the SNNS kernel interface to train networks.
+
+
+synopsis: netlearn
+
+example:
+
+unix >netlearn
+
+produces
+
+
+SNNS 3D-Kernel V3.1000
+----  Network Learning -----
+
+Filename of the network file: ../../../examples/letters_untrained.net
+Loading the network ...
+
+Network name: letters
+No. of units       : 71
+No. of input units : 35
+No. of output units: 26
+No. of sites: 0
+No. of links: 610
+
+Learning function: Std_Backpropagation
+Update function  : Topological_Order
+
+Filename of the pattern file: ../../../examples/letters.pat
+Loading the patterns ...
+
+No. of patterns: 26
+
+The learning function 'Std_Backpropagation' needs 2 input parameters:
+Parameter [1]: 0.6
+Parameter [2]: 0.2
+
+Choose no. of cycles: 250
+
+
+Shuffle patterns ? (Y/N): n
+
+Shuffleing of patterns disabled
+
+Begin learning ...
+
+Cycle: 1
+Learning function value(s): [1]: 54.971806  
+
+Cycle: 14
+Learning function value(s): [1]: 20.768957  
+
+Cycle: 27
+Learning function value(s): [1]: 18.673342  
+
+Cycle: 40
+Learning function value(s): [1]: 16.126991  
+
+Cycle: 53
+Learning function value(s): [1]: 13.680001  
+
+Cycle: 66
+Learning function value(s): [1]: 11.072329  
+
+Cycle: 79
+Learning function value(s): [1]: 8.855511  
+
+Cycle: 92
+Learning function value(s): [1]: 6.888253  
+
+Cycle: 105
+Learning function value(s): [1]: 5.557242  
+
+Cycle: 118
+Learning function value(s): [1]: 4.468373  
+
+Cycle: 131
+Learning function value(s): [1]: 3.632325  
+
+Cycle: 144
+Learning function value(s): [1]: 2.725383  
+
+Cycle: 157
+Learning function value(s): [1]: 1.964378  
+
+Cycle: 170
+Learning function value(s): [1]: 1.818217  
+
+Cycle: 183
+Learning function value(s): [1]: 1.142782  
+
+Cycle: 196
+Learning function value(s): [1]: 1.099230  
+
+Cycle: 209
+Learning function value(s): [1]: 0.756542  
+
+Cycle: 222
+Learning function value(s): [1]: 0.631204  
+
+Cycle: 235
+Learning function value(s): [1]: 0.331756  
+
+Cycle: 248
+Learning function value(s): [1]: 0.000000  
+
+Cycle: 250
+Learning function value(s): [1]: 0.000000  
+
+End learning ...
+
+Calculating the last error of the network ...
+The error is: 22.0737
+
+
+Filename of the network to save: letters_trained.net
+Saving the network ...
+

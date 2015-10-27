@@ -1,0 +1,27 @@
+                  =============================
+                  Description of the tool MKPAT
+                  =============================
+
+This program reads a binary 8-Bit RAW File form stdin and
+writes a snns pattern file entry to stdout.
+Use this program together with mkpat and mkout to produce
+pattern files from raw files in a shell script.
+
+synopsis: mkpat <xsize> <ysize>
+
+   where number  is the xsize  of the raw file
+         ysize   is the y size of the raw file
+
+example:
+
+the binary content of 'rawfile'
+
+  00 10 20 3F 40 7F AC FF
+
+unix >mkpat 1 4 2 < rawfile
+  0.000 0.063 0.125 0.247 
+  0.251 0.498 0.675 1.000 
+
+
+
+

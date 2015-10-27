@@ -1,0 +1,62 @@
+=============================================================================
+	README file for the example files spirals*.xxx
+=============================================================================
+
+
+Description: This network is an example of using the RBF DDA algorithm
+============
+
+The task was to solve the two spirals porblem.
+
+
+Pattern-Files:	spirals.pat
+==============	
+
+The pattern   file defines the  well known  spiral problem.  The input
+consists   of two  values (x  y   position) which range  from  -6.5 to
+6.5.  The output  contains two  values which  classify the two spirals
+(values 0 and 1).
+
+
+Network-Files:	spirals_dda.net
+==============	
+
+The  network  contains  a   trained network file  with   the following
+topology:
+	2  input neurons (organized as 3x3 input mask)
+	45 RBF hidden neurons
+	2  output neuron
+
+
+Config-Files:	spirals_dda.cfg
+=============
+
+This network uses one 2D display in its standard configuration.
+
+
+Hints:
+======
+
+The network is already trained  by the RBF_DDA learning function. Note
+that the RBF_DDA algorithm assumes a winner takes all behaviour in the
+output layer. Therefore the output (3.4 1.2) of the two output neurons
+is a correct output for the training pattern (1  0). Creating a result
+file or  using other learning algorithms  will result in strange error
+values.
+
+To retrain  this network all hidden neurons  must be deleted  by using
+the  graphical  network editor (select all   hidden units and give the
+command 'Units Delete'). A  valid set of  learning parameters would be
+0.4 0.2 5,  which defines two threshold  values and  the size of  unit
+columns in the new created hidden layer.
+
+Pressing ALL several times creates enough RBF hidden neurons two learn
+the spirals task with 100% accuracy.
+
+For more  information about the RBF DDA  algorithm please refer to the
+user manual or to the author berthold@ira.uka.de.
+
+
+=============================================================================
+	End of README file
+=============================================================================

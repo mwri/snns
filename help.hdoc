@@ -1,0 +1,2090 @@
+----------------------------------------------------------------------
+* Using The Graphical User Interface
+----------------------------------------------------------------------
+
+* XGUI Files
+
+The graphical user interface consists of the following files:
+ 
+   snns  or  xgui	SNNS program (XGUI and simulator kernel
+			linked together into one executable program)
+   default.cfg		default configuration file
+   help.hdoc		help text used by XGUI (this file)
+
+The file 'snns' in the home directory of SNNS is only a  symbolic link
+to the file
+
+	xgui/bin/<architecture>/xgui 
+
+where <architecture> is a combination of machine and operating  system
+names. 
+
+The file 'help.hdoc' is this file.
+
+XGUI looks for  the files  'default.cfg' and 'help.hdoc'  first in the
+current  directory. If  not  found  there,  it  looks in the directory
+specified by the environment variable XGUILOADPATH. By the command
+
+	setenv XGUILOADPATH  Path 
+
+this variable  can  be set to  the  path where the  'default.cfg'  and
+'help.hdoc' files are located. This is  best done  by an entry  in the
+files '.login' or '.cshrc'. Advanced users may change the help file or
+the default configuration for their own purposes. However, this should
+be done only on a copy of the files in a private directory.
+
+SNNS uses the following extensions for its files:
+
+	.net 	  network files (units and link weights)
+	.pat 	  pattern files
+	.cfg 	  configuration settings files 
+	.txt 	  text files (log files) 
+	.res 	  result files (unit activations) 
+
+A simulator run is started by the command 
+
+	snns  <Return>
+
+in the home directory of SNNS or by directly calling 
+
+	<SNNS-directory>/xgui/bin/<architecture>/xgui  
+
+from any directory. Note that either XGUILOADPATH must be set properly
+before or  SNNS  will complain about  missing  files 'default.cfg' and
+'help.hdoc'.
+
+The executable xgui may also be called with X parameters as arguments.
+The following example starts the interface with the font 7x14:
+
+	snns -font 7x14  <Return>
+
+The fonts   which are  available  can  be  detected  with the  program
+xfontsel (not part of this distribution).  
+
+
+
+* Windows of XGUI 
+
+The graphical user interface has the following windows which can be
+positioned and handled independently (toplevel shells):
+
+- Manager panel with buttons to open other windows, a message line, 
+  and a line with status information at the bottom .
+- File browser for loading and saving networks and pattern files.
+- Control panel for simulator operations.
+- Info panel for setting and getting information about unit and link 
+  attributes.
+- Class panel for controlling class names and pattern distribution
+  within update chunks. 
+- several Displays to display the network graphically in two
+  dimensions.
+- 3D View panel to control the three dimensional network
+  visualization component.
+- Graph  display, to explain the network error during teaching 
+  graphically.
+- Bignet  panel to facilitate the creation of big regular
+  feed-forward nets, time delay, ART1, ART2 and ARTMAP networks.
+- Pruning panel for control of the pruning algorithm.
+- Cascade  panel for control of the learning phase of cascade
+  correlation learning.
+- Kohonen panel, an extension to the control panel for Kohonen 
+  networks.
+- Projection panel to clarify the influence of two units onto a third 
+  one.
+- several Help windows to display the help text.
+- Inversion display, to control the network analyzing tool.
+- Weight Display, to show the weight matrix as a WV or Hinton diagram.
+
+
+Of these windows  only the Manager panel  and possibly one or more  2D
+displays are open  from the start, the  other windows are  opened with
+the  corresponding buttons   in the manager   panel  or by giving  the
+corresponding key code while the mouse  pointer is in  one of the SNNS
+windows.
+
+Additionally, there are  several   popup windows (   transient shells)
+which  only  become  visible  when  called and  block all   other XGUI
+windows. Among them are various  Setup  panels for adjustments of  the
+graphical representation. (called with the button SETUP in the various
+windows)
+
+There  are a   number of other   popup windows  which are  invoked  by
+pressing a button in one of the main windows or choosing a menu.
+
+The Manager  panel contains buttons to call  all other  windows of the
+interface and displays the status  of SNNS. It should therefore always
+be kept visible.
+
+The Info panel displays  the attributes of two  units and the data  of
+the link between them.  All attributes may also  be changed  here. The
+data displayed here is important for many editor commands.
+
+In each of the Displays a part of  the network is displayed, while all
+settings  can be changed using Setup.  These windows also allow access
+to the network editor using the keyboard.
+
+The Control  panel  controls the simulator  operations during learning
+and recall.
+
+In the File panel a log  file can be specified,  where all XGUI output
+to stdout is copied  to. A variety of  data  about the network  can be
+displayed here. Also a  record is kept on the  load and save of  files
+and on the teaching.
+
+QUIT is used to leave XGUI. XGUI can also be left by pressing ALT-q in
+any SNNS window. Pressing ALT-Q  will exit SNNS without asking further
+questions.
+
+* ManagerPanel 
+
+From the  manager panel all    other elements that have  a  different,
+independent window assigned can  be called. Because  this window is of
+such central importance, it is recommended to  keep it visible all the
+time.
+
+The  user can request several displays  or help windows,  but only one
+control panel  or  text window.  The  windows called from the  manager
+panel may also be called via key codes  as follows (`Alt-' meaning the
+alternate key in conjunction with some other key).
+
+	FILE		Alt-f		CONTROL		Alt-c
+	INFO		Alt-i		DISPLAY		Alt-d
+	3D DISPLAY	Alt-3		GRAPH		Alt-g
+	BIGNET		Alt-b		PRUNING
+	CASCADE				KOHONEN		Alt-k
+	WEIGHTS		Alt-w		PROJECTION	Alt-p
+	ANALYZER	Alt-a		INVERSION	
+	PRINT				HELP		Alt-h
+	CLASS				QUIT		Alt-q
+	
+
+- SNNS Status Message:
+
+This   line  features messages  about  a   current  operation  or  its
+termination. It  is also the place of  the command sequence display of
+the  editor.  When  the  command is   activated,  a message about  the
+execution of the command is displayed
+ 
+- Status line:
+
+This line shows  the current position  of the mouse  in a display, the
+number  of selected  units, and  the  position  of  flags, set  by the
+editor.
+
+X:0 Y:0 gives the current position of the mouse in the display in SNNS
+unit coordinates.
+
+The next icon shows a small  selected unit. The corresponding value is
+the number of  currently  selected units. This is   important, because
+there  might  be selected  units  not  visible  in the   displays. The
+selection of units affects only editor operations.
+
+The last icon shows a minature flag. If safe appears next to the icon,
+the safety flag was set by the user. In this case XGUI forces the user
+to confirm any delete actions.
+
+
+
+* Info Panel
+
+The  info panel displays all data of  two  units and the link  between
+them.  The unit  at the  beginning  of the link  is called SOURCE, the
+other  TARGET. One  may  run sequentially  through all connections  or
+sites  of  the TARGET  unit with  the  arrow buttons and look  at  the
+corresponding source units and vice versa.
+
+This panel is also  very important for editing, since some  operations
+refer to the displayed TARGET unit or (source->TARGET) link. A default
+unit  can  also be  created  here,  whose  values  (activation,  bias,
+IO-type, subnet number, layer numbers, activation function, and output
+function) are copied into all selected units of the net.
+
+The  source unit  of a link  can  also be specified in a 2D display by
+pressing the middle mouse  button, the target unit by releasing it. To
+select a link between  two units the user therefore presses the middle
+mouse button  on  the source unit in a 2D display, moves the mouse  to
+the target unit while holding down the mouse button and releases it at
+the target unit. Now the selected units and their link  are  displayed
+in the info panel. If  no link exists between two units selected  in a
+2D  display, the TARGET  is  displayed  with its  first  link, thereby
+changing SOURCE.
+
+In  the  following table  the various fields are listed. The fields in
+the line FUNC have the following meaning (from left to right): Name of
+the activation function,  name of  the output  function,  name  of the
+f-type.  The  fields in  the line  LINK  have  the following  meaning:
+weight, site value, site function, name of the site.
+
+
+Name                 | Type  | set by   | Range
+----------------------------------------------------------------------
+no. (unit no.)       | label |          | 1 .. 2^31
+subn. (subnet no.)   | label |          | 1 .. 32735
+io (IO type)         | label | OPTIONS  | I(nput), O(utput), H(idden),
+                     |       |          | D(ual), S(pecial)
+act. (activation)    | text  | input    | float; usually -1.0..+1.0
+iact. (initial act)  | text  | input    | float; usually -1.0..+1.0
+out. (Ausgabe)       | text  | input    | float; usually -1.0..+1.0
+bias                 | text  | input    | float
+name                 | text  | input    | 25 letters or underscore
+func (act_*)         | label | OPTIONS  | as available
+func (out_*)         | label | OPTIONS  | as available
+link (weight)        | text  | input    | float
+site (site value)    | label |          | float
+func (site_*)        | label |          | as available
+name (site name)     | label |          | as available at TARGET 
+----------------------------------------------------------------------
+
+Unit number, unit subnet number,  site value, and site function cannot
+be modified.
+
+Note: The specified  SNNS value ranges must be obeyed.  Values outside
+the specified range are not rejected  by the graphical user interface.
+Numerical values  of the  type float  have the following format: Sign,
+one digit, decimal point, and five decimal digits. For bias and weight
+two digits before the decimal point are critical. To change attributes
+of type text, the cursor has to be exactly in the corresponding field.
+
+There are the following buttons for the units (from left to right):
+
+- [FIRST]: 	Select first TARGET of SOURCE (arrow button at
+		TARGET) or select first SOURCE of the TARGET 
+		(arrow button at SOURCE).
+
+- [NEXT]: 	Select next TARGET of SOURCE (arrow button at
+		TARGET) or select next SOURCE of the TARGET 
+		(arrow button at SOURCE).
+
+- [FREEZE]:	Unit is frozen, if this button is inverted.
+		Changes become active only after SET is clicked.
+
+- [DEF]:	The default unit is assigned the displayed values of
+		TARGET and SOURCE assigned (only activation, bias, 
+		IO-type, subnet number, layer numbers, activation
+		function and output function).
+                 
+- [OPTIONS]:	Calls the following menu:
+
+     change io-type          | change the IO-type
+     change f-type           | change f-type
+     change activation func. | change activation function
+                             | note: f-type is lost!
+     display activation func.| graph the activation function
+     change output func.     | change output function
+                             | note: f-type is lost!
+     display output func.    | graph the output function
+     assign layers           | assign unit to layers
+     list all sources        | list all predecessors
+     list all targets        | list all predecessors
+
+
+- [SET]: 	Only after clicking this button the attributes
+		of the corresponding unit are set to the specified
+		value. The unit is also redrawn. Therefore the values
+		can be changed without immediate effect on the unit.
+
+
+There exist the following buttons for links (from left to right):
+
+- [FIRST]: 	Select first site of the TARGET unit.
+
+- [NEXT] : 	Select next site of the TARGET unit.
+
+- [OPTIONS]:	Calls the following menu:
+
+     list current site of TARGET | list of all links of the
+                                 | current site
+     list all sites of TARGET    | list all sites of the TARGET
+     list all links from SOURCE  | list all links starting
+                                 | at the SOURCE
+     delete site                 | delete displayed site
+                                 | note: f-type gets lost
+     add site                    | add new site to TARGET
+                                 | note: f-type gets lost!
+
+- [SET]: 	Only after clicking this button the link weight is
+		set.
+                
+
+
+* 2D Displays 
+
+
+A 2D Display or simply  Display is always part of the user  interface.
+It serves to display the network topology, the  units' activations and
+the weights of  the  links. Each  unit  is located on a grid position,
+which simplifies  the positioning of the units. The  distance  between
+two grid points (grid width) can be changed from the default 37 pixels
+to other values in the setup panel.
+
+The current  position, i.e.  the grid  position of the  mouse, is also
+numerically displayed at the bottom of the manager  panel.  The x-axis
+is  the  horizontal  line and  valid  coordinates  lie  in  the  range
+-32736..+32735 (short integer).
+
+The current version displays units as boxes, where the size of the box
+is  proportional  to the  value of the  displayed  attribute. Possible
+attributes  are activation,  initial activation, bias, and  output.  A
+black box represents a positive value, an  empty box a negative value.
+The size  of the unit varies between  16x16 and  0 pixels according to
+the value of  scaleFactor. The  parameter  scaleFactor  has  a default
+value  of  1.0,  but may be set to values between 0.0 and  2.0  in the
+setup panel. Each unit can be displayed with its name (above the unit)
+and the numerical value of one of several attributes (below the unit).
+
+Links are shown as solid lines, with optional numerical display of the
+weight in the center  of the  line and/or  arrow head  pointing to the
+target unit. These features  are optional, because they heavily affect
+the drawing speed of the display window.
+
+A display  can also  be  frozen  with  the  button FREEZE  (button  is
+inverted). Then it is not updated anymore.
+
+An iconified display is not updated and therefore consumes (almost) no
+CPU time. If  a window is closed,  its dimensions and setup parameters
+are saved in a stack (LIFO). This means that a newly requested display
+gets the values of the window assigned that was last closed.
+
+For  better orientation,  the  window title contains the subnet number
+which was specified for this display in the setup panel.
+
+
+* Setup Panel 
+
+Changes  to the kind of display of the network can be performed in the
+Setup Panel.  All settings  become valid only after the button DONE is
+clicked. The whole display window is redrawn then.
+
+The first  two  lines of the Setup panel (units  top and units bottom)
+contain  two  buttons  each  to  set the  unit  parameter  that can be
+displayed at the top resp. the bottom of the unit.
+
+[ON] toggles the display of information which can be selected with the
+button  [SHOW].  The unit  name or  unit  number  or  the  z-value (3D
+coordinate) can be displayed above the unit,  the  activation, initial
+activation, bias or output  of  the unit below the unit. The numerical
+attribute  selected with the  button [SHOW] at the bottom  of the unit
+(activation, initial  activation, output, or bias) also determines the
+size of the unit in the graphical representation.
+
+It  is usually  not advisable to switch  off the  top information of a
+unit  (number  or  name),  because  this  information  is  needed  for
+reference to the info panel. An unnamed unit is  always displayed with
+its number.
+
+The third line consists of three buttons to select the display of link
+data, [ON], [-2.35], and [-->].
+
+     [ON]	determines whether to draw links at all (then
+	   	ON is inverted),
+     [-2.35]	displays link weights at the center of the
+		line representing the link,
+     [-->]	displays arrow heads of the links pointing
+		from source to target unit.
+
+[LAYERS] invokes another popup window to select the display of up to 8
+different layers  in  the display window. Layers  are be stacked  like
+transparent sheets of paper and allow for a selective display of units
+and links. These layers  need  NOT correspond  with layers of units of
+the network topology  (as in  multilayer  feed-forward networks),  but
+they  may do so.  Layers are very useful to display  only  a  selected
+subset of the network. The display of each layer can be switched on or
+off independently.  A  unit may belong to  several layers at the  same
+time. The assignment of  units to  layers  can be done with  the  menu
+assign layers  invoked  with the  button [OPTIONS]  in  the  main Info
+panel.
+
+[COLOR] sets the 2D--display colors. On monochrome terminals, black on
+white or white  on black representation of the network can be selected
+from  a  popup  menu.  On color displays,  a  color editing  window is
+opened. This window consists of three parts:
+
+The palette of available colors at the top, the buttons to select the
+item to be colored in the lower left region, and the color preview
+window in the lower right region. 
+
+A color is set by clicking  first  at the appropriate button ( [TEXT],
+[BACKGROUND] ,  or [SELECTION] )  and then at the desired color in the
+color palette. The selected  setting is  immediately displayed in  the
+color  preview window. All colors  may  be set  in  any order  and any
+number of times. The changes  become  effective in  the  corresponding
+2D--display only after both  the setup panel and the  color edit panel
+have been dismissed with the [DONE] button.
+
+
+Sliders for  the selection of link display  parameters, links positive
+and links negative:
+
+There are two slidebars to  set thresholds for the  display of  links.
+When  the bubble  is  moved,  the current  threshold  is  displayed in
+absolute and relative  value at the bottom of  the setup  panel.  Only
+those links with an absolute value above  the  threshold are displayed
+in the display. The  range of  the absolute values is  0.0 to 10.0.  A
+value of 2.2  for  negative links means that only those negative links
+are  displayed  whose  absolute  value is above  2.2, i.e. only  those
+links,  whose value is  below  -2.2.  The trigger  values  can be  set
+independently for positive and negative weights.
+
+With  these  link thresholds  the user can skip  weak  connections and
+concentrate on  the  'important' ones.  Reducing  the number  of links
+drawn is an  effective means to speed up the drawing of  the displays,
+since line drawing takes most of the time to display a network.
+
+Note: The links  that  are not  drawn are only  invisible.  They still
+remain accessible, i.e.  they are affected by editor operations.
+
+
+Units scale: This slidebar sets the parameter scaleFactor for the size
+of the growing boxes of the units.  Its range  is 0.0 to 2.0.  A scale
+factor  of 0.5 draws  the  unit with  activation 0.5 with full size. A
+scale factor  of 2.0 draws a unit with activation  1.0 only with  half
+size. If  a color display is used the value which determines the units
+size or color is displayed with the following colors:
+
+	values around 0.0		blue
+	values around scaleFactor	red
+	values around - scaleFactor	green
+
+Grid width: This value sets the  width of  the grid on which the units
+are placed. For some nets,  changing the  default of  37 pixels may be
+useful, e.g.  to be able to better position the units in a geometrical
+pattern.  Overlapping tops and  bottoms  occur if a grid size of  less
+than 35 pixels is  selected  (26 pixels if units are displayed without
+numerical values). This overlap, however, does  not affect computation
+in any way.
+
+Origin (grid): These two  fields determine the origin of  the  window,
+i.e.  the grid position of the top left corner.  There, the left field
+represents the x coordinate, the right is the y coordinate. The origin
+is usually (0, 0). Setting it to (20, 0) moves the display 20 units to
+the right and 10 units down in the grid.
+
+subnet number: This field adjusts the  subnet number, to  be displayed
+in this window. Values between -32736 and +32735 are possible here.
+
+
+* Unit Function Displays 
+
+The  characteristic  functions  of  the units can  be  displayed  in a
+graphic  representation. For this  purpose separate displays have been
+created,  that  can  be  called  by  selecting  the  options  [display
+activation  function] or [display output function]  in the  menu under
+the options button of the target and source unit in the info panel.
+
+The  window header states  whether it is an activation  or  an  output
+function, as well as whether it is the current  function of the source
+or target unit.
+
+The size of  the  window is  as flexible as the  picture range  of the
+displayed function.  The picture  range  can  be  changed by using the
+dialog widgets at the  top of the function displays. The size  of  the
+window may be changed by using  the standard mechanisms of your window
+manager.
+
+If  the  displayed function  changes, e.g.  because  a new  activation
+function has  been defined for the  unit, the  display window  changes
+automatically to reflect the new situation. Thereby it  is easy to get
+a quick overview  of  the available  functions by opening the function
+displays and  then clicking through the  list  of available  functions
+(This list can be obtained by selecting [select  activation  function]
+or [select output function] in the unit menu).
+
+
+* File Browser 
+
+The file  browser  handles  all load and save operations  of networks,
+patterns,  configurations,  and  the  contents  of  the  text  window.
+Configurations include number, location and  dimension of the displays
+as well as their setup values and the name of the layers.
+
+In the top line, the path (without trailing slash) where the files are
+located  is  entered.  This  can  be  done  either  manually,   or  by
+double--clicking on the  list of files and directories in  the box  on
+the left.  A double click to [..] deletes  the last part of the  path,
+and  a  double click  to  a subdirectory appends that directory to the
+path.  In the input  field  below  the  path  field, the name for  the
+desired file (without extension) is entered.  Again,  this can be done
+either manually,  or  by double--clicking on the list  of files in the
+box on the left. Whether  a pattern file,  network file, or other file
+is loaded/saved depends  on the settings of  the corresponding buttons
+below. With the setting  of picture~ FigFilePanel a network file would
+be selected. A file name beginning with a slash (/)  is taken to be an
+absolute path.
+
+Note: The extension ".net" for nets, ".pat" for  patterns,  ".cfg" for
+configurations, and ".txt" for  texts is added automatically and  must
+not be specified. After the name is specified the desired operation is
+selected by clicking either [LOAD] or [SAVE] .
+
+NOTE: In version 3.0 the directories must be executable in order to be
+processed properly by the program!
+
+* Loading and Saving Networks
+
+If the  user wants to load a network  which  is to replace  the net in
+main memory, the confirmer appears  with the  remark that  the current
+network would  be  erased upon loading. Only if the question Load?  is
+answerd by a click to the [YES] button, the new network is loaded. The
+file name  of the network loaded last appears  in the  window title of
+the manager panel.
+
+Note 1: Upon saving the net  the  kernel  compacts its  internal  data
+structures, if the unit numbers  are not numbered  consecutively. This
+happens if  units are  deleted during the creation of the network. All
+earlier  listings with unit numbers then become  invalid. The  user is
+therefore  advised  to  save  and reload the network  after  creation,
+before continuing the work.
+
+Note 2:  The assignment of patterns to  input or  output units may  be
+changed after a network  save, if an input or  output unit  is deleted
+and is inserted again. This is caused because the activation values in
+the pattern file are assigned to units in ascending order  of the unit
+number.  Compaction during a  network save leaves the order unchanged.
+In the above case, however, this  order is no longer  the same because
+the  new input  or output  units  may have  been assigned higher  unit
+numbers than the existing input or output units. So some components of
+the patterns may be assigned incorrectly.  To be on the safe side, one
+should  always save and reload the network after modifications to  the
+network topology.
+
+
+* Loading and Saving Patterns
+
+Patterns are  special combinations of activated input or output units.
+Pattern files, like nets, are administrated by the SNNS kernel. During
+loading the kernel checks whether the number of input and output units
+is the same as in the network in memory. If this  is not the case, the
+operation  is aborted. The filename of the pattern loaded last appears
+in the window title of the control panel.
+
+Note: The activation values are  read  and  assigned to the input  and
+output units sequentially in  ascending order of the unit numbers (see
+above).
+
+
+* Loading and Saving Configurations
+
+A configuration  contains the location and  extension of all  displays
+with  all setup  parameters and the  names of the various layers. This
+information can be loaded  and saved separately,  since it is indepen-
+dent  from  the  networks.  Thereby  it  is  possible  to  define  one
+configuration for several networks, as well as several  configurations
+for the same net. When XGUI is started, the file default.cfg is loaded
+automatically.
+
+
+* Saving a Result file 
+
+A  result file contains  the activations  of  all output units.  These
+activations  are   obtained  by   performing   one   pass  of  forward
+propagation. After pressing the [SAVE] button  a popup window lets the
+user select  which patterns are to be tested and which patterns are to
+be saved in addition to  the test output. Since the result file has no
+meaning  for  the  loaded  network a load operation is  not useful and
+therefore not supported.
+
+
+* Defining the Log File
+
+In the log file messages to  stdout can be  stored which  dokument the
+simulation run. The  protocol contains file operations, definitions of
+values set by clicking the [SET] button in  the info panel, as well as
+a  teaching protocol  (cycles, parameters, errors). In  addition,  the
+user can output data about the network  to the log  file with the help
+of the info panel.  If no log file is loaded,  output takes place only
+on stdout. If  no  file  name  is  specified when  clicking [LOAD],  a
+possibly open log  file is closed and further  output is restricted to
+stdout.
+  
+
+
+* Help Windows
+
+An  arbitrary number of help  windows may be opened, each displaying a
+different part  of the text.  For a display of context  sensitive help
+about the editor  commands, the mouse must be in a display and the key
+[h]  must be pressed on the keyboard. Then the last  open  help window
+appears with a short description.
+
+A  special  feature is the possibility of searching a given  string in
+the help  text.  For this, the search string is  selected in the  text
+window (e.g. by a double click).
+
+[LOOK]	After  clicking this  button,  SNNS  searches  for  the  first 
+	appearance of the marked string,  starting at the beginning of
+	the help document.  If the string is found,  the corresponding 
+	paragraph is displayed.
+
+
+[MORE]	After  clicking  this  button,  SNNS  searches  for  the first 
+	appearance of the marked string, starting at the position last
+	visited  by  a  call  to  the  help  function. If the text was 
+	scrolled afterwards, this position might not be on the display 
+	anymore.
+
+Note: All  help calls look for the the  first appearance of a  certain
+string.  These strings start with the  sequence ASTERISK-BLANK ('* '),
+to  assure the discovery of the  appropriate  text position. With this
+knowledge  it is  easy  to modify the  file  help.hdoc  to adapt it to
+special  demands,  like  storing   information  about  unit  types  or
+patterns. The  best approach is to  list all relevant keywords at  the
+end of the file under the headline 'TOPICS' (preceded with a '* '), so
+that the user can select this directory by a click to TOPICS.
+
+
+* Print Panel 
+
+The  print panel handels  the Postscript  output. A 2D-display  can be
+associated  with the printer. All  setup  options and  values  of this
+display will  be  printed. Color  and encapsulated Postscript are also
+supported.  The output device is either  a printer or  a file.  If the
+output device is  a printer,  a '.ps'-file is generated and spooled in
+the /tmp  directory.  It  has a  unique name starting with  the prefix
+`snns'. The directory must be writable. When xgui terminates normally,
+all SNNS spool files are deleted.
+
+The following fields can be set in the Printer Panel:
+
+- File Name  resp.  Command Line :  
+  If the output device is a file: the filename.
+  If  the output device  is a  printer: the command line to start  the
+  printer. The filename in the command line has to be '  1'.
+- Destination : Selects the output device.
+  Toggles the above input line between File Name and Command Line.
+- Paper : Selects the paper format.
+- Orientation : Sets the orientation of the display on the paper.  Can 
+  be  'portrait' or 'landscape'.
+- Border (mm)  : Sets the  size of the horizontal and vertical borders
+  on the sheet in millimeters.
+- AutoScale : Scales the network to the  maximum possible size  on the
+  paper if turned on.
+- Aspect : If on, scaling in X and Y direction is done uniformly.
+- X-Scale  : Scale factor  in X direction. Valid only  if AutoScale is
+  'OFF'.
+- Y-Scale : Scale  factor in Y direction.  Valid  only if AutoScale is
+  'OFF'.
+
+[DONE] : Cancels the printing and closes the panel.
+
+[PRINT] : Starts printing.
+
+[NETWORK] : Opens  the  network setup  panel.  This  panel allows  the
+specification  of  several  options to control  the way the network is
+printed.
+
+
+* Control Panel
+
+With this window  the simulator is operated as  with a remote control.
+The  following table lists  all  window elements.   The meaning of the
+learning parameters depends upon the  teaching function selected  with
+the  button [SEL FUNC] in  the learning parameter  line of the control
+panel.
+
+Name                          | Type  | Range
+----------------------------------------------------------------------
+STEPS (update-Steps)          | text  | 0 <= n
+CYCLES                        | text  | 0 <= n
+PATTERN                       | text  | 0 <= n (0 => no patterns)
+LEARN  (5 param.: eta, ...)   | text  | float; usually 0.0<= eta <=1.0
+UPDATE (5 parameters)         | text  | float
+INIT   (5 parameters)         | text  | float
+REMAP  (5 parameters)         | text  | float
+----------------------------------------------------------------------
+
+There are the following text fields, buttons and menu buttons:
+
+STEPS	This text field specifies the number of update steps of the
+	network. With Topological selected as update mode (chosen with
+	the menu [SEL FUNC] in the update parameter line of the
+	control panel) one step is sufficient to propagate information
+	from input to output. With other update modes or with
+	recursive networks, several steps might be needed.
+
+[STEP]	After clicking this button, the simulator kernel executes the
+	number of steps specified in the text field STEPS. If STEPS is
+	zero, the units are only redrawn. The update mode selected
+	with the button MODE is used. The first update step in the
+	mode topological takes longer than the following, because the
+	net is sorted topologically first. Then all units are redrawn.
+
+[JOG]   Opens a panel to add random noise to the link weights.
+
+[INIT]	Initializes the network weights with random values.
+
+[RESET]	The counter is reset and the units are
+	assigned their initial activation.
+
+	The text field after RESET displays the z coordinate of the
+	units in a 3D Display.
+
+[ERROR] Print statistical information about the network performance.
+
+[INFO]	Information about the net is written to text window.
+
+CYCLES	This text field specifies the number of learning cycles. It is
+	mainly used in conjunction with the next two buttons.  A cycle
+	(also called an epoch sometimes) is a unit of training where all
+	patterns of a pattern file are presented to the network once.
+
+[SINGLE] The net is trained with a single pattern for a number of
+	training cycles defined in the field CYCLES. The text window
+	reports the error of the network every 1/10 th CYCLES, i.e.
+	independent of the number of training cycles only 10
+	numbers are generated. (This prevents flooding the user with
+	useless network performance data and slowing down the training
+	by file I/O).
+
+	The error reported in the text window is the sum of the
+	quadratic distances between the teaching input and the real
+	output over all output units. The average error per output
+	unit is given behind 'ave'.
+
+[ALL]	The net is trained with all patterns for a number of training
+	cycles specified in the field CYCLES. This is the usual way to
+	train networks with the graphical user interface. Note that if
+	cycles has a value of, say, 100, the button ALL causes SNNS to
+	train all patterns once (one cycle) and repeat this cycle 100
+	times (NOT training each pattern 100 times in a row and then
+	applying the next pattern).
+
+	The error reported in the text window is the sum of the
+	quadratic distances between the teaching input and the real
+	output over all output units. The average error per output
+	unit is given behind 'ave'.
+
+[STOP]	After completion of the current step or teaching cycle, the
+	simulation is halted immediately.
+
+[TEST]	With this button, the user can test the behaviour of the net
+	with all patterns loaded. The activation values of input and
+	output units are copied into the net. (For output units see also
+	button SHOW). Then the number of update steps specified in
+	STEPS are executed.
+
+[SHUFFLE] It is important for optimal learning that the various
+	patterns are presented in different order in the different
+	cycles. A random sequence of patterns is created
+	automatically, if SHUFFLE is switched on.
+
+[EDITORS] Offers the following menu:
+     edit f-types		edit/create f-types
+     edit sites			edit/create sites 
+
+[SHOW]	With this button, the user specifies the changes to the
+	activation values of the output units when a pattern is
+	applied with TEST. The following table gives the three
+	alternatives:
+
+	None		The output units remain unchanged. 
+	Output		The output values are computed and set, 
+			activations remain unchanged. 
+	Activation	The activation values are set. 
+ 
+PATTERN	This text field displays the current pattern number. 
+
+[DELETE] The pattern whose number is displayed in the text field
+	PATTERN is deleted from the pattern file.
+
+[MOD]	The pattern whose number is displayed in the text field
+	PATTERN is modified in place.
+
+The  current  activation  of  the input units and  the current  output
+values of output  units of the  network  loaded make up  the input and
+output pattern. These values may have been set with the network editor
+and the Info panel before.
+
+[NEW]	A new pattern is defined that is added behind existing
+	patterns. Input and output values are defined as above.
+
+[GOTO]	The simulator advances to the pattern whose number is
+	displayed in the text field PATTERN.
+ 
+[|<], [<], [>], [>|]
+	With these buttons, the user can navigate through all patterns
+	loaded, as well as jump directly to the first and last
+	pattern. Unlike with the button TEST no update steps are
+	performed here.
+
+[SUB PAT] Opens a panel for the specification of the subpattern shifting 
+        scheme.
+
+[LEARN]	The five parameters of the learning functions vary depending
+	on the learning functions used. This function is selected from 
+	the menu under the [SEL FUNC] button in this line. For some of
+	the learning functions that are already built in into SNNS, they 
+	are given below.
+
+	Std_Backpropagation  ('vanilla' Backpropagation), BackpropBatch
+	and TimeDelaybackprop
+	
+	1) eta, learning parameter, specifies the step width of
+		the gradient descent.
+		Typical values of eta are 0.1 to 1.0. Some small
+		examples actually train even faster with values above
+		1, like 2.0.
+	2) d_max, the maximum difference between a teaching value and 
+		an output of an output unit which is tolerated, 
+		i.e.  which is propagated back as 0. 
+		If values above 0.9 should be regarded as 1 and values 
+		below 0.1 as 0, then d_max should be set to 0.1. 
+		This prevents overtraining of the network.
+		Typical values of d_max are 0, 0.1 or 0.2.
+
+	
+	BackpropMomentum  (Backpropagation with momentum term and
+			   flat spot elimination):
+
+	1) eta, learning parameter, specifies the step width of
+		the gradient descent.
+		Typical values of eta are 0.1 to 1.0. Some small
+		examples actually train even faster with values above
+		1, like 2.0.
+	2) mu,	momentum term, specifies the amount of the old weight
+		change (relative to 1) which is added to the current
+		change.
+		Typical values of mu are 0 to 1.0.
+	3) c,	flat spot elimination value, a constant value 
+		which is added to the derivative of the activation
+		function to enable the network to pass flat spots of
+		the error surface.
+		Typical values of c are 0..0.25, most often 0.1 is
+		used.
+	4) d_max, the maximum difference between a teaching value and 
+		an output of an output unit which is tolerated, 
+		i.e.  which is propagated back as 0. 
+		Typical values of d_max are 0, 0.1 or 0.2.
+
+	BackpropThroughTime
+
+	1) eta, learning parameter, specifies the step width of
+		the gradient descent.
+		Typical values of eta are 0.005 to 0.1
+	2) mu,	momentum term, specifies the amount of the old weight
+		change (relative to 1) which is added to the current
+		change.
+		Typical values of mu are 0 to 1.0.
+	3) backstep, the number of backprop steps back in time.
+        	BPTT stores a sequence of all unit activations while
+	 	input patterns are applied. The activations are stored 
+		in a first-in-first-out queue for each unit. 
+
+	Quickprop, QuickpropThroughTime
+
+	1) eta, learning parameter, specifies the step width of the
+		gradient descent.
+		Typical values of eta for Quickprop are 0.1 to 0.3, for
+		QPTT 0.005 to 0.1.
+	2) mu,	maximum growth parameter, specifies the maximum amount
+		of weight change (relative to 1) which is added to the
+		current change
+		Typical values of mu are 1.75 to 2.25 for QP and 1.2 to 
+		1.75 for QPTT.
+	3) nu,	weight decay term to shrink the weights.
+		Typical values of nu are 0.0001. Quickprop is rather
+		sensitive to this parameter. It should not be set too
+		large.
+	4) d_max, the maximum difference between a teaching value and 
+		an output of an output unit which is tolerated, 
+		i.e.  which is propagated back as 0. 
+		Typical values of d_max are 0, 0.1 or 0.2.
+
+	Counterpropagation
+
+	1) alpha, learning parameter of the Kohonen layer.
+		Typical values of alpha for Counterpropagation are 0.1
+		to 0.7.
+	2) beta, learning parameter of the Grossberg layer.
+		Typical values of beta are 0 to 1.0.
+	3) theta, threshold of a unit
+		We often use a value theta of 0.
+
+	Backpercolation 1 (see the footnote about Backpercolation 1 in
+			   the introduction of the user manual)
+	
+	1) lambda, global error magnification. This is the factor in
+		the formula epsilon = lambda * (t - o), where epsilon
+		is the internal activation error of a unit, t is the
+		teaching input and o the output of a unit
+		Typical values of lambda are 1. Bigger values (up to 10)
+		may also be used here.
+	2) theta, if the error value drops below this threshold value,
+		the adaption according to the Backperc algorithm begins. 
+	3) d_max, the maximum difference between a teaching value and 
+		an output of an output unit which is tolerated, 
+		i.e.  which is propagated back as 0. 
+		Typical values of d_max are 0, 0.1 or 0.2.
+
+	RadialBasisLearning
+
+	1) centers, determines the learning rate used for the modification 
+		of center vectors.
+
+     	2) bias, determines the learning rate, used for the modification 
+		of the parameters of the base function. It is stored as 
+		bias of the hidden units.
+	3) weights, influences the training of all link weights that are
+         	leading to the output layer as well as the training of 
+        	the bias of all output neurons.
+	4) delta_max, if the actual error is smaller than the maximum 
+		allowed error (delta_max) the corresponding weights are 
+		not changed.
+
+     	5) momentum, influences the amount of the momentum--term during
+        	training.   
+
+	
+	ART1
+
+	1) p, vigilance parameter. If the quotient of active F1  units
+        	divided by the number of active F0 units is below p, an
+        	ART reset is performed.
+
+	ART2
+     	
+	1) p, vigilance parameter. Specifies the minimal length of the
+        	error vector r. 
+     	2) a, strength of the influence of the lower level in F1 by
+        	the middle level.
+     	3) b, strength of the influence of the middle level in F2 by
+        	the upper level.
+     	4) c, Part of the length of vector p used to compute the error.
+     	5) theta, threshold for output function f of units xi and qi
+
+	ARTMAP
+	
+	1) pa, vigilance parameter for  ARTa  subnet.
+	2) pb, vigilance parameter for  ARTb  subnet.
+	3) p, vigilance parameter for  ART reset control.
+
+	RPROP
+	
+	1) delta0, starting values for all deltas. Default value is 0.1.
+	2) delta_max, the upper limit for the update values delta. The 
+         	default value is  50.0.
+	
+[UPDATE] The five parameters of the update functions vary depending on
+	the network model used. They are not used in the learning
+	functions distributed in this release of SNNS. They have been
+	used in other network models which we implemented, but
+	currently do not distribute. The update function is selected from 
+	the menu under the [SEL FUNC] button in this line.
+
+[INIT]  The five parameters of the init functions vary depending on
+	the initialization function used. This function is selected from 
+	the menu under the [SEL FUNC] button in this line.
+
+[REMAP] The five parameters of the pattern remapping functions vary 
+        depending on the function used. This function is selected from 
+	the menu under the [SEL FUNC] button in this line.
+
+
+* Weight Display 
+
+The  weight display  window  is  a  separate  window  specialized  for
+displaying  the weights  of a network. It  is called  from the manager
+panel in the  gui menu with the entry [weights]  . On  black-and-white
+screens the weights are represented as squares with changing size in a
+Hinton  diagram, while  on  color screens,  fixed  size  squares  with
+changing colors are used (WV-diagrams).
+
+On small  networks,  all  connections are  displayed at the same time.
+With  larg nets the  display changes to a viewport, where only a small
+portion of the net is visible and the user is able to move around with
+scrollbars.
+
+In a  Hinton diagram, the size of a square corresponds to the absolute
+size of the  correlated  link. A filled square represents negative, an
+empty  square  positive  links.  The maximum  size of  the squares  is
+computed automatically, to allow an optimal use of the display.
+
+In  a WV diagram color is used to code the value  of a  link. Here,  a
+bright  red  is used for large negative  values and a bright  green is
+used  for  positive values. Intermediate numbers have  a lighter color
+and the  value zero is represented by white. The user also has got the
+possibility  to retrieve the numerical value of the link  by  clicking
+any mouse  button while the mouse pointer  is on  the square. A  popup
+window then gives  source and target unit of the current link as  well
+as its weight.
+
+For a better overall orientation the numbers of the  units are printed
+all around the display and a grid with user definable size is used. In
+this numbering the units on top of the screen represent  source units,
+while numbers to the left and right represent target units.
+
+
+* Graph Window 
+
+Graph is  a  tool  to visualize the error developement of  a  net. The
+program is started by clicking the menu item [graph] in  the  pulldown
+menu under the [GUI] button of the info panel.
+
+Graph is only active after  calling it. This means, the development of
+the  error is  only drawn  as long  as the  window is not  closed. The
+advantage of this implementation is, that the  simulator is not slowed
+down as long as graph is closed The  loss of  power by graph should be
+minimal. If the window is iconified, graph remains active.
+
+The error curve of the net is plotted until the net is initialized  or
+a new net is loaded, in which case the cycle counter is reset to zero.
+The window, however, is not cleared until the clear button is pressed.
+This opens the possibility to compare several error curves in a single
+display.  The  maximum  number  of  curves,  which  can  be  displayed
+simultaneously  is  25.  If a  26th curve is  tried to  be  drawn, the
+confirmer appears with an error message.
+
+When  the curve  reaches  the  right  end of the window,  an automatic
+rescale of  the x-axis is performed. This way, the whole curve  always
+remains visible.
+
+In the top region of the graph window, six buttons for handling the
+display are located:
+
+[CLEAR] Clears the screen of the graph window and sets the cycle
+	counter to zero.
+[DONE]  Closes the graph window and resets the cycle counter.
+[>]     Reduce scale in one direction.
+[<]     Enlarge scale in one direction.
+
+While the simulator is  working  all buttons  are  blocked.  The graph
+window can  be resized by the mouse like every  X-window. Changing the
+size of the window does not change the size of the scale.
+
+
+* Creating and Editing F-types and Sites
+
+The change  of the f-type  is performed  on  all  units  of that type.
+Therefore the  functionality of all  units  assigned  to a f-type  can
+easily  be  changed. The  elements in the  panel  have  the  following
+meaning:
+
+
+[SELECT]	Selects of the activation and output function
+[CHOOSE]	Chooses the f-type to be changed
+[SET]		Makes the settings/changes permanent. Changes in
+		the site list are not set (see below)
+[NEW], [DELETE]	Creates or deletes an f-type
+
+[ADD], [DELETE]	F-types also specify the sites of a unit. Therefore
+		these two buttons are necessary to add/delete a site
+		in the site list.
+
+Note: The number and the  selection of  sites can not be changed after
+the creation of an f-type.
+
+The elements in the edit panel for  sites are almost identical. A site
+is selected for change by clicking at it in the site list.
+
+
+[SELECT]	Selects the new site function. The change is
+		performed in all sites in the net with the same name.
+[SET]		Validates changes/settings
+[NEW]		Creates a new site
+[DELETE]	Deletes the site marked in the site list
+
+
+* Keyboard
+* Graphical Network Editor
+
+The  graphical user interface of  SNNS has a network editor built  in.
+With the network editor it is possible to generate a new network or to
+modify an existing network  in various ways. There also exist commands
+to change the display style of the network.
+
+As  an  introduction  operations on  networks  without  sites  will be
+discussed  first,  since they  are  easier  to learn  and  understand.
+Operations that  have  a restricted or  slightly different meaning for
+networks with sites are displayed with the  extension  (Sites!) in the
+following overview.
+
+As usual with most applications of X-Windows, the mouse must be in the
+window in which an input is to appear. This means that  the mouse must
+be in the display window for editor operations to occur. If  the mouse
+is moved  in a  display,  the  status  indicator of  the manager panel
+changes each time a new raster postion in the display is reached.
+
+Different displays of a network can be seen as different views  of the
+same object. This means that all commands in  one display  may  affect
+objects (units, links) in  the  other displays. Objects are  moved  or
+copied in a second display window in the same way as they are moved or
+copied in the first display window.
+
+The editor operations are usually invoked by a sequence of 2 to 4 keys
+on the keyboard. They only take place when the last key of the command
+(e.g.  deletion of units) is pressed. We found out that for some of us
+the fastest way to work with the editor was to move the mouse with one
+hand and to type on the keyboard with the other hand. Keyboard actions
+and mouse movement may occur at  the same  time, the mouse position is
+only relevant when the last key of the sequence is pressed.
+
+The keys that are sufficient to invoke a part of a command are written
+in capital  letters in the  commands. The message line  in the manager
+panel indicates  the completed parts  of the command sequence. Invalid
+keys are ignored by the editor.
+
+As an example, if  one presses the following keys U (for  Units) and C
+(for Copy) the status line changes as follows:
+
+Status line    Command	Comments
+----------------------------------------------------------------------
+>		Units	operation on units
+Units>		Copy    copying of units
+Units Copy>		(the sequence is not completed yet)
+
+To  the  left  of  the  caret  the fully  expanded  input  sequence is
+displayed. At  this  place also a message is displayed  when a command
+sequence is accepted  and the corresponding operation is  called. This
+serves as feedback,  especially  if the  operation takes some time. If
+the operation  completes  quickly,  only  a short flicker of the  text
+displayed can be  seen. Some  error messages appear in  the confirmer,
+others in the message line.
+
+
+* Mode
+* Editor Modes
+
+To work faster, three editor modes have been  introduced  which render
+the first key unnecessary. In normal  mode all sequences are possible,
+in unit mode all  sequences that deal with units (that start with  U),
+and in link mode all command sequences that refer to links (i.e. start
+with L).
+
+Status line    Command	Comments
+-------------------------------------------------------------------------
+Units Copy>	Quit	the input command may be cancelled any time
+>		Mode
+Mode>		Units	enter unit mode
+Units>		Copy	copying
+Units Copy>	Quit	cancel again
+Units>			Quit  leaves the current mode unchanged
+Units>		Copy	copying
+Units Copy>	Return	return to normal mode
+>
+
+The mode command is useful, if several unit or link commands are given
+in sequence. Return cancels a command, like Quit does, but also
+returns to normal mode.
+
+
+* Selection
+* Selection of Units
+
+Units are selected by clicking on the unit with the left mouse button.
+Selected  units are  shown with crosses.   By pressing and holding the
+mouse button down and moving the mouse, all units within a rectangular
+area can be selected, like in a number of popular drawing programs. It
+is not significant in what direction the rectangle is opened.
+
+To remove a unit or  group  of units from a selection, one presses the
+SHIFT key on the  keyboard while selecting the unit or group of  units
+again. This  undoes the previous selection  for the  specified unit or
+group of  units. Alternatively, a  single unit can be  deselected with
+the right mouse button.
+
+If the whole selection should be reset,  one clicks in an empty raster
+position. The number of selected  units is displayed ath the bottom of
+the manager panel next to a stylised selection icon.
+
+Example (setting activations of a  group of units): The activations of
+a group of units can be set to a specific value as follows:  Enter the
+value in the activation value  field of  the  target unit in the  info
+panel. Select  all  units that should obtain the new value. Then enter
+the command to set the activation (Units Set Activation).
+
+
+* Selection of Links
+
+Since it is often very hard to select a  single link with the mouse in
+a  dense web of links, in this simulator all selections  of  links are
+done with the reference  to units.  That is, links  are  selected  via
+their  source and target units. To select a link or a number of links,
+first a unit  or a  group units must be selected in the usual way with
+the left mouse button (indicated  by  crosses through the units). Then
+the mouse pointer is moved to another  unit.   All  links between  the
+selected set of units and the unit under  the mouse pointer during the
+last key stroke of the link command are then selected.
+
+Example (deleting  a  group  of links):  All  links from  one unit  to
+several other  units  are deleted as follows: First select all  target
+units, then point to the source  unit with the mouse. Now  the command
+Links Delete from Source unit deletes all the specified links.
+
+As can be seen from the examples, for many  operations three  types of
+information are relevant: first a group of selected  units, second the
+position of the mouse and the unit  associated with  this position and
+third some attributes  of this  unit  which  are displayed in the info
+panel. Therefore it is  good  practise  to keep the info panel visible
+all the time.
+
+
+* Mouse 
+* Use of the Mouse
+
+Besides  the  usual use  of the  mouse to control  the elements  of  a
+graphical  user interface  (buttons,  scroll bars  etc.) the mouse  is
+heavily used in  the  network  editor.  Many important  functions like
+selection of  units and links need  the use of the  mouse.  The  mouse
+buttons of the  standard 3 button mouse are used in  the following way
+within a graphic window:
+
+
+* left mouse button
+
+Selects a  unit. If the mouse is moved with the button pressed down, a
+group of units in  a rectangular area is selected. If the SHIFT key is
+pressed at  the same  time, the units are deselected. The direction of
+movement  with  the  mouse  to  open   the  rectangular  area  is  not
+significant, i.e. one  can open the rectangle from bottom right to top
+left, if convenient.
+
+If the left mouse button is pressed together with  the CONTROL key,  a
+menu appears  with  all  alternatives to complete the  current  comand
+sequence. The menu items that display a trailing ':' indicate that the
+mouse position of the last command of a command sequence is important.
+The letter 'T'  indicates that the target unit in the info panel plays
+a role. A '~' denotes that the command sequence is not yet completed.
+
+
+* right mouse button
+
+Undo of a selection. Klicking  on a selected unit with the right mouse
+button only deselects this unit. Klicking on  an empty raster position
+resets the whole selection.
+
+
+* middle mouse button
+
+Selects the  source unit  (on pressing the button down) and the target
+unit (on  releasing the  button)  and displays them both in  the  info
+panel. If  there  is no  connection between the two units,  the target
+unit is displayed with its first source unit. If the button is pressed
+on a source unit and released over  an empty target position, the link
+between  the source and the  current (last) target  is  displayed.  If
+there is  no such link the display remains unchanged.  Conversely,  if
+the button is pressed on an  empty source position and released on  an
+existing target unit,  the link between the current (last) source unit
+and the selected target  unit  is displayed, if  one exists. This is a
+convenient way to inspect links.
+
+In  order  to indicate  the position of the  mouse even  with a  small
+raster size, there is always a sensitive area of at least 16x16 pixels
+wide.
+
+
+* Keyboard 
+* Short Command Reference
+
+The following section briefly  describes the commands of  the  network
+editor. Capital letters denote the keys that must be hit to invoke the
+command in a command sequence.
+
+The following commands are possible within any command sequence:
+
+     Quit	quit a command 
+     <Return>	quit a command and return to normal mode
+     Help	get help information. A help window pops up
+
+As already  mentioned, some operations  have  a  different meaning  if
+there  exist units  with sites  in  a network.  These  operations  are
+indicated with the suffix (sites). Commands that manipulate sites  are
+also included in  this  overview. They  start  with the  first command
+'Sites'.
+
+Flags Safety
+	sets/resets safety flag (a flag to prompt the user before
+	units or links are deleted; additional question, if units with
+	different subnet numbers are selected.)
+
+* Links
+Links Set
+	sets all links between the selected units to the weight
+	displayed in the info panel (independent of sites)
+
+* Links Make
+Links Make ... 
+	creates or modifies connections 
+Links Make Clique
+	connects every selected unit with every other selected unit,
+	plus itself (Sites!)
+Links Make to Target unit
+	creates links from all selected source units to a single
+	target unit (under the mouse pointer) (Sites!)
+Links Make from Source unit
+	creates links from a single source unit (under the mouse
+	pointer) to all selected target units (Sites!)
+Links Make Double
+	doubles all links between the selected units, i.e. generates
+	two links (from source to target and from target to source)
+	from each single link) (Sites!)
+Links Make Inverse
+	changes the direction of all links between the selected units
+	(Sites!)
+
+
+* Links Delete
+Links Delete Clique
+	deletes all links between all selected units (Sites!)
+Links Delete to Target unit
+	deletes all ingoing links from a selected group of units to a
+	single target unit (under the mouse pointer) (Sites!)
+Links Delete from Source unit
+	deletes all outgoing links from a single source unit (under
+	the mouse pointer) to a selected group of units (Sites!)
+
+
+* Links Copy
+Links Copy Input
+	copies all input links leading into the selected group of
+	units as new input links to the target unit (under the mouse
+	pointer) (Sites!)
+Links Copy Output
+	copies all output links starting from the selected group of
+	units as new output links of the source unit (under the mouse
+	pointer) (Sites!).
+Links Copy Environment
+	copies all links between the selected units and the TARGET
+	unit to the actual unit, if there exist units with the same
+	relative distance (Sites!)
+
+
+* Sites
+Sites Add
+	add a site to all selected units
+Sites Delete
+	delete a site from all selected units
+
+
+* Sites Copy
+Sites Copy with No links
+	copies the current site of the Target unit to all selected
+	units. Links are not copied
+Sites Copy with All links
+       ditto, but with all links
+
+
+* Units
+Units Freeze
+       freeze all selected units
+Units Unfreeze
+       reset freeze for all selected units
+
+
+* Units Set
+Units Set Name
+	sets name to the name of TARGET
+Units Set io-Type
+	sets bias to the bias of TARGET
+Units Set Activation
+	sets activation to the activation of TARGET 
+Units Set Initial activation
+	sets initial activation to the initial activation of TARGET
+Units Set Output
+	sets output to the output of TARGET
+Units Set Bias
+	sets bias to the bias of TARGET
+
+* Units Set Function
+Units Set Function Activation
+	sets activation function.
+	Note: all selected units loose their default type (f-type)
+Units Set Function Output
+	sets output function
+	Note: all selected units loose their default type (f-type)
+Units Set Function Ftype
+	sets default type (f-type)
+
+
+* Units Insert
+Units Insert Default: 
+	inserts a unit with default values. The unit has no link
+Units Insert Target
+	inserts a unit with the same values as the Target unit. The
+	unit has no links
+Units Insert Ftype
+	inserts a unit of a certain default type (f-type) which is
+	determined in a popup window
+
+
+* Units Delete
+Units Delete
+	all selected units are deleted.
+
+
+* Units Move
+Units Move
+	all selected units are moved. The mouse determines the
+	destination position of the Target unit (info panel). The
+	selected units and their position after the move are shown as
+	outlines.
+
+
+* Units Copy
+Units Copy ...
+	copies all selected units to a new position. The mouse
+	position determines the destination position of the Target
+	unit (info panel).  
+Units Copy All
+	copies all selected units with all links 
+Units Copy Input
+	copies all selected units with their input links
+Units Copy Output
+	copies all selected units and their output links 
+Units Copy None
+	copies all selected units, but no links
+
+
+* Units Copy Structure
+Units Copy Structure ...
+	copies all selected units and the link structure between these
+	units, i.e.  a whole subnet is copied
+Units Copy Structure All
+	copies all selected units, all links between them, and all
+	input and output links to and from these units
+Units Copy Structure Input
+	copies all selected units, all links between them, and all
+	input links to these units
+Units Copy Structure Output
+	copies all selected units, all links between them, and all
+	output links from these units
+Units Copy Structure None
+	copies all selected units and all links between them
+Units Copy Structure Back binding
+	copies all selected units and all links between them and
+	inserts additional links from the new to the corresponding
+	original units (Sites!)
+Units Copy Structure Forward binding
+	copies all selected units and all links between them and
+	inserts additional links from the original to the
+	corresponding new units (Sites!)
+Units Copy Structure Double binding
+	ditto, but inserts additional links from the original to the
+	new units and vice versa (Sites!) 
+
+
+* Mode
+Mode Units
+	unit mode, shortens command sequence if one wants to work with
+	unit commands only. All subsequences after the Units command
+	are valid then
+Mode Links
+	analogous to Mode Units, but for link commands
+
+
+* Graphics
+Graphics All
+	redraws the local window
+Graphics Complete
+	redraws all windows
+Graphics Direction
+	draws all links from and to a unit with arrows in the local
+	window
+Graphics Links
+	redraws all links in the local window
+Graphics Move
+	moves the origin of the local window such that the Target unit
+	is displayed at the position of the mouse pointer
+Graphics Origin
+	moves the origin of the local window to the position indicated
+Graphics Grid
+	displays a graphic grid at the raster positions in the local
+	window
+Graphics Units
+	redraws all units in the local window
+
+
+
+* Editor Commands
+
+We now describe  the  editor commands in more detail.  The description
+has the following form that is shown in two examples:
+
+	Links Make Clique  (selection LINK : site-popup)
+
+First comes the  command sequence 'Links Make Clique' which is invoked
+by  pressing  the keys L, M,  and  C  in  this  order.  The  items  in
+parentheses  indicate  that the command  depends  on the objects of  a
+previous selection  of a group of units  with  the mouse  (selection),
+that it depends on the value of the LINK field in the info panel,  and
+that a site-popup appears if there  are sites  defined in the network.
+The options are  given in their temporal order,  the colon  ':' stands
+for the moment  when the  last character of the  command  sequence  is
+pressed, i.e.   the  selection and the input of the value must precede
+the last key of the command sequence.
+
+	Units Set Activation  (selection TARGET :)
+
+The command sequence 'Units Set Activation' is invoked by pressing the
+keys U, S, A, in  that order. The items in parentheses  indicate  that
+the command  depends on  the  selection  of a  group of units with the
+mouse (selection) which it  depends on the value  of the  TARGET field
+and  that these two  things must  be  done before the last key  of the
+command sequence is pressed.
+
+The following table displays the meaning of the symbols in parantheses:
+
+selection	all selected units 
+:		now the last key of a command sequence is pressed 
+[unit]		the raster cursor is placed on a unit 
+[empty]		the raster cursor is placed on an empty positon 
+default		the default values are used 
+TARGET		the TARGET unit field in the info panel must be set 
+LINK		the LINK field in the info panel must be set 
+site-links	only links to the current site in the info panel
+		play a role 
+site		the current site in the info panel must be set 
+popup		a popup menu appears to ask for a value 
+(site-popup)	if there are sites defined in the network, a popup 
+		appears to choose the site for the operation 
+dest?		a raster position for a destination must be clicked 
+		with the mouse (e.g. in Units Move) 
+ 
+In the  case of  a  site-popup a site  for the operation can be chosen
+from this  popup  window. However,  if  one  clicks  the  DONE  button
+immediately after, only  the direct input without sites  is chosen. In
+the following description this direct input  should  be regarded  as a
+special case of a site.
+
+All newly generated units are  assigned  to  all active layers  in the
+display in which the command for their creation was issued.
+
+The following keys are always possible within a command sequence:
+ 
+	Q>uit		quit a command
+	R>eturn		quit and return to normal mode
+	H>elp		get help information to the commands
+
+A detailed description of the commands follows:
+
+* Flags Safety (:)
+  
+If the SAFETY flag is  set,  then with  every operation which  deletes
+units, sites or links (Units Delete or Links Delete) a confirmer  asks
+if the units, sites or links should really be  deleted. If the flag is
+set, this is shown in  the manager panel with a safe  after the little
+flag icon. If  the flag is not set, units, sites or links  are deleted
+immediately. There is no undo operation for these deletions.
+
+
+* Links Set (selection LINK :)
+  
+All  link weights between  the selected units are set to  the value of
+the LINK field in the info panel.
+
+
+* Links Make Clique (selection LINK : (site-popup))
+  
+A full connection between all selected units is generated. Since links
+may be deleted selectively afterwards, this function is useful in many
+cases where many links in both directions are to  be generated.  If  a
+site is selected, a  complete connection is only possible if all units
+have a site with the same name.
+
+
+* Links Make from Source unit (selection [unit] : (site-popup))
+* Links Make to Target unit (selection [unit] : (site-popup))
+  
+Both operations connect all selected units with  a single  unit  under
+the mouse pointer. In the first case, this unit is the  source, in the
+second, it is the target. All links get the value of the LINK field in
+the info panel.   If sites are  used, only links to the  selected site
+are generated.
+
+
+* Links Make Double (selection :)
+  
+All unidirectional links become double (bidirectional) links. That is,
+new  links in the opposite direction are generated.  Immediately after
+creation the new links possess the same weights as the original links.
+However,  the  two  links  do  not  share  the weight, i.e. subsequent
+training usually changes  the similarity.   Connections impinging on a
+site only become bidirectional, if  the  original source  units  has a
+site with the same name.
+
+
+* Links Make Inverse (selection :)
+  
+All  unidirectional  links  between  all selected  units  change their
+direction. They keep  their original value.   Connections leading to a
+site are only reversed if the  original source unit  has a site of the
+same name. Otherwise they remain as they are.
+
+
+* Links Delete  Clique (selection : (site-popup)) 
+* Links  Delete from Source unit (selection [unit] : (site-popup)) 
+* Links Delete to Target unit (selection [unit] : (site-popup))
+  
+These three  operations are  the reverse of  Links  Make  in that they
+delete  the  connections.  If the safety  flag is set  (the word  safe
+appears  behind the  flag  symbol in  the manager panel),  a confirmer
+window confirms the deletion.
+
+
+* Links Copy Input (selection [unit] :) 
+* Links Copy Output (selection [unit] :) 
+* Links Copy All (selection [unit] :)
+  
+Links Copy Input copies all input links of the selected group of units
+to the single  unit  under  the mouse  pointer.  If  sites  are  used,
+incoming links are only copied if a  site with the same name as in the
+original units exists.
+
+Links Copy Output  copies  all output links  of  the selected group of
+units to the single unit under the mouse pointer.
+
+Links Copy All performs both of the two operations above.
+
+
+* Links Copy Environment (selection site-links [unit] :)
+  
+This is  a rather  complex  operation: Links Copy Environment tries to
+duplicate the links between all selected units  and the current TARGET
+unit in the  info panel  at  the  place  of  the  unit under the mouse
+pointer. The relative position  of the  selected units  to the  TARGET
+unit  plays an important  role:  if a  unit  exists that has  the same
+relative position to the  unit under  the mouse cursor  as  the TARGET
+unit has to one  of the selected units, then  a link between this unit
+and the unit under the mouse pointer  is  created.  The result of this
+operation is a  copy of  the structure  of links  between the selected
+units  and the TARGET unit at the  place of the unit  under the  mouse
+pointer. That is, one obtains the same link topology at the unit under
+the mouse pointer. See the user manual for an example.
+
+
+* Sites Add (selection : popup)
+  
+A site which  is chosen  in a  popup window is added to  all  selected
+units. The command has  no  effect for  all units which already have a
+site of  this name (because the names of all sites  of a  unit must be
+different).
+
+
+* Sites Delete (selection : popup)
+  
+The site that is chosen in the popup window is deleted at all selected
+units that possess a  site of this  name. Also all links  to this site
+are deleted. If the safety flag is set  (in the manager panel the word
+safe  is  displayed behind  the flag  icon  at  the  bottom),  then  a
+confirmer window first confirms the deletion.
+
+
+* Sites Copy with No  links (selection site :)  
+* Sites  Copy with All links (selection site :)
+  
+The current  site of the Target  unit  is added to  all selected units
+which  do not have this site yet.  Links are copied  together with the
+site only with the command Site Copy with All links. If a unit already
+has a site of that name, only the links are copied.
+
+
+* Units Freeze (selection :) 
+* Units Unfreeze (selection :)
+  
+These commands  are used  to  freeze or unfreeze  all  selected units.
+Freezing  means,  that  the  unit does  not  get  updated anymore, and
+therefore keeps its activation and output.  Upon  loading  input units
+change only their  activation, while keeping their  output. For output
+units,  this depends upon the setting of the pattern load mode. In the
+load mode Output only the output is set. Therefore,  if  frozen output
+units are to keep their output,  another mode (None or Activation) has
+to be selected. A learning cycle, on the other hand, executes as if no
+units have been frozen.
+
+
+* Units Set Name (selection TARGET :)  
+* Units Set Activation(selection TARGET :) 
+* Units Set Initial activation (selection TARGET :) 
+* Units Set Output (selection TARGET :) 
+* Units Set Bias (selection TARGET :) 
+* Units Set io-Type (selection : popup) 
+* Units Set Function Activation (selection  : popup) 
+* Units Set Function Output (selection : popup) 
+* Units Set Function F-type (selection : popup)
+  
+Sets the specific attribute of  all selected units to  a common value.
+Types and functions are defined by a  popup window. The operations can
+be aborted  by immediately  clicking the  DONE  button  in  the  popup
+without selecting an element of the list.
+
+The remaining attributes are read from the corresponding fields of the
+Target unit in  the info panel. The user  can  of  course  change  the
+values there  (without clicking the SET button) and then execute Units
+Set A different approach would be to make a unit target unit (click on
+it with the middle mouse button) which already has the desired values.
+This procedure is very convenient, but works only if appropriate units
+exist already.  It is a  good idea  to create a  couple  of such model
+units first, to be able to quickly set different attribute sets in the
+info panel.
+
+
+* Units Insert Default ([empty] DEFAULT :)  
+* Units Insert Target ([empty] TARGET :) 
+* Units Insert F-type ([empty] : popup)
+  
+This command is used to insert a unit with the  IO-type hidden. It has
+no  connections  and its attributes are  set according  to the default
+values and the Target unit. With the command Units Insert Default, the
+unit gets no F-type and no sites. With Units  Insert F-type an  F-type
+and sites  have to be selected in  a popup window. Units Insert Target
+creates  a copy of the  target unit  in  the  info  panel. If sites or
+connections  are to be copied as well, the  command Units Copy All has
+to be used instead.
+
+
+* Units Delete (selection :)
+  
+All selected  units are deleted.  If  the safety  flag  is  set  (safe
+appears in the manager panel behind the flag symbol)  the deletion has
+to be confirmed with the confirmer.
+
+
+* Units Move (selection TARGET : dest?)
+  
+All selected units are moved. The Target unit is moved to the position
+at which  the  mouse  button is  clicked.  This  postion  must  not be
+occupied  by  an  unselected unit, because  a  position  conflict will
+result  otherwise.  All other  units move in the same way relative  to
+that position. The command is ignored, if
+
+- the target position is occupied by an unselected unit, or 
+- units would be moved to grid positions already taken by unselected
+  units.
+
+It might happen that units  are moved beyond the right or lower border
+of the display. These units remain selected, as long as  not all units
+are  deselected  (click  the  right  mouse  button  to  an  empty grid
+position).
+
+As long  as no target  is selected, the editor reacts only  to Return,
+Quit  or Help.  Positioning  is eased by displaying  the unit outlines
+during the  move. The user may also switch to another display. If this
+display has a different subnet number,  the subnet number of the units
+change accordingly. Depending upon layer and subnet parameters, it can
+happen that the moved units are not visible at the target.
+
+If  networks are  generated  externally, it might  happen that several
+units lie on the  same grid position. Upon selection of this position,
+only the unit with the smallest number is selected. With  'Units Move'
+the user can thereby clarify the situation.
+
+
+* Units Copy ...  (selection : dest?)   
+* Units Copy All 
+* Units Copy Input 
+* Units Copy Output 
+* Units Copy None
+
+This  command is similar  to Units  Move.  Copy creates  copies of the
+selected  units  at the  positions  that  would  be assigned by  Move.
+Another  difference is that if  units are  moved to grid  positions of
+selected units the command is ignored. The units created have the same
+attributes as their originals, but different numbers. Since unit types
+are copied as well the new units also inherit the activation function,
+output  function  and  sites.  There  are four  options regarding  the
+copying  of  the links. If no links are copied,  the  new unit  has no
+connections. If, for example,  the  input links  are  copied, the  new
+units have the same predecessors as their originals.
+
+
+* Units Copy Structure ...   (selection : dest?)  
+* Units Copy Structure All 
+* Units Copy Structure Input 
+* Units Copy Structure Output 
+* Units Copy Structure None 
+* Units Copy Structure ...    binding (selection : dest? (site-popup))  
+* Units Copy Structure Back   binding 
+* Units Copy Structure Forward binding 
+* Units Copy Structure Double binding
+  
+These  commands are refinements of the general Copy command. Here, all
+links between the selected units are always copied as well. This means
+that the substructure is  copied form the originals to the new  units.
+On a copy without  Structure these links would go unnoticed. There are
+also options, which additional  links are  to  be copied. If  only the
+substructure is to be copied, the command Units Copy Structure None is
+used.
+
+The  options  with binding  present a  special  feature. There,  links
+between  original  and  copied  units are  inserted  automatically, in
+addition  to  the  copied structure  links.  Back, Forward  and Double
+specify  thereby the direction  of the  links, where  'back' means the
+direction  towards  the   original  unit.  If  sites  are  used,   the
+connections to the originals are assigned to the  site selected in the
+popup. If not all originals have a site  with  that name, not all  new
+units are linked to their predecessors.
+
+With these various copy options, large, complicated nets with the same
+or similar substructures can be created very easily.
+
+
+* Mode Units (:) 
+* Mode Links (:)
+  
+Switches to the mode Units or Links. All sequences of the normal modes
+are available. The keys  U and  L need not be  pressed  anymore.  This
+shortens all sequences by one key.
+  
+  
+* Units ... Return (:) 
+* Links ... Return (:)
+  
+Returns to normal mode after executing Mode Units,
+
+
+* Graphics All (:) 
+* Graphics Complete (:) 
+* Graphics Units (:)  
+* Graphics Links (:)
+  
+These commands initiate redrawing the whole net, or parts  of the net.
+With the exception  of Graphics Complete, all commands affect only the
+current  display.  They are especially  usefull  after  a deletion  of
+links.
+
+
+* Graphics Direction ([unit] :)
+  
+This command assigns arrow heads to all links leading to/from the unit
+selected by  the  mouse.  This is  done independently from  the  setup
+values.  XGUI, however, does not recall  that  links have been  drawn.
+This means that after moving a unit, these links remain in the window,
+if the display of links is switched off in the SETUP.
+
+
+* Graphics Move (TARGET [empty]/[unit] :)
+  
+The origin of the window (upper left corner)  is  moved  in a way that
+the  Target unit  in  the info  panel  becomes visible at the position
+specified by the mouse.
+
+
+* Graphics Origin ([empty]/[unit] :)
+  
+The position specified by the mouse becomes new  origin of the display
+(upper left corner).
+
+
+* Graphics Grid (:)
+  
+This command draws  a point at each grid position. The grid,  however,
+is not  refreshed, therefore one might have  to redo the command  from
+time to time.
+
+
+----------------------------------------------------------------------
+
+* An Example Dialogue
+
+A short example dialogue  for the construction of an XOR network might
+clarify the use of the editor.  First the four  units are  created. In
+the  info  panel  the  target name  'input' and the Target bias  0  is
+entered.
+
+Status	Command			Comments
+----------------------------------------------------------------------
+>	Mode Units		switch on mode units
+Units>				set mouse to position (3,5)
+Units>	Insert Target		insert unit 1 with the attributes of 
+				the Target unit here
+				repeat for position (5,5)
+Units>				name = "hidden", bias = -2.88
+Units>	Insert Target		position (3,3); insert unit 3
+Units>				name = "output", bias = -3.41
+Units>	Insert Target		position (3,1); insert unit 4
+Units>	Return			return to normal mode
+>	Mode Links		switch on link mode
+Links>				select both input units and set mouse 
+				to third (hidden) unit 
+Links>				weight = 6.97
+Links>	Make to Destination	create links
+Links>				set mouse to unit 4, weight = -5.24
+Links>	Make to Destination	create links 
+Links>				deselect all units and select unit 3
+Links>				set mouse to unit 4, weight = 11.71
+Links>	Make to Destination	create links
+
+Now the topology is defined. The only actions remaining are to set the
+IO types  and  the four patterns. To set the IO  types, one can either
+use  the command  Units  Set  Default  io-type, which sets  the  types
+according to the  topological position of the units, or repeatedly use
+the  command Units  Set io-Type. The  second option can  be aborted by
+pressing  the  Done  button  in  the  popup  window  before  making  a
+selection.
+
+----------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------
+* TOPICS
+----------------------------------------------------------------------
+
+* Using The Graphical User Interface
+
+* XGUI Files
+
+* Windows of XGUI
+
+* Manager Panel
+
+* Info Panel
+
+* 2D Displays
+
+* Setup Panel
+
+* Unit Function Displays 
+
+* File Browser
+* Loading and Saving Networks
+* Loading and Saving Patterns
+* Loading and Saving Configurations
+* Saving a Result file 
+* Defining the Log File
+
+* Help Windows
+
+* Print Panel 
+
+* Control Panel
+
+* Weight Display 
+
+* Graph Window 
+
+* Creating and Editing F-types and Sites
+
+----------------------------------------------------------------------
+* Graphical Network Editor
+----------------------------------------------------------------------
+
+* Editor Modes
+* Selection
+* Selection of Units
+* Selection of Links
+
+* Use of the Mouse
+* left mouse button
+* right mouse button
+* middle mouse button
+
+* Keyboard
+
+----------------------------------------------------------------------
+* Short Command Reference
+----------------------------------------------------------------------
+* Links Make
+* Links Delete
+* Links Copy
+* Sites
+* Sites Copy
+* Units
+* Units Set
+* Units Set Function
+* Units Insert
+* Units Delete
+* Units Move
+* Units Copy
+* Units Copy Structure
+* Mode
+* Graphics
+
+----------------------------------------------------------------------
+* Editor Commands
+----------------------------------------------------------------------
+
+* Flags Safety
+
+* Links Set
+
+* Links Make Clique
+* Links Make from Source unit
+* Links Make to Target unit
+* Links Make Double
+* Links Make Inverse
+
+* Links Delete Clique
+* Links Delete from Source unit
+* Links Delete to Target unit
+
+* Links Copy Input
+* Links Copy Output
+* Links Copy All
+* Links Copy Environment
+
+* Site Add
+* Sites Delete
+* Sites Copy with No links
+* Sites Copy with All links
+
+* Units Freeze
+* Units Unfreeze
+
+* Units Set Name
+* Units Set Activation
+* Units Set Initial activation
+* Units Set Output
+* Units Set Bias
+* Units Set S-type
+* Units Set Function Activation
+* Units Set Function Output
+* Units Set Function F-type
+
+* Units Insert Default
+* Units Insert Target
+* Units Insert F-type
+
+* Units Delete
+* Units Move
+
+* Units Copy All
+* Units Copy Input
+* Units Copy Output
+* Units Copy None
+* Units Copy Structure All
+* Units Copy Structure Input
+* Units Copy Structure Output
+* Units Copy Structure None
+* Units Copy Structure Back binding
+* Units Copy Structure Forward binding
+* Units Copy Structure Double binding
+
+* Mode Units
+* Mode Links
+
+* Graphics All
+* Graphics Complete
+* Graphics Units
+* Graphics Links
+* Graphic Direction
+* Graphics Move
+* Graphics Origin
+* Graphics Grid
+
+----------------------------------------------------------------------
+* An Example Dialogue
+----------------------------------------------------------------------

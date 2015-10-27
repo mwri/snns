@@ -1,0 +1,62 @@
+/*****************************************************************************
+  FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/tools/sources/README,v $
+  SHORTNAME      : readme
+  SNNS VERSION   : 4.2
+
+  PURPOSE        : Readme File for the SNNS Tools
+  NOTES          :
+
+  AUTHOR         : Guenter Mamier
+  DATE           : 20.8.93
+
+  CHANGED BY     : 
+  RCS VERSION    : $Revision: 2.3 $
+  LAST CHANGE    : $Date: 1998/03/13 17:35:32 $
+
+    Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
+    Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
+
+******************************************************************************/
+
+
+This Directory contains the following files:
+
+README			:       This file
+
+analyze.c		:	Network Analysation Tool	
+arglist.c		:	Argument list handling functions for the 
+				SNNS batch interpreter:
+backpatch.c		:	batchman intermediate code handling functions
+batchman.c		:	batch mode network training prgram
+bignet.c		:	Generator for 3-Layer Feedforward Networks
+convert2snns.c		:	Generator for n-Component Kohonen Networks
+error.c			:	printing of error messages and warnings
+feedback-gennet.c	:	Generator for fully recurrent Networks
+ff_bignet.c		:	program to create feedforward networks
+gram1.tab.c		:	grammer rules for batch interpreter batchman
+ic_snns.c		:	SNNS kernel interface of batchman
+icopjmp.c		:	batchman intermediate code handling functions
+ictab.c			:	batchman intermediate symbol table handling
+isnns.c			:	interactive control of SNNS
+lex.yyy.c		:	batchman input scanner
+lex.yyz.c		:	batchman input scanner
+linknets.c		:	Combination of multiple SNNS feedforward 
+				networks to one combined net
+memory.c		:	implements the realloc function
+mkhead.c		:	writes SNNS Pattern File Header
+mkout.c			:	converts an 8 bit RAW File to Pattern Entry
+mkpat.c			:	creates SNNS Output Patten
+netlearn.c		:	Backpropagation Kernel Demo Program
+netperf.c		:	Kernel Benchmark Program
+pat_sel.c		:	Pattern Selector Program
+snns2c.c		:	Converter for network files to  executable 
+				C-source
+snns2clib.c		:	set of function to be linked with the code 
+				genereated by snns2c
+snns_intfce.c		:	SNNS kernel interface of batchman
+snnsbat.c		:	Batchlearning Program
+special_jacket.c	:	intermediate code functions for batchman
+symtab.c		:	batchman intermediate symbol table 
+				implementation
+td_bignet.c		:	program to create time-delay networks
+

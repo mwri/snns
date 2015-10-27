@@ -1,0 +1,47 @@
+**********************************************************************
+	SNNS Version 4.2 Linux Installation Notes
+**********************************************************************
+
+
+The configure script doesn't work with the Linux 'Bourne Again Shell'.
+It needs a c-shell. To install SNNS you have two possibilties:
+
+  1) install a c-shell
+     - get the tcsh for linux (for example form tsx-11.mit.edu in the
+      /pub/linux/binaries/usr.bin directory) 
+     - make a link from the tcsh executable to /bin/csh
+     - run the configuration scripts
+
+  2) install SNNS manually
+     - go to the SNNSv4.2/kernel/sources directory
+     - edit the Makefile (it is set for a sun sparc with the gcc compiler)
+     - change the SNNSDIR entry to your local path
+     - change the MACHINE entry to 386
+     - change the LEX entry to flex -I
+     - change the MACHINENAME entry to pc_linux
+     - change the LEXLIB entry to -lfl
+     - change the RLIB entry to ranlib 
+	(check '/usr/bin/ranlib' to be sure you have this before changing)
+     - change XDIR and XH entries to your local X11 library and include
+       path. This is normaly /usr/X11R6/lib and /usr/X11R6/include
+     - run 'make' and 'make install'
+
+     - go to the SNNSv4.2/xgui/sources directory
+     - repeat the steps above for the interface Makefile
+     - also change the LDOPTIONS entry to 
+	-L$(XDIR) -lXaw -lXmu -lXt -lSM -lICE -lXext -lX11 -lm -lfl
+
+     - go to the SNNSv4.2/tools/sources directory
+     - repeat the steps above for the tools Makefile
+     - also change the LDOPTIONS entry to 
+	-L$(XDIR) -lXaw -lXmu -lXt -lSM -lICE -lXext -lX11 -lm -lfl
+---------------------------------------------------------------------
+
+The Linux version of LaTeX has other limits than the standard Unix 
+version. With the Linux version it is possible to compile the user 
+manual using LaTeX, where under Unix biglatex has to be used.
+
+
+**********************************************************************
+      End of document 'SNNS Version 4.2 Installation Linux Notes'
+**********************************************************************

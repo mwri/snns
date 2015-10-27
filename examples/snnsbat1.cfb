@@ -1,0 +1,60 @@
+#
+Type: SNNSBATCH_1
+#
+# This is the style for an snnsbat configuration file, type 1.
+#
+# The following keyword-value combinations may be supplied in any order.
+# If a key is given twice, the second appearence is taken.
+# Keys that are not required for a special run may be omitted.
+# If a key is ommited but required, a default value is assumed.
+# The lines may be separated with comments.
+#
+# Please note the mandatory file type specification at the begining and 
+# the colon following the key.
+#
+#
+#                                           Defaults:
+#
+#     NoOfLearnParam:      <int>                0
+#     LearnParam:          [ <float> ]*         0.0
+#     NoOfInitParam:       <int>                0
+#     InitParam:           [ <float> ]*         0.0
+#     NetworkFile:         <string>             ""
+#     TrainedNetworkFile:  <string>             ""
+#     LearnPatternFile:    <string>             ""
+#     TestPatternFile:     <string>             ""
+#     ResultFile:          <string>             ""
+#     InitFunction:        <string>             ""
+#     MaxLearnCycles:      <int>                0
+#     MaxErrorToStop:      <float>              0.0
+#     Shuffle:             [ YES | NO ]         NO
+#     ShuffleSubPat:       [ YES | NO ]         NO
+#     NoOfVarDim:          <int><int>           0 0
+#     SubPatternISize: 	   [ <int> ]*		0
+#     SubPatternOSize: 	   [ <int> ]*		0
+#     SubPatternIStep: 	   [ <int> ]*		0
+#     SubPatternOStep: 	   [ <int> ]*		0
+#     ResultMinMaxPattern: <int><int>           0 0
+#     ResultIncludeInput:  [ YES | NO ]         NO
+#     ResultIncludeOutput: [ YES | NO ]         YES
+#
+#######################################################################
+NetworkFile: letters.net
+#
+InitFunction: Randomize_Weights
+NoOfInitParam: 2
+InitParam: -1.0 1.0
+#
+LearnPatternFile: letters.pat
+NoOfLearnParam: 2
+LearnParam: 0.8 0.3
+MaxLearnCycles: 500
+MaxErrorToStop: 0.1
+Shuffle: YES
+#
+TrainedNetworkFile: trained_letters.net
+TestPatternFile: test_letters.pat
+ResultFile: letters.res
+ResultMinMaxPattern: 1 26
+ResultIncludeInput: NO
+ResultIncludeOutput: YES

@@ -1,0 +1,80 @@
+.TH batchman 1 "" "" SNNS
+
+.SH NAME
+
+.B batchman
+\- batch execution interface for the neural network simulation package SNNS
+
+.SH SYNOPSIS
+
+.B batchman
+.RI "[-f " scriptfile "] [ -l " logfile " ] [-p] [-q] [-s] [-h]"
+
+.SH OPTIONS
+.BI -f " scriptfile"
+.RS 
+read all the commands to be executed from the file
+.I scriptfile. 
+If no -f option is given, read the commands from stdin. For a description of
+the script grammer, please refer to the SNNS manual.
+.RE
+
+.BI -l " logfile"
+.RS
+write output not only to stdout but also to the file 
+.IR logfile  " for later checking."
+.RE
+
+.B -p
+.RS
+parse only. Do not execute script, just test for gramatical correctness.
+.RE
+
+.B -q
+.RS
+run very quiet. Display only contents of print statements defined by
+the user, don't issue comments on the current state of the execution.
+.RE
+
+.B -s
+.RS
+parse silently. Do not display warnings produced by the parser.
+.RE
+
+.B -h 
+.RS
+print usage information and exit.
+.RE
+
+.SH DESCRIPTION
+Since training a neural network may require several hours of
+cpu time, it is advisable to perform this task as a batch job during
+low usage times. SNNS offers the program
+.B batchman
+for this purpose. It is basically an additional interface to the kernel that
+allows easy background execution. 
+
+The Interpreter can be used in an interactive mode or with the help of a file, 
+containing the batch program. When using a file no input from the 
+keyboard is necessary. The interactive mode can be activated by just calling 
+the interpreter. All the instructions entered at the command prompt
+are executed only after Ctrl-D is pressed.
+
+For a description of the batch script language refer to the SNNS user manual.
+
+.SH SEE ALSO
+The SNNS user manual under the SNNS installation directory or the
+hypertext manual at
+http://www-ra.informatik.uni-tuebingen.de/SNNS/UserManual/UserManual.html
+
+.BR xgui (1)
+graphical user interface for SNNS
+
+.BR snns2c (1)
+compiler to transform a trained neural network into a C-routine
+
+.BR snns (1)
+description of the whole package
+
+.SH AUTHOR
+Guenter W. Mamier

@@ -1,0 +1,357 @@
+==============================================================================
+Description of the tool M_ART
+==============================================================================
+
+
+                                  MAKEART
+
+             Copyright (c) 1990-1993  SNNS Group, IPVR, Univ. Stuttgart, FRG
+
+
+
+
+
+==============================================================================
+TABLE OF CONTENTS  /   INHALTSVERZEICHNIS
+        English documentation  .......................  line    25
+        Deutsche Dokumentation .......................  Zeile  200
+==============================================================================
+
+
+
+
+
+
+==============================================================================
+                         English documentation
+==============================================================================
+        A TOOL TO GENERATE ART-NETWORKS AS THEY ARE NEEDED FOR
+
+                         SNNS ART ALGORITHMS
+
+
+                    written by:   Kai-Uwe Herrmann
+
+
+------------------------------------------------------------------------------
+Preliminary remarks on the documentation
+------------------------------------------------------------------------------
+
+Using the SNNS ART algorithms, it is rather boring to create the
+corresponding networks using the graphical user interface.
+The reason is that we need many different unit types with different
+activation functions, different sites etc.
+
+So M_ART (MAKEART) is a tool doing this boring job for you. It is
+distributed with the SNNS (Stuttgart Neural Network Simulator) and
+is a stand-alone-software using the kernel of SNNS.
+
+
+
+------------------------------------------------------------------------------
+Further Reading
+------------------------------------------------------------------------------
+
+To get an idea of the realization, implementation of the ART algorithms
+(ART1, ART2 and ARTMAP) in SNNS it will be necessary to read
+
+[1] Kai-Uwe Herrmann: "ART-Adaptive Resonance Theory, Architekturen,
+                       Implementierung und Anwendung";
+                       Diplomarbeit Nr.929;
+                       Institut fuer Parallele und Verteilte
+                       Hoechstleistungsrechner;
+                       Fakultaet Informatik;
+                       Universitaet Stuttgart; 1992
+
+A PostScript-File of [1] should be available with SNNS via FTP.
+
+
+
+------------------------------------------------------------------------------
+Files
+------------------------------------------------------------------------------
+
+MAKEART consists of the following source files:
+
+      m_art.doc
+      m_art.c
+      m_art1.c
+      m_art1.h
+      m_art2.c
+      m_art2.h
+      m_artmap.c
+      m_artmap.h
+
+It is written in C, following the ANSI C standard.
+
+
+------------------------------------------------------------------------------
+Using MAKEART
+------------------------------------------------------------------------------
+
+
+Calling MAKEART
+===============
+
+To start MAKEART enter
+
+      %m_art
+
+on a unix-shell.
+
+
+The following text will appear on screen:
+
+   ------ Network Generator for ART Network architectures ------
+
+   using: SNNS 3D-Kernel V2.2        (<<<<<<<<< or which version you ever use)
+
+   Choose the ART model:
+
+       1 ....... ART 1
+       2 ....... ARTMAP
+       3 ....... ART 2
+
+      99 ....... Quit
+
+
+    Enter number:
+
+Enter either 1, 2, 3 or 99. Depending on the choice you made, you will
+now have to enter several parameters for the creation of the network or
+leave MAKEART.
+
+If you chose 1 or 3, you will first be prompted for the number of units
+in the F1 Layer. Let's call this number N.
+Afterwards you will be asked for the number of rows the N F1 units should
+build.
+
+Examples:  N=10   no. of rows = 3  will create a F1 layer as follows:
+
+               O O O O
+               O O O
+               O O O
+
+          where each  O  represents a unit.
+
+          N=10   no. of rows = 4  will create
+
+               O O O
+               O O O
+               O O
+               O O
+
+So with the parameter 'no. of rows', you will be able to tell MAKEART
+how you wish the units to appear in the DISPLAY.
+The same procedure as for F1 is to be done for the F2 layer. You will
+be prompted for the number of units in F2 (M) and again the corresponding
+number of rows.
+
+After entering the required 4 parameters:
+
+         number of units in F1,
+         number of rows in F1,
+         number of units in F2,
+         number of rows in F2
+
+the network will be generated. Finally you will be prompted for
+the name of the network and the filename. The network will then
+be saved in a file with the filename you gave. The fileformat is
+the standard SNNS netfile format.
+
+
+If you chose 2 instead of 1 or 3, things will be slightly different.
+For an ARTMAP network you have to define eight parameters, because
+it consists of 2 ART1 networks. So you have to define the above
+four parameters for ARTa and ARTb:
+
+         number of units in F1a,
+         number of rows in F1a,
+         number of units in F2a,
+         number of rows in F2a,
+         number of units in F1b,
+         number of rows in F1b,
+         number of units in F2b,
+         number of rows in F2b.
+
+
+Choice 99 will lead you back to the unix prompt.
+==============================================================================
+                   End of English documentation
+==============================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==============================================================================
+                        Deutsche Dokumentation
+==============================================================================
+
+         EIN WERKZEUG, UM ART-NETZWERKE ZU GENERIEREN, WIE SIE
+
+             FUER DIE SNNS-ART-ALGORITHMEN BENOETIGT WERDEN
+
+                         von:   Kai-Uwe Herrmann
+
+
+------------------------------------------------------------------------------
+Vorbemerkungen
+------------------------------------------------------------------------------
+
+ART-Netzwerke fuer die SNNS-ART-Algorithmen mit der graphischen
+Oberflaeche XGUI direkt zu erzeugen ist sehr ermuedend, da sehr
+viele verschiedene Unit-Typen mit vielen verschiednen Aktivierungs-
+funktion und Sites gebraucht werden. Auch die Verbindungsstruktur
+ist sehr inhomogen.
+
+Deshalb wurde MAKEART entwickelt, um diese laestige Arbeit zu
+uebernehmen. MAKEART wird mit dem SNNS (Stuttgarter Neuronale Netze Simulator)
+geliefert. Es ist ein eigenes Programm, das den SNNS-Kern verwendet.
+
+
+------------------------------------------------------------------------------
+Weitere Literatur
+------------------------------------------------------------------------------
+
+Um zu erfahren, wie die ART-Algorithmen (ART1, ART2 und ARTMAP) in SNNS
+realisiert und implementiert sind, ist folgende Lektuere notwendig:
+
+[1] Kai-Uwe Herrmann: "ART-Adaptive Resonance Theory, Architekturen,
+                       Implementierung und Anwendung";
+                       Diplomarbeit Nr.929;
+                       Institut fuer Parallele und Verteilte
+                       Hoechstleistungsrechner;
+                       Fakultaet Informatik;
+                       Universitaet Stuttgart; 1992
+
+Ein PostScript-File von [1] sollte mit SNNS via FTP erhaeltlich sein.
+
+
+
+------------------------------------------------------------------------------
+Dateien
+------------------------------------------------------------------------------
+
+MAKEART besteht aus den folgenden Dateien:
+
+      m_art.doc
+      m_art.c
+      m_art1.c
+      m_art1.h
+      m_art2.c
+      m_art2.h
+      m_artmap.c
+      m_artmap.h
+
+Es ist in C geschrieben, dem ANSI-C-Standard folgend.
+
+
+
+------------------------------------------------------------------------------
+Benutzung von MAKEART
+------------------------------------------------------------------------------
+
+
+Um MAKEART aufzurufen geben Sie
+
+      %m_art
+
+in einer Unix-Shell ein.
+
+
+Daraufhin wird folgender Text auf dem Bildschirm erscheinen:
+
+   ------ Network Generator for ART Network architectures ------
+
+   using: SNNS 3D-Kernel V2.2         (<<<<<<<<< oder welche Version auch immer)
+
+   Choose the ART model:
+
+       1 ....... ART 1
+       2 ....... ARTMAP
+       3 ....... ART 2
+
+      99 ....... Quit
+
+
+    Enter number:
+
+Geben Sie entweder 1, 2, 3 oder 99 ein. Abhaengig von der getroffenen
+Wahl, muessen jetzt verschiedene Parameter fuer die Generierung des
+Netzes eingegeben werden, oder Sie verlassen MAKEART.
+
+Haben Sie 1 oder 3 gewaehlt, dann werden Sie zunaechst nach der Zahl
+der Units in der F1-Schicht gefragt. Wir nennen diese Zahl N.
+Danach werden Sie nach der Zahl der Zeilen gefragt, die diese N F1 units
+bilden sollen.
+
+Beispiele: N=10   Zeilenzahl = 3  wird eine F1-Schicht generieren, die so
+           aussieht:
+
+               O O O O
+               O O O
+               O O O
+
+           Dabei repraesentiert jedes  O  ein Unit.
+
+           N=10   Zeilenzahl = 4  generiert:
+
+               O O O
+               O O O
+               O O
+               O O
+
+Mit der Zeilenzahl sind sie also in der Lage, MAKEART mitzuteilen, wie
+die jeweilige Schicht im DISPLAY von SNNS aussehen soll.
+Die gleiche Prozedur, wie fuer F1, muss fuer F2 wiederholt werden. Wieder
+werden sie erst nach der Zahl der Units und dann nach der Zahl der Zeilen
+gefragt, die diese Units bilden sollen.
+
+Nachdem Sie die vier relevanten Parameter
+
+        Zahl der F1-Units,
+        Zahl der Zeilen in F1,
+        Zahl der F2-Units,
+        Zahl der Zeilen in F2
+
+eingegeben haben, wird das Netzwerk generiert. Schliesslich werden
+Sie noch nach einem Namen fuer das Netzwerk und nach einem Dateinamen
+gefragt, unter dem es abgespeichert werden soll. Das Dateiformat ist
+das Standard-SNNS-Netzwerk-Datei-Format.
+
+
+Wenn Sie 2, anstatt 1 oder 3 gewaehlt haben, muessen sie 8 Parameter
+angeben, da ein ARTMAP-Netz aus zwei ART1-Netzen besteht. Somit
+muessen die vier obigen Parameter fuer beide (ARTa und ARTb) definiert
+werden.
+
+        Zahl der F1a-Units,
+        Zahl der Zeilen in F1a,
+        Zahl der F2a-Units,
+        Zahl der Zeilen in F2a,
+        Zahl der F1b-Units,
+        Zahl der Zeilen in F1b,
+        Zahl der F2b-Units,
+        Zahl der Zeilen in F2b.
+
+
+Wenn Sie 99 waehlen, dann verlassen Sie MAKEART und gelangen zurueck zur
+Unix-Shell.
+==============================================================================
+                   Ende der deutschen Dokumentation
+==============================================================================
+

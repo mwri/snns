@@ -1,0 +1,83 @@
+.TH td_bignet 1 "" "" SNNS
+
+.SH NAME
+
+.B td_bignet
+\- time-delay network generator for the neural network
+simulation package SNNS 
+
+.SH SYNOPSIS
+
+.B td_bignet 
+.IR "plane-definition " ...  " link-definition " "... [" " output-file " ]
+
+.RS
+.B plane-definition
+.RS
+defines the several layers of the network. There must be at least two
+plane definitions, but there might be any
+number given on the command line. Note, that you
+might have to define several planes for a single network layer, if you
+want to define a more complex network connection pattern than just
+"full-connection". One plane definition takes the form
+
+.BI -p " f d"
+
+.RS
+.IR f " :  number of feature units "
+
+.IR d " : total delay length"
+.RE
+.RE
+
+.B link-definition
+.RS
+defines the connectivity of the network. There must be at least one
+link definition, but there might be any number given on the command line. 
+One link definition takes the form
+
+.BI -l " sp sf sw d tp tf tw"
+
+.RS
+.IR sp " : number of the source plane"
+
+.IR sf " : 1st feature unit in source plane"
+
+.IR sw " : field width in source plane"
+
+.IR d " : delay length in source plane"
+
+.IR tp " : number of the target plane"
+
+.IR tf " : 1st feature unit in target plane"
+
+.IR tw " : field width in target plane"
+.RE
+.RE
+.RE
+.RE
+
+.SH OPTIONS
+.B output-file
+.RS
+name of the generated network file. Default is "SNNNS_TD_NET.net"
+.RE
+
+
+.SH DESCRIPTION
+.B td_bignet 
+can be used to automatically construct neural
+networks with the topology for time-delay learning. As with 
+.BR ff_bignet "(1), the graphical version included in"
+.BR xgui "(1) is preferrable if networks are to be constructed manually. "
+
+.SH SEE ALSO
+The SNNS user manual under the SNNS installation directory or the
+hypertext manual at
+http://www-ra.informatik.uni-tuebingen.de/SNNS/UserManual/UserManual.html
+
+.BR snns (1)
+description of the SNNS package
+
+.SH AUTHOR
+Guenter W. Mamier

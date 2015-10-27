@@ -1,0 +1,280 @@
+**********************************************************************
+	SNNS Version 4.2 Installation 
+**********************************************************************
+
+Note that  SNNS has not been tested extensively  in different computer
+environments and is a research tool with frequent substantial changes.
+It should be obvious that we don't guarantee anything. We are also not
+staffed to answer problems with SNNS or to fix bugs quickly.
+
+SNNS  currently runs on color or black and white screens of almost any
+Unix system, while the graphical user  interface  might  give problems 
+with systems which are not fully X11R5 (or X11R6) compatible.
+
+For the most impatient reader, the easiest way to compile SNNS is:
+
+	make
+
+It works  on  most UNIX  systems  and will  not install   any compiled
+program  (it keeps them  in the corresponding source directories). Now
+the more detailed description.  We  strongly recommend to read it very
+carefully! Please  ALWAYS refer to this  document before you  post any
+questions to the SNNS Mailing list or to the SNNS developer team!
+
+
+*** CONFIGURING THE SNNS INSTALLATION ***
+
+To build and install SNNS in the directory in  which you have unpacked
+the tar  file (from   now  on called  <SNNSDIR>),  you first  have  to
+generate the correct  Makefiles   for your machine   architecture  and
+window system used. To do this, simply call the shell script
+
+	configure
+
+This makes you ready to install SNNS and  its tools in the common SNNS
+installation       directories     <SNNSDIR>/tools/bin/<HOST>      and
+<SNNSDIR>/xgui/bin/<HOST>.  <HOST> denotes an automatically determined
+system identification  (e.g.   alpha-dec-osf4.0), which   is used   to
+install SNNS for  different hardware and software architectures within
+the same directory tree.
+
+If you plan to install SNNS or parts of it in a more global place like
+/usr/local or /home/yourname  you should use the flag --enable-global,
+optionally combined with the flag --prefix.  Please note that --prefix
+alone will not work, although it is mentioned in the usage information
+for 'configure'.  If you use --enable-global  alone --prefix is set to
+/usr/local  by  default.   Using   --enable-global   will  install all
+binaries  of  SNNS into  the bin directory  below the  path defined by
+--prefix:
+
+	configure
+	-> will install to <SNNSDIR>/[tools|xgui]/bin/<HOST>
+
+	configure --enable-global
+	-> will install to /usr/local/bin
+
+	configure --enable-global --prefix /home/yourdir
+	-> will install to /home/yourdir/bin
+
+Running 'configure'  will check your  system  for the availability  of
+some software  tools, system  calls,  header files, and   X libraries.
+After   that,    Makefile.def  is  created    from  its  corresponding
+configuration/Makefile.din file.  Also   the file config.h,  which  is
+included     by   most of  the    SNNS    modules,  is   created  from
+configuration/config.hin.
+
+By default, 'configure' tries to use the  GNU C-compiler gcc, if it is
+installed on your system. Otherwise cc is  used, which must be an ANSI
+C-compiler. We strongly recommend to use gcc. However, if you'd rather
+like  to use cc  or any other C-compiler  instead of an installed gcc,
+you must set the  environment variable CC before running  'configure'.
+Ensure that there is  no file named 'config.cache'  in <SNNSDIR>.  You
+may  also  overwrite the  default optimization and  debuging  flags by
+defining the environment variable CFLAGS. Example:
+
+	setenv CC acc
+	setenv CFLAGS -O
+	configure
+
+There  are some more useful options  for 'configure'.   You will get a
+short help message, if you apply the flag  --help. Most of the options
+you will see won't work, because the SNNS installation directories are
+determined by other rules as noted  in the help message. However there
+are some very useful options,  which might be of  interest. Here is  a
+summary of all applicable options for 'configure'
+
+	--quiet           suppress most of the configuration messages
+	--enable-global   use global installation path --prefix
+	--prefix          path for global installation
+	--x-includes      alternative path for X include files
+	--x-libraries     alternative path for X libraries
+	--no-create       test run, don't change any output files
+
+
+*** MAKING AND INSTALLING SNNS ***
+
+After configuring, the next step to build SNNS  is usually to make and
+install the  kernel, the tools and the  graphical user interface. This
+is most easily done with the command
+
+	make install
+
+given in the  base  directory where you have   run  'configure'.  This
+command will descent into all parts of SNNS to compile and install all
+necessary  parts. If  you want to  compile  only and refrain  from any
+installation, you may use:
+
+	make compile
+
+After installing SNNS you may  want to cleanup the source  directories
+(delete all object and library files) with the command
+
+	make clean
+
+If  you are totally  unhappy with your SNNS  installation, you can run
+the command
+
+	make uninstall
+
+If you want to compile and install, clean,  or uninstall only parts of
+SNNS, you may also call one or more of the following commands:
+
+	make compile-kernel
+	make compile-tools    (implies making of kernel libraries)
+	make compile-xgui     (implies making of kernel libraries)
+
+
+	make install-tools    (implies making of kernel libraries)
+	make install-xgui     (implies making of kernel libraries)
+
+	make clean-kernel
+	make clean-tools
+	make clean-xgui
+
+	make uninstall-kernel
+	make uninstall-tools
+	make uninstall-xgui
+
+To make a report about your current configuration:
+
+	make bugreport
+
+If you are a developer and like to modify SNNS or parts of it for your
+own  purpose,  there  are  even more  make  targets available  for the
+Makefiles in each of the source directories.
+
+
+*** POSSIBLE PROBLEMS DURING CONFIGURING THE SNNS INSTALLATION ***
+
+'configure' tries to locate all of  the tools which might be necessary
+for development of SNNS. However, you  don't need to  have all of them
+installed on  your system  if you only  want to  install the unchanged
+SNNS distribution.  You may ignore the  following warning messages but
+you should keep them in mind whenever you plan to modify SNNS:
+
+	messages concerning the parser generator 'bison'
+	messages concerning the scanner generator 'flex'
+	messages concerning 'makedepend'
+
+You should have   installed version of  these tools,  if you  plan  to
+modify   SNNS. Please also read   the  following section "*** POSSIBLE
+PROBLEMS DURING SNNS COMPILATION ***" in this document.
+ 
+If  configure is unable to locate  the X  libraries and include files,
+you may    give  advise  by   using   the mentioned   --x-include  and
+--x-libraries flags. If you don't have  the X installed on your system
+at all, you may  still use the batch version  of SNNS "batchman" which
+is included  in the SNNS tools tree.  
+
+At  some sites different versions of  X  may be installed in different
+directories (X11R6, X11R5, ...).  The configure script always tries to
+determine the  newest  one of these  installations.  However, although
+configure tries its best, it could happen that  you are linking to the
+newest X11 libraries  but compiling with  older X  header files.  This
+may happen, if outdated versions of the X  headers are still available
+in some of  the default include directories  known to your C compiler.
+If you encounter  any strange X problems  (like unmotivated Xlib error
+reports during runtime)  please double check  which  headers and which
+libraries you are actually using. To do so, set  the C compiler to use
+the -v option (by defining CFLAGS as written above) and carefully look
+at the output during recompilation.  If you  see any conflicts at this
+point, also use the --x- options described above to fix the problem.
+
+
+*** POSSIBLE PROBLEMS DURING SNNS COMPILATION ***
+
+The pattern file parser of SNNS  was built by the  program 'bison'.  A
+pregenerated version of the  pattern parser (kr_pat_parse.c + y.tab.h)
+and also the original bison grammar (kr_pat_parse_bison.y) is included
+in the   distribution.    The  generated    files  are   newer    than
+kr_pat_parse_bison.y if you unpack  the SNNS distribution.  Because of
+this, 'bison' is not called (and does not need to be) by default. ONLY
+IF  YOU WANT  TO CHANGE   THE GRAMMAR OR  IF  YOU  HAVE TROUBLE   WITH
+COMPILING   AND   LINKING     KR_PAT_PARSE.C  you   should  enter  the
+kernel/sources directory and rebuild the parser.  To do this, you have
+either to 'touch' the file kr_pat_parse_bison.y or to delete either of
+the files kr_pat_parse.c or y.tab.h. Afterwards running
+
+	make install
+
+in the kernel/sources directory will recreate the parser and reinstall
+the kernel libraries. If you  completely messed up your pattern parser
+please use the   original kr_pat_parse.c/y.tab.h combination  from the
+SNNS distribution. Don't  forget to 'touch'  these files before runing
+'make' to ensure that they remain unchanged.
+
+To rebuild the parser you should use 'bison' version 1.22 or later. If
+your   version  of  'bison'  is older,  you   may  have to change  the
+definition of BISONFLAGS  in Makefile.def.  Also  look for any warning
+messages while   running  'configure'.   The  common  parser generator
+'yacc' won't work!
+
+The equivalent 'bison' discussion holds true for  the parser, which is
+used by the  SNNS tool 'batchman' in   the tools directory.  Here, the
+orginal grammar  file  is called gram1.y,   while the 'bison'  created
+files are named gram1.tab.c and gram1.tab.h.
+
+The parsers in SNNS receive their input from scanners which were built
+by  the program 'flex'.    A pregenerated version  of every  necessary
+scanner (kr_pat_scan.c in the  kernel/sources directory, lex.yyy.c and
+lex.yyz.c in   the    tools/sources directory)  is   included in   the
+distribution.   These files  are newer   than the corresponding  input
+files   (kr_pat_scan.l, scan1.l, scan2.l)  if    you unpack the   SNNS
+distribution. Because of this, 'flex' is not called (and does not need
+to be) by  default.  ONLY IF  YOU WANT TO CHANGE  A SCANNER OR  IF YOU
+HAVE TROUBLE  WITH COMPILING AND LINKING  you should enter the sources
+directories and rebuild the scanners.  To  do this, you have either to
+'touch' the *.l files or to delete the files kr_pat_scan.c, lex.yyy.c,
+and lex.yyz.c. Running
+
+	make install
+
+in  the sources directories will  recreate and reinstall all necessary
+parts.  If you  completely messed up  your pattern scanners please use
+the original files from the SNNS distribution. Don't forget to 'touch'
+these files before runing make to ensure that they remain unchanged.
+
+To  rebuild  the scanners  you must  use   'flex'. The common  scanner
+generator 'lex' won't work!
+
+
+*** RUNNING SNNS ***
+
+After installation, we usually  build a symbolic  link named 'snns' to
+point to the  executable xgui program, if   we often work  on the same
+machine architecture. E.g.:
+
+	ln -s  xgui/bin/<architecture>/xgui  snns
+
+This link  may also be placed  in the user's  home directory (with the
+proper path prefix to SNNS) or in a directory of binaries in the local
+user's search path.
+
+The simulator is then called simply with
+ 
+	snns
+ 
+For further  details about calling the  simulator or any of  its tools
+and for working with the graphical user interface, please refer to the
+user manual.
+
+
+*** REPORTING BUGS ***
+
+If you really need to report a bug you should run 
+
+	make bugreport
+
+in <SNNSDIR>. This command ensures, that your Makefiles are up to date
+and prints out all critical definitions.  If you see, that the SNNS is
+reconfigured during this operation, you must recompile SNNS and check,
+if  the bug  is still  there  before complaining about  problems. Also
+refer  to section *** CONFIGURING THE  SNNS  INSTALLATION *** to learn
+more about how to change C-compiler usage and compile flags.
+
+The output  from the  above  command should be   included in your  bug
+report, so we don't need to ask you about your system characteristics.
+
+**********************************************************************
+	End of document 'SNNS Version 4.2 Installation'
+**********************************************************************

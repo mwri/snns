@@ -1,0 +1,31 @@
+                  ==============================
+                  Description of the tool MKHEAD
+                  ==============================
+
+This program writes a snns pattern file header to stdout.
+Use this program together with mkpat and mkout to produce
+pattern files from raw files in a shell script.
+
+synopsis: mkhead <#pats> <#in_units> <#out_units>
+
+   where #pats      are the number of patterns in the file
+         #in_units  are the number of input units in the file
+         #out_units are the number of output units in the file
+
+
+example:
+
+unix >mkhead 10 35 26
+
+produces
+
+  SNNS pattern definition file V1.4
+  generated at Thu Aug 19 14:36:37 1993
+
+
+  No. of patterns     : 10
+  No. of input units  : 35
+  No. of output units : 26
+
+
+

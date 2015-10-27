@@ -1,0 +1,152 @@
+.TH ff_bignet 1 "" "" SNNS
+
+.SH NAME
+
+.B ff_bignet
+\- complex network generator for the neural network simulation package SNNS 
+
+.SH SYNOPSIS
+
+.B ff_bignet 
+.IR "plane-definition " ... " link-definition " "... [" " output-file " ] 
+
+.RS
+.B plane-definition
+.RS
+defines the various layers of the network. There must be at least one
+plane definition, but there might be any
+number given on the command line. Note, that you
+might have to define several planes for a single network layer, if you
+want to define a more complex network connection pattern than just
+"full-connection". One plane definition takes the form
+
+.B -p
+.IR "x y " [ " act " [ " out " [ 
+.IR "type " "] ] ]"
+
+.RS
+.IR x " : number of units in x-direction"
+
+.IR y  " : number of units in y-direction"
+
+.IR act " : optional activation function. Default: Act_Logistic"
+ 
+.IR out " : optional output function. Default: Out_Identity."
+ 
+.IR type " : optional layer type. Valid types: input, hidden, or output"
+.RS 
+.RS 
+Default values : 1st plane: input; last plane: output; all others: hidden
+.RE
+.RE
+.RE
+.RE
+
+.B link-definition
+.RS
+defines the connectivity of the network. There must be at least one
+link definition, but there might be any number given on the command line. 
+One link definition takes the form
+
+.B -l 
+.IB source-section "  " target-section
+.RS
+Both source and target section definitions take the form 
+
+.I p cx cy cw ch ux uy mx my
+
+.RS
+.IR p " : number of the plane to connect"
+
+.IR cx " : x position of cluster in plane " p
+
+.IR cy " : y position of cluster in plane " p
+
+.IR cw " : width of cluster in plane " p
+
+.IR ch " : height of cluster in plane" p
+
+.IR ux " : x position of a distinct unit in plane " p
+
+.IR uy " : y position of a distinct unit in plane " p
+
+.IR mx " : delta x for multiple fields in plane " p
+
+.IR my " : delta y for multiple fields in plane " p
+.RE
+
+Unused parameters have to be specified as 0. A series of 0s at the
+end of each section may be abreviated by a '+' character. 
+.RE
+.RE
+.RE
+
+.SH OPTIONS
+.B output-file
+.RS
+name of the generated network file. Default is "SNNNS_FF_NET.net"
+.RE
+
+
+.SH DESCRIPTION
+
+.B ff_bignet 
+can be used to automatically construct complex neural networks. The
+synopsis is kind of lengthy, so when networks are to be constructed
+manually, the graphical version included in 
+.BR xgui (1) 
+is preferrable. The parameters to this tools are derived from the
+input fields of the
+.BR bignet " panel in " xgui (1)  
+If, however, networks are to be
+constructed automatically, e.g. a whole series from within a shell
+script, this program is the method of choice.
+.BR Note " that even though the tool is called " ff- bignet, 
+it can not only construct feed-forward but also recurrent networks.
+.SH EXAMPLES
+
+.RS
+ff_bignet -p 1 10 -p 1 5 -p 1 6 -l 1 + 2 + -l 2 + 3 +
+.RE
+
+creates a simple 10-5-6, fully connected feedforward network.
+
+.RS
+ff_bignet -p 1 10 -p 1 5 -p 1 6 -l 1 + 2 + -l 2 + 3 + -l 1 + 3 +
+.RE
+
+creates the same network including shortcut connections.
+
+.RS
+ff_bignet -p 1 10 -p 1 5 -p 1 6 -l 1 + 2 + -l 2 + 3 + -l 2 1 1 1 1 0 0 0 1 2 1 1 1 1 0 0 0 1
+.RE
+
+creates the same network including additional self recurrent links in
+the hidden layer. 
+ 
+.RS
+ff_bignet -p 6 20 -p 1 10 -p 1 1 -l 1 1 1 6 10 + 2 1 1 1 10 -l 2 + 3 1 1 1 1 +
+.RE
+
+defines a network with three layers. A 6x20 input layer, a 1x10 hidden layer,
+and a single output unit. The upper 6x10 input units are fully
+connected to the hidden layer, which in turn is fully connected to the
+output unit. The lower 6x10 input units do not have any connections. 
+
+.RS
+ff_bignet -p 1 2 -p 1 3 -p 1 1 -l 1 + 2 + -l 2 + 3 + -l 2 1 1 1 1 0 0 0 1 2 1 1 1 1 0 0 0 1
+.RE
+
+defines a 2-3-1 network, fully feed-forward connected with additional
+self recurrent links in the hidden layer.
+ 
+.SH SEE ALSO
+The SNNS user manual under the SNNS installation directory or the
+hypertext manual at
+http://www-ra.informatik.uni-tuebingen.de/SNNS/UserManual/UserManual.html
+
+.BR snns (1)
+description of the SNNS package
+
+.SH AUTHOR
+Guenter W. Mamier

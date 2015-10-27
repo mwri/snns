@@ -1,0 +1,107 @@
+.TH isnns 1 "" "" SNNS
+
+.SH NAME
+
+.B isnns
+\- interactiv, on the fly neural network training for SNNS
+
+.SH SYNOPSIS
+
+.B isnns
+.RI [ " outpt_pattern_file " ]
+
+.SH OPTIONS
+.B outpt_pattern_file
+.RS 
+A file with this name will be created and will log all training
+patterns used.
+.RE
+
+.SH DESCRIPTION
+.B isnns 
+is a small program based on the SNNS kernel which allows
+stream-oriented network training. It is supposed to train a
+network with patterns that are generated on the fly by some other
+process. 
+.BR isnns " does not support the whole SNNS functionality, it "
+only offers some basic operations.
+
+.RB "The idea of " isnns " is to provide a simple mechanism which allows"
+to use an already trained network within another application, with the
+possibility to retrain this network during usage. This can not be done
+.RB "with networks created by " snns2c. 
+.RB "To use " isnns " effectively,"
+another application should fork an 
+.BR isnns " process and communicate "
+with it over the standard input and standard output channels. Please
+refer to the common literature about UNIX processes, and how to use the
+.BR fork "(2) and " exec "(2) system calls."
+
+.SH COMMANDS
+.BI load " net_file_name"
+.RS
+This command loads the specified network into the SNNS kernel.  After
+loading the network, the number of input units 
+.IR n " and the number of output units " m
+is printed to standard output.  
+.RE
+
+.BI save " net_file_name"
+.RS
+Save the network to the given file name.
+.RE
+
+.BI prop " i1 ... in"
+.RS
+.RI "Propagates the given input pattern " "i1 ... in"
+through the network and prints out the values of the
+output units of the network. The number of parameters 
+.IR n " must match exactly the number of input units of the network."
+.RE
+
+.BI train " lr o1 ... om"
+.RS
+Taking the current activation of the input units into account, this
+command performs one single training step based on the training
+function which is given in the network description. The first
+.RI parameter " lr " "to this function refers to the first training"
+parameter of the learning function. This is usually the learning rate.
+All other learning parameters are implicitely set to 0.0. 
+.RE
+
+.BI learn " lr i1 ... in o1 ...on"
+.RS
+This command is nearly the same as a combination of 
+.BR prop " and " train. 
+The only difference is, that it ensures that the input units are set
+.RI "to the given values " "i1 ... in" " and not read out of the current"
+.RI "network. " "o1 ... on" " represents the training output and " lr 
+again refers to the first training parameter. 
+.RE  
+  
+.B quit
+.RS  
+Quit isnns after printing a final "ok>" prompt.
+.RE
+
+.B help
+.RS
+Print help information to standard error output.
+.RE
+
+.SH SEE ALSO
+The SNNS user manual under the SNNS installation directory or the
+hypertext manual at
+http://www-ra.informatik.uni-tuebingen.de/SNNS/UserManual/UserManual.html
+
+.BR snns (1)
+description of the whole package
+
+.BR fork (2)
+Creates a new process
+
+.BR exec (2)
+Executes a file
+
+.SH AUTHOR
+Guenter W. Mamier

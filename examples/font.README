@@ -1,0 +1,84 @@
+=============================================================================
+	README file for the example files font.xxx
+=============================================================================
+
+
+Description:	This feedforward network recognizes printed characters 
+===========	of two different fonts. 
+
+The characters are displayed in a matrix of 24x24 input units. Each
+output neuron represents one character. There are a number of special
+characters and punctuation symbols, all captial letters, all lowercase
+letters and all digits for a total of 75 character classes.
+
+
+Pattern-Files:	font.pat
+==============
+
+This file contains 150 input and output patterns for the 75 different
+characters (2 characters of each class).
+
+
+Network-Files:	font.net
+==============
+
+The network font.net contains a trained feedforward network for this
+task. It consists of 24x24 = 576 input units, two groups of 4x6 hidden
+units and 75 output units. The input layer is NOT fully connected with
+the hidden layer, because this would yield too many weights and make
+the network too large to be used as an example. Instead, only each
+unit of the same input row is connected with a hidden unit of the
+first group, for a total of 24 input rows (24 hidden units of the
+first group). Also, each unit of the same input column is connected
+with one hidden unit of the second group, for a total of 24 columns
+(24 hidden units of the second group).
+
+All hidden units are fully connected with all output units.
+
+
+Config-Files:	font.cfg
+=============
+
+This example is best displayed with one large 2D network display for
+the whole network (without unit numbers or activations) and one 2D
+display for the output units with names (classes) and activation
+values.
+
+
+Result-Files: font1.res
+=============
+
+This file is an example for Result files. You can analyze them with the tool
+analyze in the tools directory.
+
+
+Hints:
+======
+
+This is NOT an example of a 'real world' neural network character
+recognition network, but a toy example to be played with. The number
+of characters is much too small for the network size.
+However, it makes for a visually appealing demonstration of the simulator.
+
+The following table shows some learning functions one may use to train
+the network. In addition, it shows the learning-parameters and the
+number of cycles we needed to train the network successfully. These
+are not necessarily the best parameters. They are given as starting
+points for own experiments and should not be cited in comparisons of
+learning algorithms or network simulators.
+
+Learning-Function               Learning-Parameters       Cycles
+
+Backpropagation                 2.0                       100
+Backpropagation with momentum   0.8  0.6  0.1              30
+Quickprop                       0.1  2.0  0.0001           50 
+Rprop                           0.6                        50
+
+In this example Backpropagation with momentum seems to be the most
+stable learning algorithm giving the least classification error on the
+training set.
+
+
+=============================================================================
+	End of README file
+=============================================================================

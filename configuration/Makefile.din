@@ -1,0 +1,121 @@
+#*****************************************************************************
+# FILE           : $Source: /projects/higgs1/SNNS/CVS/SNNS/configuration/Makefile.din,v $
+# SHORTNAME      : Makefile.defs.in
+# SNNS VERSION   : 4.2
+#
+# PURPOSE        : input file to create Makefile.defs by configure
+# NOTES          : Do not change Makefiles manually
+#
+# AUTHOR         : Michael Vogt
+# DATE           : 27.02.98
+#
+# CHANGED BY     : 
+# RCS VERSION    : $Revision: 2.2 $
+# LAST CHANGE    : $Date: 1998/03/18 15:24:12 $
+#
+#   Copyright (c) 1990-1995  SNNS Group, IPVR, Univ. Stuttgart, FRG
+#   Copyright (c) 1996-1998  SNNS Group, WSI, Univ. Tuebingen, FRG
+#
+#*****************************************************************************
+
+#*****************************************************************************
+# BEGIN OF USER CUSTOMIZABLE AREA
+#*****************************************************************************
+
+# Use the command 'bison --version' to get information about your bison.
+# If you are using bison 1.22 or later, your BISONFLAGS should look like this:
+# BISONFLAGS       = -y -t -d -p
+# For bison version before 1.22, use these BISONFLAGS:
+# BISONFLAGS       = -y -t -d +a
+
+BISONFLAGS         = -y -t -d @bison_flag@ # REPORT_IF_BUG
+
+# This is the archiver program used to build libraries
+AR                 = ar # REPORT_IF_BUG
+
+# These are the flags for the archiver program 
+ARFLAGS 	   = rc # REPORT_IF_BUG
+
+#*****************************************************************************
+# END OF USER CUSTOMIZABLE AREA
+# Don't change any of the following setings. They are all set by running 
+# 'configure' in the main SNNS directory. Check possible variations with
+# 'configure --help' and read the file Readme.install.
+#*****************************************************************************
+
+#*****************************************************************************
+# BEGIN OF AREA UNDER CONTROL OF CONFIGURE
+# Please read Readme.install before you even think about changing any of
+# the following definitions manually!
+#*****************************************************************************
+
+# Here are the automatically created options to run the C compiler
+# To influence this value, set the enviroment variable CFLAGS before
+# running 'configure'
+CFLAGS             = @CFLAGS@ # REPORT_IF_BUG
+CXXFLAGS           = @CXXFLAGS@ # REPORT_IF_BUG
+
+# SNNS installation directories
+
+CANONICAL_HOST     = @host@ # REPORT_IF_BUG
+INSTALLDIR         = @prefix@
+SNNSDIR            = @snnsdir@
+KERNELBINEXT       = @kernelbinext@
+TOOLSBINEXT        = @toolsbinext@
+XGUIBINEXT         = @xguibinext@
+HOSTBINEXT         = @hostbinext@
+
+KERNELBINDIR       = $(INSTALLDIR)$(KERNELBINEXT)/bin$(HOSTBINEXT)
+KERNELSRCDIR       = kernel/sources
+TOOLSBINDIR        = $(INSTALLDIR)$(TOOLSBINEXT)/bin$(HOSTBINEXT)
+TOOLSSRCDIR        = tools/sources
+XGUIBINDIR         = $(INSTALLDIR)$(XGUIBINEXT)/bin$(HOSTBINEXT)
+XGUISRCDIR         = xgui/sources
+XGUIICONSDIR       = xgui/iconsXgui
+MANDIR             = $(INSTALLDIR)/man
+MAN1DIR            = $(MANDIR)/man1
+MANSRCDIR          = man
+
+# Tools covered by configure
+
+FLEX               = @FLEX@ # REPORT_IF_BUG
+BISON              = @BISON@ # REPORT_IF_BUG
+CC                 = @CC@ # REPORT_IF_BUG
+CXX                = @CXX@ # REPORT_IF_BUG
+INSTALL            = @INSTALL@ # REPORT_IF_BUG
+INSTALL_DATA       = @INSTALL_DATA@
+INSTALL_PROGRAM    = @INSTALL_PROGRAM@
+RANLIB             = @RANLIB@ # REPORT_IF_BUG
+MAKEDEPEND         = @MAKEDEPEND@
+
+# C-Preprocessor, C-Compiler, and linker configuration
+
+# Define library and include paths for the X system if headers and
+# libraries can not be found in standard places
+X_CFLAGS           = @X_CFLAGS@ # REPORT_IF_BUG
+X_LIBS             = @X_LIBS@ # REPORT_IF_BUG
+
+# Any extra libraries needed to be linked after all X libraries
+X_EXTRA_LIBS       = @X_EXTRA_LIBS@ # REPORT_IF_BUG
+
+# Any extra libraries needed to be linked before -lX11
+X_PRE_LIBS         = @X_PRE_LIBS@ # REPORT_IF_BUG
+
+# Library needed for flex scanner
+LEXLIB             = @LEXLIB@ # REPORT_IF_BUG
+
+# Preprocessor flags to prepare SNNS for ENZO
+ENZOFLAGS          = @ENZOFLAGS@ # REPORT_IF_BUG
+
+# Substitutions for some function implementations
+SUBSTOBJECTS       = @LIBOBJS@ @ALLOCA@ # REPORT_IF_BUG
+
+# Redefinition of implicit make rules
+.SUFFIXES:
+.SUFFIXES: .c .o
+.c.o:
+	$(CC) -fPIC $(CPPFLAGS) $(CFLAGS) -c $<
+
+#*****************************************************************************
+# End of common Makefile.defs
+#*****************************************************************************

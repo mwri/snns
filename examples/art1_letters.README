@@ -1,0 +1,102 @@
+=============================================================================
+	README file for the example files	art1_letters.xxx
+=============================================================================
+
+
+Description:	ART1 letters network
+============
+
+The ART1 letters network shows the self-organized classification of
+input patterns by an ART1 network. The input patterns are identical
+with the patterns of the 'letters' pattern file, except that they
+consist only of input patterns. The input is a 5x7 binary input
+matrix, each input representing a different captial letter of the
+alphabet. Each input pattern exists only once, there is no noise in
+the input.
+The ART1 network as implemented in SNNS differs from the standard ART1
+network in that it tries to implement the functionality of the reset
+box not algorithmically, but in the form of additional reset neurons:
+  The leftmost 5x7 layer is the input layer,
+  the next 5x7 layer is the comparison layer (F1 layer)
+  the next 5x7 layer ist the recognition layer (F2 layer)
+  the remaining two layers (delay layer and reset layer) and the delay
+  units d1, ... d3 on top are needed for proper synchronization of the
+  reset component.
+See the SNNS user manual for a more detailed description of the ART1
+implementation in SNNS.
+
+
+Pattern-Files:	art1_letters.pat
+==============
+
+The pattern-file letters.pat contains 26 binary input patterns with values
+of 0 and 1 representing capital letters in a 5x7 input matrix.
+
+
+Network-Files:	art1_letters.net
+==============
+
+This network file contains a trained ART1 network for the letter
+classification task described above. The standard configuration file
+for this network is letters.cfg (one 2D display only).
+
+You may generate your own ART1 network with the BIGNET tool from the
+Info-Panel of SNNS. This automatically generates all units and the
+necessary connections.
+
+Because the unit types and link structure are highly specialized in
+ART1 we strongly urge you only to use this tool to generate ART1
+networks in SNNS.
+
+
+Config-Files:	art1_letters.cfg	(one 2D display only)
+=============	art1_letters3D.cfg	(one 2D display, one 3D display)
+
+The drawing of the 3D display is relatively slow for this network, so
+you probably want to work only with the 2D display once you know how
+the units are connected.
+The 3D display is a nice example for a moderately complicated 3D
+network layout of a non-homogeneous network.
+
+
+Result-Files:	(none)
+=============
+
+
+Hints:
+======
+
+Read the chapter about ART1 in the SNNS manual very carefully!
+
+Note that ART1 needs a special network initialization function 
+	(REMOTE panel: OPTIONS select init function: ART1_Weights).
+Note that there exist two different ART1 update functions: 
+	(REMOTE panel: OPTIONS select update function: ART1_Synchronous
+						or     ART1_Stable)
+Note that ART1 needs a special learning function:
+	(REMOTE panel: OPTIONS select learning function: ART1)
+These should already be set when loading the example ART1 network.
+
+Use a high vigilance parameter $\rho$ (e.g. $\rho$ = 0.9 or 0.95),
+otherwise all examples will be grouped into only a few classes. The
+small value in the figure 'Setting the ART1 learning parameter $\rho$
+in the SNNS manual is misleading.
+
+Note that several input patterns are proper subsets of other
+patterns. It is interesting to watch how the 'smaller' pattern erodes
+the bitmap of the larger pattern until the former is no longer similar
+to the smaller pattern and is assigned a different neuron.
+
+The assignment of input patterns to recognition layer neurons appears
+counterintuitive at a first glance but can be explained by the above
+erosion effect.
+
+There exists additional documentation in form of the diploma
+thesis of Kai-Uwe Herrmann (in German), available via anon. ftp
+from our public ftp server ftp.informatik.uni-stuttgart.de under
+/pub/SNNS/NN-papers-german/herrmann_kaiuwe_DA.ps.Z
+
+
+=============================================================================
+	End of README file
+=============================================================================

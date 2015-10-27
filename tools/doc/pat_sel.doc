@@ -1,0 +1,37 @@
+                  ===============================
+                  Description of the tool PAT_SEL
+                  ===============================
+
+Given a 'pattern file' and a file containing numbers, PAT_SEL
+produces a new 'pattern file' which contains the subset of the first
+'pattern file' which consists of the patterns whose numbers are given
+in the 'number file'.
+
+Synopsis:
+---------
+
+pat_sel <number file> <input pattern file> <output pattern file>
+
+Parameters:
+-----------
+<number file>		: ASCII file which contains positive integer
+			  numbers (one number per line) in ascending
+			  order (like it is produced by the tool
+			  ANALYZE)
+
+<input pattern file>	: SNNS pattern file
+
+<output pattern file>	: SNNS pattern file which contains the
+			  selected subset (created by PAT_SEL)
+
+Examples:
+---------
+
+PAT_SEL can be used to create a pattern file which only contains the
+patterns which were classified wrong by a neural network. Therefore a
+'result file' has to be created using SNNS. The result file can be
+analyzed be the tool ANALYZE which produces a file containing the
+numbers of wrong classified patterns. This 'number file' and the
+corresponding 'pattern file' are read by PAT_SEL and the new 'pattern
+file' is going to be created.
+

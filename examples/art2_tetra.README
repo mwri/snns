@@ -1,0 +1,82 @@
+************************************************************************
+Example: art2_tetra.xxx		ART2 tetrahedron network
+************************************************************************
+
+Problem description:
+====================
+
+The ART2 tetrahedron network shows the self-organized classification
+of real valued input pattern vectors by an ART2 network. The input
+patterns are noisy real valued coordinates of the verteces of a
+tetrahedron in 3D space. They should automatically be classified into
+four different clusters. There exist variations of the input patterns
+with different amount of noise added to the input patterns.
+
+See the SNNS user manual for a more detailed description of the ART2
+implementation in SNNS.
+
+
+Pattern-Files:	art2_tetra.pat	
+==============	art2_tetra_low.pat
+		art2_tetra_med.pat
+		art2_tetra_high.pat
+
+All art2_tetra pattern files contain 40 input patterns with 3 real
+values each, describing a noisy coordinate of a vertex of the
+tetrahedron. The files differ by the amount of noise added to the
+verteces as indicated by the suffix 'low' 'med'(ium) and 'high'.
+
+
+Network-Files:	art2_tetra.net
+==============
+
+This network file contains a trained ART2 network for the tetrahedron
+vertex classification task described above. The standard configuration file
+for this network is art2_tetra.cfg
+
+You may generate your own ART2 network with the BIGNET tool from the
+Info-Panel of SNNS. This automatically generates all units and the
+necessary connections.
+
+Because the unit types and link structure are highly specialized in
+ART2 we strongly urge you only to use this tool to generate ART2
+networks in SNNS.
+
+
+Config-Files:	art2_tetra.cfg	(one 2D display only)
+=============	
+
+The drawing of the 3D display is relatively slow for this network, so
+you probably want to work with the 2D display once you know how the
+units are connected.
+The 3D display is a nice example for a moderately complicated 3D
+network layout.
+
+
+Result-Files:	(none)
+=============
+
+
+Hints:
+======
+
+Read the chapter about ART2 in the SNNS manual very carefully!
+
+Note that ART2 needs a special network initialization function 
+	(REMOTE panel: OPTIONS select init function: ART2_Weights).
+Note that there exist two different ART2 update functions: 
+	(REMOTE panel: OPTIONS select update function: ART2_Synchronous
+						or     ART2_Stable)
+Note that ART2 needs a special learning function:
+	(REMOTE panel: OPTIONS select learning function: ART2)
+These should already be set when loading the example ART2 network.
+
+You may use the ART2 learning parameters as given in the figure
+'Setting the ART2 learning parameters $\rho$, a, b, c, and $\theta$.
+
+There exists additional documentation in form of the diploma
+thesis of Kai-Uwe Herrmann (in German), available via anon. ftp
+from our public ftp server  ftp.informatik.uni-stuttgart.de  as file
+/pub/SNNS/NN-papers-german/herrmann_kaiuwe_DA.ps.Z
+
+************************************************************************

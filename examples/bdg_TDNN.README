@@ -1,0 +1,49 @@
+=============================================================================
+	README file for the example files bdg_TDNN.xxx
+=============================================================================
+
+
+Description:	Time-delay network (TDNN) for the recognition of the
+============	phonemes 'b', 'd', 'g'
+
+The file bdg_TDNN.net describes the time delay network discussed in 
+
+	Connectionist Glue: Modular Design of Neural Speech Systems,
+	Alex Waibel, CMU, in Proceedings of the 1988 Connectionist 
+	Models Summer School, 1988
+
+The net classifies the phonemes obtained by spelling the letters B, D,
+and G from 16 melscale spectral coeficients. The input therefore does
+not resemble the figures B, D, or G, but their accoustic
+representations.
+
+See the user manual for a detailed description of TDNNs and their usage.
+
+
+Network-Files:	bdg_TDNN.net
+==============
+
+This network file contains a trained TDNN network for the phoneme
+recognition task described above. The standard configuration file
+for this network is bdg_TDNN.cfg (one 2D display only).
+
+
+Pattern-Files:	bdg_TDNN.pat
+==============	bdg_variable.pat
+
+In the old SNNS pattern format exemplified by bdg_TDNN.pat, each
+position shift of a fixed moving window over a time-varying input
+signal resulted in a different imput pattern. This kind of pattern
+file is given in bdg_TDNN.pat. For space reasons, only three sample
+patterns are provided here.
+
+In the new pattern file format with variable length input patterns one
+can use the subpattern mechanism to extract subpatterns 'on the fly'
+from one large pattern, e.g. from a time series pattern. This is
+demonstrated with the file bdg_variable.pat
+See the SNNS manual for details about using the subpattern mechanism.
+
+
+=============================================================================
+	End of README file
+=============================================================================

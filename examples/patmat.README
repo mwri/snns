@@ -1,0 +1,54 @@
+=============================================================================
+	README file for the example files patmat.xxx
+=============================================================================
+
+
+Description:	This network is a toy pattern matching network,
+============	a feedforward auto-associator network.
+
+This network is derived from the letters.net network. Instead of a
+classification output layer it has an output layer which is identical
+to the input layer. Both are 5x7 matrices of binary values.
+
+
+Pattern-Files:	patmat.pat
+==============	
+
+The pattern-file patmat.pat contains 6 training patterns only. The
+patterns here have binary values of 0 and 1 but SNNS treats all inputs
+and outputs as real valued. You may best use this network and pattern
+file for your own experiments to generate or modify patterns from the
+user interface.
+
+
+Network-Files:	patmat.net
+==============	
+
+The network contains a trained network file with the following topology:
+	35 input neurons
+	10 hidden neurons
+	35 output neurons
+
+
+Config-Files:	patmat.cfg
+=============
+
+This network uses one 2D display and a 3D display in its standard
+configuration.
+
+
+Hints:
+======
+
+Use this network and pattern file for your own early experiments with
+the 2D display network editor. Try all the commands to
+insert/delete/modify units and links.
+
+Try also to generate this network from scratch with the BIGNET tool
+and perform your initial training experiments with it. You don't loose
+anything of you accidentally overwrite it.
+
+
+=============================================================================
+	End of README file
+=============================================================================

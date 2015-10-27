@@ -1,0 +1,146 @@
+=============================================================================
+	This file contains data to test the learning functions
+=============================================================================
+
+Network-Files:	dlvq_ziff_untrained.net
+==============	
+
+Pattern-Files:	dlvq_ziff_100.pat
+==============	
+
+Description:	- load network dlvq_ziff_untrained.net	
+============	- load patterns dlvq_ziff_100.pat	
+		- do NOT press init button
+		- set cycles to 1
+		- set shuffle off 
+		- for each test set:
+			- set learing function given in test set.
+			- set learning parameters given in test set.
+			- set update function given in test set.
+			- set update parameters given in test set.
+			- press the all button
+			- compare the results with the given results 
+			- reload network dlvq_ziff_untrained.net	
+
+Test set 1)
+===========
+
+learning function  : Dynamic_LVQ	          0.03  0.03  1.0   0.0   0.0
+update function    : Dynamic_LVQ		  0.0   0.0   0.0   0.0   0.0
+
+  epoch:         SSE            MSE            SSE/o-units
+
+Cycle 1 
+Total number of incorrectly classified items: 36 
+Array of classified items:
+
+0 1 0 0 0 0 0 0 0 0 
+2 0 0 0 0 0 1 0 0 0 
+0 1 0 1 0 1 0 1 0 1 
+0 0 2 0 0 2 3 0 0 0 
+0 0 1 1 0 2 0 0 1 0 
+0 1 1 2 1 0 0 0 1 0 
+0 0 0 1 1 1 0 0 0 0 
+0 0 0 0 0 0 0 0 1 1 
+0 0 0 0 2 0 0 0 0 0 
+0 0 0 2 0 0 0 0 0 0 
+
+
+Cycle 2 
+Total number of incorrectly classified items: 15 
+Array of classified items:
+
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 2 0 0 0 0 0 0 
+0 0 1 0 1 0 0 0 0 1 
+0 0 0 0 0 0 0 0 1 0 
+0 0 1 0 0 0 2 0 1 0 
+0 0 0 1 0 2 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 1 0 0 0 0 
+0 0 0 1 0 0 0 0 0 0 
+
+
+Cycle 3 
+Total number of incorrectly classified items: 7 
+Array of classified items:
+
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 1 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 1 0 0 0 0 1 
+0 0 0 1 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 1 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 1 0 0 
+0 0 0 0 0 1 0 0 0 0 
+
+
+Cycle 4 
+Total number of incorrectly classified items: 15 
+Array of classified items:
+
+0 0 0 0 0 1 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 1 
+0 0 1 0 0 1 1 0 0 0 
+0 1 0 0 0 0 1 0 1 0 
+0 0 0 1 0 0 1 0 1 0 
+0 0 0 1 0 1 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+1 0 0 0 1 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+
+
+Cycle 5 
+Total number of incorrectly classified items: 7 
+Array of classified items:
+
+0 1 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 1 0 0 0 
+0 0 0 1 0 0 0 0 0 0 
+1 0 0 0 1 0 0 0 0 0 
+0 0 0 0 0 2 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+
+
+Cycle 6 
+Total number of incorrectly classified items: 3 
+Array of classified items:
+
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 1 0 0 
+0 0 0 0 0 1 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 1 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+
+
+Cycle 7 
+Total number of incorrectly classified items: 0 
+Array of classified items:
+
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+
+
+      1:       0.00000        0.00000           0.00000
+

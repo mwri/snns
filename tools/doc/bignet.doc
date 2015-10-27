@@ -1,0 +1,32 @@
+                  ==============================
+                  Description of the tool BIGNET
+                  ==============================
+
+This program is a generator for special 3 layered feedforward networks.
+It's a demo for using the SNNS kernel interface to create networks.
+It has nothing to do with the XGUI bignet tool.
+
+synopsis: bignet
+
+example:
+
+unix >bignet
+
+produces
+
+
+  SNNS 3D-Kernel V3.1000
+  ----  Network Generator for 3 Layer Feedforward Networks  ----
+
+  No. of input units: 35
+  No. of output units: 26
+  No. of hidden units: 10
+
+  Create Units now ...
+  make connections
+
+  Name of the network: test                    
+  Filename of the network to save: test.net
+  Saving the network ...
+
+

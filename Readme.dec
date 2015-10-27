@@ -1,0 +1,22 @@
+**********************************************************************
+	  SNNS Version 4.2 Decstation Installation Notes
+**********************************************************************
+
+
+The optimation of the module m_artmap.c takes extremely long, 
+especially with the standart cc compiler. If you don't like
+to optimize it, you can abort the compilation and compile this
+module by hand.
+
+  - change to the kernel/sources directory
+  - run  'cc -float  -Dconst='' -c m_artmap.c' 
+     or  'gcc -ansi -Dultrix -c m_artmap.c' 
+  - return to the SNNSv4.2 directory
+  - run './build sim' again
+
+
+
+**********************************************************************
+   End of document 'SNNS Version 4.2 Installation Decstation Notes'
+**********************************************************************
+ 

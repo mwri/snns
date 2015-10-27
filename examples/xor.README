@@ -1,0 +1,64 @@
+=============================================================================
+	README file for the example files xor.xxx
+=============================================================================
+
+
+Description:	This example shows how to train the XOR-problem 
+============    on a neural network.
+
+
+Pattern-Files:	xor.pat
+==============	xor-rec1.pat	
+		xor-rec2.pat
+
+Xor is the pattern-file for the standard feedforward XOR-network, the
+other pattern files are for recurrent networks solving the XOR-problem.
+
+
+Network-Files:	xor.net
+==============	xor-rec.net
+
+xor.net topology: (2-1-1)-feedforward-Network with shortcut
+connections from the input units to the output unit.  xor-rec.net is a
+recurrent network solving the XOR-problem with one or two time delays
+between input and output. It was trained with backpropagation through
+time (BPTT). See the user manual in the chapter Neural Network Models
+and Functions, section 'Backpropagation through time' for
+a more detailed description.
+
+
+Config-Files:	xor.cfg
+=============	xor-rec.cfg
+
+The config files contains the configuration for a 2D display in both
+cases.
+
+
+Hints:
+======
+
+The following table shows some learning functions one may use to train
+the network. In addition, it shows the learning-parameters and the
+number of cycles we needed to train the network successfully. These
+parameters have not been obtained with extensive studies of
+statistical significance. They are given as hints to start your own
+training sessions, but should not be cited as optimal or used in
+comparisons of learning procedures or network simulators.
+
+Learning-Function               Learning-Parameters       Cycles
+
+Backpropagation                 2.0                       2000
+Backpropagation with momentum   3.0 0.8 0.1               100
+Quickprop                       0.3 2.25 0.0001            50
+Rprop                           0.2
+
+
+XOR is a nice small problem to learn about neural networks and
+learning algorithms. Try to build a 2-2-1 xor-network and a
+2-3-1-network (both without shortcuts) and compare their training
+times with the 2-1-1 network with shortcuts given above!
+
+
+=============================================================================
+	End of README file
+=============================================================================

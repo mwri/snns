@@ -1,0 +1,107 @@
+=============================================================================
+	This file contains data to test the learning functions
+=============================================================================
+
+Network-Files:	font_untrained.net
+==============	
+
+Pattern-Files:	font.pat
+==============	
+
+Description:	- load network font_untrained.net	
+============	- load patterns font.pat	
+		- do NOT press init button
+		- set cycles to 50
+		- set shuffle off 
+		- for each test set:
+			- set learing function given in test set.
+			- set learning parameters given in test set.
+			- set update function given in test set.
+			- set update parameters given in test set.
+			- press the all button
+			- compare the results with the given results 
+			- reload network font_untrained.net	
+
+Test set 1)
+===========
+
+learning function  : Backpropagation	  2.0   0.0   0.0   0.0   0.0
+update function    : Topological_Order	  0.0   0.0   0.0   0.0   0.0
+
+  epoch:         SSE            MSE            SSE/o-units
+
+     50:     192.05171        1.28034           2.56069
+     45:     145.26021        0.96840           1.93680
+     40:     129.34404        0.86229           1.72459
+     35:     107.77004        0.71847           1.43693
+     30:      90.47894        0.60319           1.20639
+     25:      76.59864        0.51066           1.02132
+     20:      67.40642        0.44938           0.89875
+     15:      56.65160        0.37768           0.75535
+     10:      51.79101        0.34527           0.69055
+      5:      46.88659        0.31258           0.62515
+      1:      41.94405        0.27963           0.55925
+
+
+Test set 2)
+===========
+
+learning function  : Backprop Momentum	  0.8   0.6   0.1   0.0   0.0
+update function    : Topological_Order	  0.0   0.0   0.0   0.0   0.0
+
+  epoch:         SSE            MSE            SSE/o-units
+
+     50:     193.56581        1.29044           2.58088
+     45:     108.02216        0.72015           1.44030
+     40:      27.55836        0.18372           0.36744
+     35:       6.18125        0.04121           0.08242
+     30:       3.19529        0.02130           0.04260
+     25:       2.04648        0.01364           0.02729
+     20:       0.94066        0.00627           0.01254
+     15:       0.57076        0.00381           0.00761
+     10:       0.43675        0.00291           0.00582
+      5:       0.35213        0.00235           0.00470
+      1:       0.30297        0.00202           0.00404
+
+
+Test set 3)
+===========
+
+learning function  : Quickprop		  0.1   2.0   0.0001 0.0   0.0
+update function    : Topological_Order	  0.0   0.0   0.0    0.0   0.0
+
+  epoch:         SSE            MSE            SSE/o-units
+
+     50:    4008.13794       26.72092          53.44184
+     45:     154.06007        1.02707           2.05413
+     40:     153.48735        1.02325           2.04650
+     35:     259.75369        1.73169           3.46338
+     30:     671.71240        4.47808           8.95617
+     25:     579.68127        3.86454           7.72908
+     20:     456.46268        3.04308           6.08617
+     15:     146.59467        0.97730           1.95460
+     10:     141.47960        0.94320           1.88639
+      5:     120.61822        0.80412           1.60824
+      1:     105.55431        0.70370           1.40739
+
+
+Test set 4)
+===========
+
+learning function  : Rprop		  0.6   0.0   0.0    0.0   0.0
+update function    : Topological_Order	  0.0   0.0   0.0    0.0   0.0
+
+  epoch:         SSE            MSE            SSE/o-units
+     50:    4008.13794       26.72092          53.44184
+     45:    2303.54565       15.35697          30.71394
+     40:     143.91373        0.95942           1.91885
+     35:     151.20253        1.00802           2.01603
+     30:     126.03333        0.84022           1.68044
+     25:      79.34955        0.52900           1.05799
+     20:      48.30243        0.32202           0.64403
+     15:      28.97503        0.19317           0.38633
+     10:      19.87347        0.13249           0.26498
+      5:      13.01181        0.08675           0.17349
+      1:      10.60551        0.07070           0.14141
+
+

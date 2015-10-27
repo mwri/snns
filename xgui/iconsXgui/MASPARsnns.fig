@@ -1,0 +1,17 @@
+#FIG 2.1
+80 2
+4 1 0 12 0 -1 0 0.00000 4 9 267 236 21 STUTTGART  NEURAL  NETWORK  SIMULATOR
+4 1 0 36 0 -1 0 0.00000 4 23 84 236 80 SNNS
+4 1 0 12 0 -1 0 0.00000 4 12 222 236 269 Kai-Uwe Herrmann, Artemis Hatzigeorgiou
+4 1 0 12 0 -1 0 0.00000 4 12 127 236 295 external contributions by:
+4 1 0 12 0 -1 0 0.00000 4 12 96 236 199 sequential code by:
+4 1 0 12 0 -1 0 0.00000 4 12 89 236 149 parallelization by:
+4 1 0 12 0 -1 0 0.00000 4 12 223 236 218 Andreas Zell, Günter Mamier, Michael Vogt
+4 1 0 12 0 -1 0 0.00000 4 11 214 236 235 Niels Mache, Tilman Sommer, Ralf Hübner
+4 1 0 12 0 -1 0 0.00000 4 12 318 236 252 Michael Schmalzl, Tobias Soyez, Sven Döring, Dietmar Posselt
+4 1 0 12 0 -1 0 0.00000 4 12 184 236 315 Martin Riedmiller, Heike Speckmann
+4 1 0 12 0 -1 0 0.00000 4 11 160 236 333 Martin Reczko, Jamie DeCoster
+4 1 0 12 0 -1 0 0.00000 4 12 387 236 377 (c) 1990-94,  Institute for Parallel and Distributed High Perfomance Systems
+4 1 0 12 0 -1 0 0.00000 4 12 112 236 395 University of Stuttgart
+4 1 0 18 0 -1 0 0.00000 4 13 170 236 108 V 3.3 - MasPar Kernel
+4 1 0 12 0 -1 0 0.00000 4 11 147 236 166 Niels Mache, Günter Mamier

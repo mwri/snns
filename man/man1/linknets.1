@@ -1,0 +1,141 @@
+.TH linknets 1 "" "" SNNS
+
+.SH NAME
+
+.B linknets 
+\- connects two or more SNNS network files into one single network
+
+.SH SYNOPSIS
+
+.B linknets
+.RI -innets " netfile " "...  [ -outnets " netfile " ... ] -o " output-network
+[ options ] 
+
+.SH DESCRIPTION
+.B linknets 
+allows to easily link several independent networks
+to one combined network. In general 
+.I n 
+so called input networks (
+.I n
+ranges from 1 to 20) are linked to
+.I m 
+so called output networks (
+.I m 
+ranges from 0 to 20). It is possible to add a new layer of input units
+to feed the former input units of the input networks. It is also
+possible to add a new layer of output units which is either fed by the
+former output units of the output networks (if output networks are
+given) or by the former output units of the input networks.
+
+
+.SH PARAMETERS 
+.BI "-innets " netfile
+.RS
+the name of a network file to be the pre-processor of the resulting
+network. There must be at least one 
+.B innets
+option present. Up to 20 networks might be given here, which then will
+be put next to each other in the resulting network, i.e. the new input
+layer will be the union of the input layers of these networks.
+.RE
+
+.BI -outnets " netfile"
+.RS
+the name of a network file to be the post-processor of the resulting
+network. Up to 20 networks might be given here, which then will
+be put next to each other in the resulting network, i.e. the new output
+layer will be the union of the output layers of these networks.
+.RE
+
+.BI  -o " output-network"
+.RS
+the filename of the network to be generated.
+.RE
+
+.SH OPTIONS
+.B -inunits
+.RS 
+To use the option 
+.B -inunits, 
+all input networks must have the
+same number of input units. If 
+.B -inunits
+is given, a new layer of input units is created. The number of new input
+units is equal to the number of (former) input units of a given input
+network. The new input units are connected by a one-to-one scheme to
+the (former) input units, which means, that every former input unit
+gets input activation from exactly one new input unit. The newly
+created network links are initialized with weight 1.0. The (former)
+input units of the input networks are changed to be special hidden
+units in the resulting network (incoming weights of special hidden
+units are not changed during further training). This connection scheme
+is useful to feed input patterns into several networks with similar
+input structure.
+.RE
+
+.BI -inconnect " n"
+.RS
+If
+.BI -inconnect " n"
+is given, 
+.I n 
+new input units are created. These new input units are fully connected to
+the (former) input units of all input networks. The (former) input
+units of the input networks are changed to be hidden units in the
+resulting network. The newly created network links are initialized
+with weight 0.0.
+.RE
+
+Note, that
+.BR -inunits " and " -inconnect
+may not be used together.
+
+.BI "-outconnect " n
+.RS
+If
+.BI "-outconnect " n
+is given, 
+.I n 
+new output units are created. These new output units are fully
+connected either to the (former) output units of all output networks
+(if output networks are given) or to the (former) output units of all
+input networks. The (former) output units are changed to be hidden
+units in the resulting network. The newly created network links are
+initialized with weight 0.0.
+.RE
+
+.B -direct
+.RS
+By default, all output units of the input networks are fully
+connected to all input units of the output networks. In some cases
+it is usefull, not to use a full connection but a one-to-one
+connection scheme. This is performed by giving the option
+.B -direct. 
+To use this option, the sum of all (former)
+output units of the input networks must equal the sum of all
+(former) input units of the output networks. Following the given
+succession of input and output networks (and the network dependent
+succession of input and output units), every (former) output unit
+of the input networks is connected to exactly one (fomer) input unit
+of the output networks. The newly created network links are
+initialized with weight 1.0. The (former) input units of the output
+networks are changed to be special hidden units in the resulting
+network (incoming weights of special hidden units are not changed
+during further training). The (former) output units of the input
+networks are changed to be hidden units. This connection scheme is
+usefull to directly feed the output from one (or more) network(s) into
+one (or more) other network(s).This option is ignored if no output
+networks are given. 
+.RE
+
+.SH SEE ALSO
+It is strongly recommended to examine the examples in the SNNS user
+manual under the SNNS installation directory or in the hypertext manual
+at http://www-ra.informatik.uni-tuebingen.de/SNNS/UserManual/UserManual.html
+
+.BR snns (1)
+neural network simulation package SNNS
+
+.SH AUTHOR
+Guenter W. Mamier
