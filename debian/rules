@@ -1,0 +1,46 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+#
+# Sample debian/rules that uses debhelper.
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+export CFLAGS=-g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2
+export LDFLAGS=-Wl,-z,relro
+
+
+override_dh_auto_configure:
+	dh_auto_configure -- --enable-global --prefix /usr
+
+override_dh_auto_install:
+	cp kernel/sources/libfunc.a debian/libsnns-dev/usr/lib/libsnnsfunc.a
+	cp kernel/sources/libkernel.a debian/libsnns-dev/usr/lib/libsnnskernel.a
+	cp kernel/sources/libsnnsfunc.so.4.3 debian/libsnns/usr/lib/
+	(cd debian/libsnns/usr/lib; ln -s libsnnsfunc.so.4.3 libsnnsfunc.so.4)
+	(cd debian/libsnns-dev/usr/lib; ln -s libsnnsfunc.so.4 libsnnsfunc.so)
+	cp kernel/sources/libsnnskernel.so.4.3 debian/libsnns/usr/lib/
+	(cd debian/libsnns/usr/lib; ln -s libsnnskernel.so.4.3 libsnnskernel.so.4)
+	(cd debian/libsnns-dev/usr/lib; ln -s libsnnskernel.so.4 libsnnskernel.so)
+	dh_install
+
+build:
+	cp Makefile.def Makefile.def.orig
+	dh build  --with autotools-dev
+
+clean:
+	if [ -f Makefile.def.orig ]; then cp Makefile.def.orig Makefile.def; fi
+	#if [ ! -f configuration/config.log.orig ]; then mv configuration/config.log configuration/config.log.orig; fi
+	rm -f config.status config.log
+	dh clean  --with autotools-dev
+	rm -f xgui/sources/libsnnsxgui2.so.4.3
+	rm -f xgui/sources/libsnns3d.so.4.3
+	rm -f xgui/sources/libsnnsxgui1.so.4.3
+	rm -f kernel/sources/libsnnsfunc.so.4.3
+	rm -f kernel/sources/libsnnskernel.so.4.3
+
+%:
+	dh $@  --with autotools-dev

@@ -1,0 +1,20 @@
+Index: SNNSv4.3/kernel/sources/Makefile
+===================================================================
+--- SNNSv4.3.orig/kernel/sources/Makefile	2008-04-21 08:55:55.000000000 +0100
++++ SNNSv4.3/kernel/sources/Makefile	2015-10-25 16:05:07.925004281 +0000
+@@ -135,6 +135,7 @@
+ 
+ $(LIBKERNEL): $(KERNELOBJECTS)
+ 	$(AR) $(ARFLAGS) $(LIBKERNEL) $(KERNELOBJECTS)
++	$(CC) -shared -fPIC -DPIC $(KERNELOBJECTS) -ldl -O2 $$LDFLAGS -Wl,-soname -Wl,libsnnskernel.so.4 -o libsnnskernel.so.4.3
+ 	@echo ""
+ 	@echo "Ignore possible error messages for the following command:"
+ 	-$(RANLIB) $(LIBKERNEL)
+@@ -143,6 +144,7 @@
+ 
+ $(LIBFUNCS): $(USR_FUNC_OBJECTS) $(SUBSTOBJECTS)
+ 	$(AR) $(ARFLAGS) $(LIBFUNCS) $(USR_FUNC_OBJECTS) $(SUBSTOBJECTS)
++	$(CC) -shared -fPIC -DPIC $(USR_FUNC_OBJECTS) $(SUBSTOBJECTS) -ldl -O2 $$LDFLAGS -Wl,-soname -Wl,libsnnsfunc.so.4 -o libsnnsfunc.so.4.3
+ 	@echo ""
+ 	@echo "Ignore possible error messages for the following command:"
+ 	-$(RANLIB) $(LIBFUNCS)

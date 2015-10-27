@@ -1,0 +1,36 @@
+Source: snns
+Priority: extra
+Maintainer: Michael Wright <mjw@methodanalysis.com>
+Build-Depends: debhelper (>= 8.0.0), autotools-dev
+Standards-Version: 3.9.3
+Section: libs
+Homepage: http://www.ra.cs.uni-tuebingen.de/SNNS/
+
+Package: libsnns-dev
+Section: libdevel
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends},
+ libsnns (= ${binary:Version})
+Description: Stuttgart Neural Network Simulator (development headers)
+ SNNS development headers for the SNNS library (libsnns).
+ .
+ SNNS (Stuttgart Neural Network Simulator) is a software simulator for
+ neural networks on Unix workstations developed at the Institute for
+ Parallel and Distributed High Performance Systems (IPVR) at the
+ University of Stuttgart. The goal of the SNNS project is to create
+ an efficient and flexible simulation environment for research on
+ and application of neural nets.
+
+Package: libsnns
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Stuttgart Neural Network Simulator (library)
+ SNNS static library files.
+ .
+ SNNS (Stuttgart Neural Network Simulator) is a software simulator for
+ neural networks on Unix workstations developed at the Institute for
+ Parallel and Distributed High Performance Systems (IPVR) at the
+ University of Stuttgart. The goal of the SNNS project is to create
+ an efficient and flexible simulation environment for research on
+ and application of neural nets.

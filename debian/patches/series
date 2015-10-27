@@ -1,0 +1,4 @@
+lib_only
+shared_libs
+format_security
+deb_cflags

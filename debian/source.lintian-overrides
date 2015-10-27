@@ -1,0 +1,3 @@
+# Removed configuration/config.log in debian/rules clean, but lintian
+# can't reliable detect this.
+snns source: configure-generated-file-in-source configuration/config.log

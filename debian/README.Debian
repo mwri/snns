@@ -1,0 +1,16 @@
+SNNS (Stuttgart Neural Network Simulator)
+=========================================
+
+SNNS (Stuttgart Neural Network Simulator) is a software simulator for
+neural networks on Unix workstations developed at the Institute for
+Parallel and Distributed High Performance Systems (IPVR) at the
+University of Stuttgart. The goal of the SNNS project is to create
+an efficient and flexible simulation environment for research on
+and application of neural nets.
+
+This installation is ONLY THE LIBRARY. The other binaries which are
+part of the SNNS upstream, including the X11 interface (xgui) are
+deliberately omitted from the package because SNNS as an app has
+been superceeded by JavaNNS.
+
+JavaNNS uses the original SNNS kernel which is provided here.

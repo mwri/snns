@@ -1,0 +1,12 @@
+--- a/kernel/sources/Makefile
++++ b/kernel/sources/Makefile
+@@ -182,6 +182,9 @@
+ 
+ # Dependencies
+ 
++%.o: %.c
++	$(CC) -fPIC -c $(CFLAGS) $(CPPFLAGS) -o $@ $<
++
+ $(KERNELOBJECTS): Makefile ../../Makefile.def
+ $(USR_FUNC_OBJECTS): Makefile ../../Makefile.def
+ 

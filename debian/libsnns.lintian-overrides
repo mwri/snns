@@ -1,0 +1,5 @@
+# Upstream provides five libraries, only 2 are taken by this package.
+# The names are are libkernel and libfunc, which this package renames
+# to provide a common prefix of libsnns. It's not really worth having
+# two packages to install one file each though.
+libsnns binary: package-name-doesnt-match-sonames libsnnsfunc4 libsnnskernel4

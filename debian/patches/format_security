@@ -1,0 +1,374 @@
+Index: SNNSv4.3/kernel/sources/kr_io.c
+===================================================================
+--- SNNSv4.3.orig/kernel/sources/kr_io.c	2008-04-21 08:55:59.000000000 +0100
++++ SNNSv4.3/kernel/sources/kr_io.c	2015-10-26 15:23:57.500331605 +0000
+@@ -806,9 +806,9 @@
+ 
+   err = fprintf( file_out, "\n\n%s :\n\n", title[8] );
+   retchk( err );
+-  err = fprintf( file_out, fmt_hdr1 );
++  err = fprintf( file_out, "%s", fmt_hdr1 );
+   retchk( err );
+-  err = fprintf( file_out, fmt_hdr2 );
++  err = fprintf( file_out, "%s", fmt_hdr2 );
+   retchk( err );
+ 
+   do
+@@ -819,7 +819,7 @@
+   }
+   while (krui_getNextSiteTableEntry( &site_name, &site_func ) );
+ 
+-  err = fprintf( file_out, fmt_hdr2 );
++  err = fprintf( file_out, "%s", fmt_hdr2 );
+   retchk( err );
+   return( 0 );
+ }
+@@ -850,9 +850,9 @@
+ 
+   err = fprintf( file_out, "\n\n%s :\n\n", title[9] );
+   retchk( err );
+-  err = fprintf( file_out, fmt_hdr1 );
++  err = fprintf( file_out, "%s", fmt_hdr1 );
+   retchk( err );
+-  err = fprintf( file_out, fmt_hdr2 );
++  err = fprintf( file_out, "%s", fmt_hdr2 );
+   retchk( err );
+ 
+   do  {
+@@ -865,7 +865,7 @@
+       second = FALSE;
+       do  {
+         if (second)  {
+-	  err = fprintf( file_out, fmt_blank );
++	  err = fprintf( file_out, "%s", fmt_blank );
+           retchk( err );
+ 	}
+ 
+@@ -881,7 +881,7 @@
+   }
+   while (krui_setNextFTypeEntry() );
+ 
+-  err = fprintf( file_out, fmt_hdr2 );
++  err = fprintf( file_out, "%s", fmt_hdr2 );
+   if (err <= 0)  return( err );
+ 
+   return( 0 );
+@@ -950,9 +950,9 @@
+ 
+   err = fprintf( file_out, "\n\n%s :\n\n", title[13] );
+   retchk( err );
+-  err = fprintf( file_out, fmt_hdr1 );
++  err = fprintf( file_out, "%s", fmt_hdr1 );
+   retchk( err );
+-  err = fprintf( file_out, fmt_hdr2 );
++  err = fprintf( file_out, "%s", fmt_hdr2 );
+   retchk( err );
+ 
+   krui_getUnitDefaults( &act, &bias, &st, &subnet_no, &layer_no,
+@@ -969,7 +969,7 @@
+ 
+   retchk( err );
+ 
+-  err = fprintf( file_out, fmt_hdr2 );
++  err = fprintf( file_out, "%s", fmt_hdr2 );
+   retchk( err );
+ 
+   return( 0 );
+@@ -1017,9 +1017,9 @@
+ 
+   err = fprintf( file_out, "\n\n%s :\n\n", title[10] );
+   retchk( err );
+-  err = fprintf( file_out, fmt_hdr1 );
++  err = fprintf( file_out, "%s", fmt_hdr1 );
+   retchk( err );
+-  err = fprintf( file_out, fmt_hdr2 );
++  err = fprintf( file_out, "%s", fmt_hdr2 );
+   retchk( err );
+ 
+   krui_getUnitDefaults( &act_def, &bias_def, &st_def, &subnet_no, &layer_no,
+@@ -1089,7 +1089,7 @@
+         second = FALSE;
+         do  {
+           if (second)  {
+-	    err = fprintf( file_out, fmt_blank );
++	    err = fprintf( file_out, "%s", fmt_blank );
+ 	    retchk( err );
+ 	  }
+ 
+@@ -1107,7 +1107,7 @@
+   }
+   while ( (unit_no = krui_getNextUnit() ) > 0);
+ 
+-  err = fprintf( file_out, fmt_hdr2 );
++  err = fprintf( file_out, "%s", fmt_hdr2 );
+   retchk( err );
+ 
+   return( KRERR_NO_ERROR );
+@@ -1146,7 +1146,7 @@
+   
+      err = fprintf( file_out, "\n\n%s :\n\n", title[18] ); 
+      retchk( err );
+-     err = fprintf (file_out, "%s\n", headers[8]);
++     err = fprintf (file_out, "%s\n", KR_IO_HEADER_8);
+      retchk (err);
+      err = fprintf (file_out, "-----|-----|-----|------|------|-------\n");
+      retchk (err);
+@@ -1217,7 +1217,7 @@
+ 
+     if (++i > max_connects_per_line)  {
+       i = 1;
+-      err = fprintf( file_out, fmt_blank );
++      err = fprintf( file_out, "%s", fmt_blank );
+       retchk( err );
+     }
+     if ((tacoma_mode)&&((val_a != 0.0)&&(val_b != 0.0)))
+@@ -1263,9 +1263,9 @@
+ 
+   err = fprintf( file_out, "\n\n%s :\n\n", title[11] );
+   retchk( err );
+-  err = fprintf( file_out, fmt_hdr1 );
++  err = fprintf( file_out, "%s", fmt_hdr1 );
+   retchk( err );
+-  err = fprintf( file_out, fmt_hdr2 );
++  err = fprintf( file_out, "%s", fmt_hdr2 );
+   retchk( err );
+ 
+   unit_no = krui_getFirstUnit();
+@@ -1312,7 +1312,7 @@
+   }
+   while ( (unit_no = krui_getNextUnit()) > 0 );
+ 
+-  err = fprintf( file_out, fmt_hdr2 );
++  err = fprintf( file_out, "%s", fmt_hdr2 );
+   retchk( err );
+   return( KRERR_NO_ERROR );
+ }
+@@ -1344,9 +1344,9 @@
+ 
+   err = fprintf( file_out, "\n\n%s :\n\n", title[12] );
+   retchk( err );
+-  err = fprintf( file_out, fmt_hdr1 );
++  err = fprintf( file_out, "%s", fmt_hdr1 );
+   retchk( err );
+-  err = fprintf( file_out, fmt_hdr2 );
++  err = fprintf( file_out, "%s", fmt_hdr2 );
+   retchk( err );
+ 
+   /*  get default subnet number  */
+@@ -1383,7 +1383,7 @@
+ 		      retchk( err );
+ 
+ 		      if ( (++elem_no % max_subnets_per_line) == 0)  {
+-			  err = fprintf( file_out, fmt_blank );
++			  err = fprintf( file_out, "%s", fmt_blank );
+ 			  retchk( err );
+ 		      }
+ 
+@@ -1394,7 +1394,7 @@
+ 	  }
+       }
+ 
+-  err = fprintf( file_out, fmt_hdr2 );
++  err = fprintf( file_out, "%s", fmt_hdr2 );
+   retchk( err );
+   err = fprintf( file_out, "\n" );
+   retchk( err );
+@@ -1430,9 +1430,9 @@
+ 
+   err = fprintf( file_out, "\n\n%s :\n\n", title[15] );
+   retchk( err );
+-  err = fprintf( file_out, fmt_hdr1 );
++  err = fprintf( file_out, "%s", fmt_hdr1 );
+   retchk( err );
+-  err = fprintf( file_out, fmt_hdr2 );
++  err = fprintf( file_out, "%s", fmt_hdr2 );
+   retchk( err );
+ 
+   /*  get default layer number	*/
+@@ -1468,7 +1468,7 @@
+ 		      retchk( err );
+ 
+ 		      if ( (++elem_no % max_layers_per_line) == 0)  {
+-			  err = fprintf( file_out, fmt_blank );
++			  err = fprintf( file_out, "%s", fmt_blank );
+ 			  retchk( err );
+ 		      }
+ 
+@@ -1479,7 +1479,7 @@
+ 	  }
+       }
+ 
+-  err = fprintf( file_out, fmt_hdr2 );
++  err = fprintf( file_out, "%s", fmt_hdr2 );
+   retchk( err );
+   err = fprintf( file_out, "\n" );
+   retchk( err );
+@@ -2202,7 +2202,7 @@
+ static void  krio_readSiteDefinitions(void)
+ {
+   if ( !skipComments() )  return;
+-  if ((fscanf( file_in, headers[0] ) != 0) ||
++  if ((fscanf( file_in, KR_IO_HEADER_0 ) != 0) ||
+       !matchHead2( 1 ) )  {
+     KernelErrorCode = KRERR_FILE_SYNTAX;
+     return;
+@@ -2247,7 +2247,7 @@
+   NoOfUnitTypes = 0;
+ 
+   if ( !skipComments() )  return;
+-  if ((fscanf( file_in, headers[1] ) != 0) ||
++  if ((fscanf( file_in, KR_IO_HEADER_1 ) != 0) ||
+       !matchHead2( 3 ) )  {
+     KernelErrorCode = KRERR_FILE_SYNTAX;
+     return;
+@@ -2330,7 +2330,7 @@
+ 
+ 
+   if ( !skipComments() )  return;
+-  if ((fscanf( file_in, headers[2] ) != 0) ||
++  if ((fscanf( file_in, KR_IO_HEADER_2 ) != 0) ||
+       !matchHead2( 6 ) )  {
+     KernelErrorCode = KRERR_FILE_SYNTAX;
+     return;
+@@ -2374,7 +2374,7 @@
+ 
+ 
+   if ( !skipComments() )  return;
+-  if ((fscanf( file_in, headers[3] ) != 0) ||
++  if ((fscanf( file_in, KR_IO_HEADER_3 ) != 0) ||
+       !matchHead2( 9 ) )  {
+     KernelErrorCode = KRERR_FILE_SYNTAX;
+     return;
+@@ -2588,7 +2588,7 @@
+ 
+ 
+   if ( !skipComments() )  return;
+-  if ((fscanf( file_in, headers[4] ) != 0) ||
++  if ((fscanf( file_in, KR_IO_HEADER_4 ) != 0) ||
+      (!matchHead2( 2 )) )  {
+     KernelErrorCode = KRERR_FILE_SYNTAX;
+     return;
+@@ -2684,7 +2684,7 @@
+ 
+ 
+   if ( !skipComments() )  return;
+-  if ((fscanf( file_in, headers[5] ) != 0) ||
++  if ((fscanf( file_in, KR_IO_HEADER_5 ) != 0) ||
+       !matchHead2( 1 ) )  {
+     KernelErrorCode = KRERR_FILE_SYNTAX;
+     return;
+@@ -2733,7 +2733,7 @@
+ 
+ 
+   if ( !skipComments() )  return;
+-  if ((fscanf( file_in, headers[6] ) != 0) ||
++  if ((fscanf( file_in, KR_IO_HEADER_6 ) != 0) ||
+       !matchHead2( 1 ) )  {
+     KernelErrorCode = KRERR_FILE_SYNTAX;
+     return;
+@@ -2785,7 +2785,7 @@
+   kr_xyTransTable( OP_TRANSTABLE_CLEAR, &x, &y, 0 );
+ 
+   if ( !skipComments() )  return;
+-  if ((fscanf( file_in, headers[7] ) != 0) ||
++  if ((fscanf( file_in, KR_IO_HEADER_7 ) != 0) ||
+       !matchHead2( 2 ) )  {
+     KernelErrorCode = KRERR_FILE_SYNTAX;
+     return;
+@@ -2834,7 +2834,7 @@
+    struct Unit *unit_ptr;
+  
+   if ( !skipComments() )  return;
+-  if (fscanf( file_in, headers[8] ) != 0)
++  if (fscanf( file_in, KR_IO_HEADER_8 ) != 0)
+     {  KernelErrorCode = KRERR_FILE_SYNTAX;  return;  }
+   if ( !matchHead2( 5 ) )
+     {  KernelErrorCode = KRERR_FILE_SYNTAX;  return;  }
+@@ -3056,7 +3056,7 @@
+   KernelErrorCode = KRERR_IO;
+ 
+   /*  write header and version number  */
+-  ret = fprintf( file_out, resHeader[0], krio_getIOVersion() );
++  ret = fprintf( file_out, 0, krio_getIOVersion() );
+   RETCHKGTO( ret );
+   lineno++;
+ 
+@@ -3064,16 +3064,16 @@
+   clock = 1;
+   (void) time( (time_t *) &clock);
+ 
+-  strcpy( work_str, resHeader[1] );
++  strcpy( work_str, KR_IO_RESHEADER_1 );
+   strcat( work_str, " %s\n" );
+   ret = fprintf( file_out, work_str, ctime( (time_t *) &clock) );
+   RETCHKGTO( ret );
+   lineno++;
+ 
+   /*  write no. of patterns, input units, output units  */
+-  strcpy( work_str, resHeader[2] );
+-  strcat( work_str, resHeader[3] );
+-  strcat( work_str, resHeader[4] );
++  strcpy( work_str, KR_IO_RESHEADER_2 );
++  strcat( work_str, KR_IO_RESHEADER_3 );
++  strcat( work_str, KR_IO_RESHEADER_4 );
+   ret = fprintf( file_out, work_str, end - start + 1, 
+ 		krui_getNoOfInputUnits() + krui_getNoOfSpecialInputUnits(),
+ 		krui_getNoOfOutputUnits() + krui_getNoOfSpecialOutputUnits() );
+@@ -3081,8 +3081,8 @@
+   lineno += 3;
+ 
+   /* write numbers of used patterns */
+-  strcpy( work_str, resHeader[5] );
+-  strcat( work_str, resHeader[6] );
++  strcpy( work_str, KR_IO_RESHEADER_5 );
++  strcat( work_str, KR_IO_RESHEADER_6 );
+   ret = fprintf( file_out, work_str, startpattern, endpattern);
+   RETCHKGTO( ret );
+   lineno += 2;
+@@ -3090,13 +3090,13 @@
+   /* write additional format information */
+   if (includeinput)
+   {
+-    ret = fprintf(file_out, resHeader[7]);
++    ret = fprintf(file_out, KR_IO_RESHEADER_7);
+     RETCHKGTO( ret );
+     lineno += 1;
+   }
+   if (includeoutput)
+   {
+-    ret = fprintf(file_out, resHeader[8]);
++    ret = fprintf(file_out, KR_IO_RESHEADER_8);
+     RETCHKGTO( ret );
+     lineno += 1;
+   }
+Index: SNNSv4.3/kernel/sources/kr_io.ph
+===================================================================
+--- SNNSv4.3.orig/kernel/sources/kr_io.ph	2008-04-21 08:56:00.000000000 +0100
++++ SNNSv4.3/kernel/sources/kr_io.ph	2015-10-26 15:27:47.564329763 +0000
+@@ -179,6 +179,26 @@
+     " no. | LLN | LUN | Toff | Soff | Ctype"
+     };
+ 
++#define KR_IO_RESHEADER_0 "SNNS result file %s\n"
++#define KR_IO_RESHEADER_1 "generated at"
++#define KR_IO_RESHEADER_2 "No. of patterns     : %d\n"
++#define KR_IO_RESHEADER_3 "No. of input units  : %d\n"
++#define KR_IO_RESHEADER_4 "No. of output units : %d\n"
++#define KR_IO_RESHEADER_5 "startpattern        : %d\n"
++#define KR_IO_RESHEADER_6 "endpattern          : %d\n"
++#define KR_IO_RESHEADER_7 "input patterns included\n"
++#define KR_IO_RESHEADER_8 "teaching output included\n"
++
++#define KR_IO_HEADER_0 " site name | site function"
++#define KR_IO_HEADER_1 " name | act func | out func | sites"
++#define KR_IO_HEADER_2 " act | bias | st | subnet | layer | act func | out func"
++#define KR_IO_HEADER_3 " no. | typeName | unitName | act | bias | st | position | act func | out func | sites"
++#define KR_IO_HEADER_4 " target | site | source:weight"
++#define KR_IO_HEADER_5 " subnet | unitNo."
++#define KR_IO_HEADER_6 " layer | unitNo."
++#define KR_IO_HEADER_7 " delta x | delta y | z"
++#define KR_IO_HEADER_8 " no. | LLN | LUN | Toff | Soff | Ctype"
++
+ 
+ 
+ /*
