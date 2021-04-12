@@ -1,3 +1,12 @@
+Quote from http://www.ra.cs.uni-tuebingen.de/software/JavaNNS/welcome_e.html:
+
+    "JavaNNS and SNNS are now very outdated and are no longer supported or maintained. Better use a modern neural network simulator, like Google Tensorflow 2.0 or Facebook's PyTorch 1.5, which also have very good online tutorials and support GPUs."
+
+Please note this siftware is not maintained by me, and never was, it's not my software, it was made available for free by the University of Stuttgart and the University of Tübingen. It is not apparently available for download any more (the link at http://www.ra.cs.uni-tuebingen.de/software/JavaNNS/welcome_e.html is dysfunctional, and it has never been available from any RCS that I know of, which is why I checked it in here for my own purposes, a very long time ago).
+
+I cannot however provide any help or support I'm afraid... very sorry... I've not even used it myself for 10Y or so.
+
+
 **********************************************************************
 			 SNNSv4.2 Readme file
 **********************************************************************
