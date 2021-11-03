@@ -198,7 +198,8 @@ snnsbat: snnsbat.o $(KERNELLIBS)
 	$(CC) $(LDFLAGS) snnsbat.o $(KERNELALLLIBS) -o snnsbat
 
 feedback-gennet: feedback-gennet.o $(KERNELLIBS)
-	$(CC) $(LDFLAGS) feedback-gennet.o $(KERNELALLLIBS) -o feedback-gennet
+#	$(CC) $(LDFLAGS) feedback-gennet.o $(KERNELALLLIBS) -o feedback-gennet
+	$(CC) $(LDFLAGS) feedback-gennet.o $(KERNELLIBS) -o feedback-gennet
 
 convert2snns: convert2snns.o $(KERNELLIBS)
 	$(CC) $(LDFLAGS) convert2snns.o $(KERNELALLLIBS) -o convert2snns

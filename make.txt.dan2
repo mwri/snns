@@ -1,0 +1,96 @@
+cd kernel/sources && make
+make[1]: Entering directory '/media/hd_dan_4/danysan/PROJECT_GITs/SNNS/snns-1/kernel/sources'
+gcc  -fPIC -I../..  -g -O2  -c kr_pat_scan.c
+gcc  -fPIC -I../..  -g -O2  -c kr_io.c
+gcc  -fPIC -I../..  -g -O2  -c kr_mem.c
+gcc  -fPIC -I../..  -g -O2  -c kr_ui.c
+gcc  -fPIC -I../..  -g -O2  -c kr_inversion.c
+gcc  -fPIC -I../..  -g -O2  -c art_ui.c
+gcc  -fPIC -I../..  -g -O2  -c kr_art.c
+gcc  -fPIC -I../..  -g -O2  -c kr_art1.c
+gcc  -fPIC -I../..  -g -O2  -c kr_art2.c
+gcc  -fPIC -I../..  -g -O2  -c kr_amap.c
+gcc  -fPIC -I../..  -g -O2  -c kr_pat_parse.c
+gcc  -fPIC -I../..  -g -O2  -c kr_newpattern.c
+gcc  -fPIC -I../..  -g -O2  -c kr_JordElm.c
+ar  rc  libkernel.a kr_pat_scan.o kernel.o kr_io.o kr_mem.o kr_ui.o kr_inversion.o art_ui.o kr_art.o kr_art1.o kr_art2.o kr_amap.o kr_pat_parse.o kr_newpattern.o kr_JordElm.o kr_rand.o
+
+Ignore possible error messages for the following command:
+ranlib  libkernel.a
+END OF COMMANDS THAT MAY FAIL
+
+gcc  -fPIC -I../..  -g -O2  -c init_f.c
+gcc  -fPIC -I../..  -g -O2  -c kr_td.c
+gcc  -fPIC -I../..  -g -O2  -c kr_funcs.c
+gcc  -fPIC -I../..  -g -O2  -c learn_f.c
+gcc  -fPIC -I../..  -g -O2  -c prun_f.c
+gcc  -fPIC -I../..  -g -O2  -c update_f.c
+gcc  -fPIC -I../..  -g -O2  -c cc_learn.c
+gcc  -fPIC -I../..  -g -O2  -c cc_prune.c
+gcc  -fPIC -I../..  -g -O2  -c cc_modify.c
+gcc  -fPIC -I../..  -g -O2  -c cc_glob.c
+gcc  -fPIC -I../..  -g -O2  -c cc_display.c
+gcc  -fPIC -I../..  -g -O2  -c tacoma_learn.c
+tacoma_learn.c: In function ‘tac_initXiAndRis’:
+tacoma_learn.c:475:10: warning: type of ‘StartPattern’ defaults to ‘int’ [-Wimplicit-int]
+ krui_err tac_initXiAndRis(StartPattern,EndPattern)
+          ^~~~~~~~~~~~~~~~
+tacoma_learn.c:475:10: warning: type of ‘EndPattern’ defaults to ‘int’ [-Wimplicit-int]
+gcc  -fPIC -I../..  -g -O2  -c dlvq_learn.c
+gcc  -fPIC -I../..  -g -O2  -c stochastic_learn_f.c
+gcc  -fPIC -I../..  -g -O2  -c scaled_conj_grad.c
+ar  rc  libfunc.a func_tbl.o init_f.o kr_td.o kr_funcs.o learn_f.o prun_f.o tbl_func.o trans_f.o update_f.o remap_f.o matrix.o arttr_f.o cc_learn.o cc_prune.o cc_modify.o cc_glob.o cc_display.o tacoma_learn.o dlvq_learn.o stochastic_learn_f.o scaled_conj_grad.o 
+
+Ignore possible error messages for the following command:
+ranlib  libfunc.a
+END OF COMMANDS THAT MAY FAIL
+
+make[1]: Leaving directory '/media/hd_dan_4/danysan/PROJECT_GITs/SNNS/snns-1/kernel/sources'
+cd tools/sources && make
+make[1]: Entering directory '/media/hd_dan_4/danysan/PROJECT_GITs/SNNS/snns-1/tools/sources'
+gcc  -fPIC -I../.. -I../../kernel/sources  -g -O2  -c snns2c.c
+snns2c.c: In function ‘main’:
+snns2c.c:2145:5: warning: ‘strncpy’ specified bound depends on the length of the source argument [-Wstringop-overflow=]
+     strncpy(ProcName, CFileName, strlen(CFileName) - 2);
+     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+snns2c.c:2145:34: note: length computed here
+     strncpy(ProcName, CFileName, strlen(CFileName) - 2);
+                                  ^~~~~~~~~~~~~~~~~
+gcc   snns2c.o snns2clib.o ../../kernel/sources/libkernel.a ../../kernel/sources/libfunc.a -lm -lfl  -o snns2c
+gcc   pat_sel.o ../../kernel/sources/libkernel.a ../../kernel/sources/libfunc.a -lm -lfl  -o pat_sel
+gcc   netlearn.o ../../kernel/sources/libkernel.a ../../kernel/sources/libfunc.a -lm -lfl  -o netlearn
+gcc  -fPIC -I../.. -I../../kernel/sources  -g -O2  -c td_bignet.c
+gcc   td_bignet.o ../../kernel/sources/libkernel.a ../../kernel/sources/libfunc.a -lm -lfl  -o td_bignet
+gcc  -fPIC -I../.. -I../../kernel/sources  -g -O2  -c ff_bignet.c
+gcc   ff_bignet.o ../../kernel/sources/libkernel.a ../../kernel/sources/libfunc.a -lm -lfl  -o ff_bignet
+gcc   netperf.o ../../kernel/sources/libkernel.a ../../kernel/sources/libfunc.a -lm -lfl  -o netperf
+gcc   snnsbat.o ../../kernel/sources/libkernel.a ../../kernel/sources/libfunc.a -lm -lfl  -o snnsbat
+/usr/bin/ld: snnsbat.o: in function `main':
+/media/hd_dan_4/danysan/PROJECT_GITs/SNNS/snns-1/tools/sources/snnsbat.c:1785: warning: the use of `tempnam' is dangerous, better use `mkstemp'
+gcc   feedback-gennet.o ../../kernel/sources/libkernel.a ../../kernel/sources/libfunc.a -o feedback-gennet
+gcc   convert2snns.o ../../kernel/sources/libkernel.a ../../kernel/sources/libfunc.a -lm -lfl  -o convert2snns
+gcc   isnns.o ../../kernel/sources/libkernel.a ../../kernel/sources/libfunc.a -lm -lfl  -o isnns
+gcc  -fPIC -I../.. -I../../kernel/sources  -g -O2  -c linknets.c
+gcc   linknets.o snns2clib.o ../../kernel/sources/libkernel.a ../../kernel/sources/libfunc.a -lm -lfl  -o linknets
+gcc   batchman.o gram1.tab.o lex.yyz.o icopjmp.o ictab.o symtab.o backpatch.o memory.o ic_snns.o error.o arglist.o snns_intfce.o special_jacket.o lex.yyy.o ../../kernel/sources/libkernel.a ../../kernel/sources/libfunc.a -lm -lfl  -o batchman
+/usr/bin/ld: ic_snns.o: in function `pruneNet':
+/media/hd_dan_4/danysan/PROJECT_GITs/SNNS/snns-1/tools/sources/ic_snns.c:1770: warning: the use of `tempnam' is dangerous, better use `mkstemp'
+make[1]: Leaving directory '/media/hd_dan_4/danysan/PROJECT_GITs/SNNS/snns-1/tools/sources'
+cd xgui/sources && make
+make[1]: Entering directory '/media/hd_dan_4/danysan/PROJECT_GITs/SNNS/snns-1/xgui/sources'
+gcc  -fPIC -I../.. -I../../kernel/sources -I../../xgui/iconsXgui   -g -O2  -c ui_netGraph.c
+ar  rc  libxgui1.a ui_xWidgets.o ui_confirmer.o ui_main.o ui_mainP.o ui_status.o ui_info.o ui_infoP.o ui_maspar.o ui_control.o ui_controlP.o ui_file.o ui_fileP.o ui_setup.o ui_setupP.o ui_xGraphic.o ui_netGraph.o ui_utilP.o ui_netUpdate.o
+ranlib  libxgui1.a
+gcc  -fPIC -I../.. -I../../kernel/sources -I../../xgui/iconsXgui   -g -O2  -c ui_funcdispl.c
+ar  rc  libxgui2.a ui_event.o ui_selection.o ui_action.o ui_key.o ui_textP.o ui_lists.o ui_layer.o ui_layerP.o ui_display.o ui_edit.o ui_config.o ui_color.o ui_inversion.o ui_funcdispl.o ui_displmap.o ui_displwght.o ui_print.o ui_colEdit.o ui_result.o cc_main.o pr_main.o ui_kohonen.o
+ranlib  libxgui2.a
+gcc  -fPIC -I../.. -I../../kernel/sources -I../../xgui/iconsXgui   -g -O2  -c net_analyzer.c
+gcc  -fPIC -I../.. -I../../kernel/sources -I../../xgui/iconsXgui   -g -O2  -c bn_TD_bignet.c
+ar  rc  lib3d.a net_analyzer.o d3_xUtils.o d3_global.o d3_anageo.o d3_shade.o d3_lists.o d3_point.o d3_dither.o d3_zgraph.o d3_fonts.o d3_graph.o d3_draw.o d3_disp.o d3_move.o d3_zValue.o d3_setup.o d3_units.o d3_links.o d3_model.o d3_project.o d3_light.o d3_pannels.o d3_main.o bn_bignet.o bn_basics.o bn_art1.o bn_art2.o bn_artmap.o bn_TD_bignet.o bn_kohonen.o bn_assoz.o o_graph.o bn_JordElm.o ui_class.o bn_bighop.o
+ranlib  lib3d.a
+gcc  libxgui1.a libxgui2.a lib3d.a \
+ -lXaw3d -lXmu -lXt -lXext -lSM -lICE  -lX11  \
+../../kernel/sources/libkernel.a ../../kernel/sources/libfunc.a -lm -lfl  -o xgui 
+/usr/bin/ld: libxgui1.a(ui_controlP.o): in function `ui_rem_performPrunInit':
+/media/hd_dan_4/danysan/PROJECT_GITs/SNNS/snns-1/xgui/sources/ui_controlP.c:1191: warning: the use of `tempnam' is dangerous, better use `mkstemp'
+make[1]: Leaving directory '/media/hd_dan_4/danysan/PROJECT_GITs/SNNS/snns-1/xgui/sources'

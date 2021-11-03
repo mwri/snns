@@ -1,0 +1,16 @@
+This is a Python module that provides the SNNS kernel functions.
+This should allow much better scripting than batchman and could be a
+first step towards a replacement GUI (for example using Tkinter).
+
+Please notice that this is not very well tested, I'd be happy if you
+reported problems with it.
+
+For usage, please have a look at the files in the "examples" directory and
+read the PyDoc documentation.
+
+Patrick Kursawe
+patrick.kursawe@web.de
+
+Convertido a Python 3 por Daniel Sanchez.
+danysan2000@gmail.com
+

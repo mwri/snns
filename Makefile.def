@@ -58,8 +58,8 @@ CXXFLAGS           = -g -O2 # REPORT_IF_BUG
 # SNNS installation directories
 
 CANONICAL_HOST     = x86_64-pc-unknown-linux-gnuoldld # REPORT_IF_BUG
-INSTALLDIR         = /home/planatsc/Desktop/snns/SNNSv4.3
-SNNSDIR            = /home/planatsc/Desktop/snns/SNNSv4.3
+INSTALLDIR         = /media/danysan/hd_dan_4/danysan/PROJECT_GITs/snns-1
+SNNSDIR            = /media/danysan/hd_dan_4/danysan/PROJECT_GITs/snns-1
 KERNELBINEXT       = /kernel
 TOOLSBINEXT        = /tools
 XGUIBINEXT         = /xgui
@@ -93,7 +93,7 @@ MAKEDEPEND         = makedepend
 # Define library and include paths for the X system if headers and
 # libraries can not be found in standard places
 X_CFLAGS           =  # REPORT_IF_BUG
-X_LIBS             =  -L/usr/lib64 # REPORT_IF_BUG
+X_LIBS             =  # REPORT_IF_BUG
 
 # Any extra libraries needed to be linked after all X libraries
 X_EXTRA_LIBS       =  # REPORT_IF_BUG

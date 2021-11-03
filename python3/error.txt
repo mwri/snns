@@ -1,0 +1,6 @@
+running build
+running build_py
+running build_ext
+building 'krui' extension
+x86_64-linux-gnu-gcc -pthread -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -I../kernel/sources -I/usr/include/python3.7m -c snns/krui.c -o build/temp.linux-x86_64-3.7/snns/krui.o
+x86_64-linux-gnu-gcc -pthread -shared -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,relro -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 build/temp.linux-x86_64-3.7/snns/krui.o -L../kernel/sources -lkernel -lfunc -lfl -o build/lib.linux-x86_64-3.7/snns/krui.cpython-37m-x86_64-linux-gnu.so

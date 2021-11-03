@@ -1,0 +1,59 @@
+SNNS network definition file V1.4-3D
+generated at Mon Apr 25 15:58:28 1994
+
+network name : xor
+source files :
+no. of units : 4
+no. of connections : 5
+no. of unit types : 2
+no. of site types : 2
+
+
+learning function : Quickprop
+update function   : Topological_Order
+
+
+site definition section :
+
+ site name | site function
+-----------|------------------
+ excite    | Site_WeightedSum
+ inhibit   | Site_Pi
+-----------|------------------
+
+
+type definition section :
+
+name          | act func     | out func     |sites
+--------------|--------------|--------------|---------
+LongeroutType | Act_Logistic | Out_Identity |
+outType       | Act_Logistic | Out_Identity |
+--------------|--------------|--------------|---------
+
+
+unit default section :
+
+act      | bias     | st | subnet | layer | act func     | out func
+---------|----------|----|--------|-------|--------------|-------------
+ 0.00000 |  0.00000 | h  |      0 |     1 | Act_Logistic | Out_Identity 
+---------|----------|----|--------|-------|--------------|-------------
+
+
+unit definition section :
+
+no. | typeName      | unitName | act      | bias     | st | position | act func | out func | sites
+----|---------------|----------|----------|----------|----|----------|----------|----------|---------
+  1 |               | in_1     |  1.00000 |  0.00000 | i  | 3,5,0    |||
+  2 |               | in_2     |  1.00000 |  0.00000 | i  | 9,5,0    |||
+  3 |               | hidden   |  0.04728 | -3.08885 | h  | 6,3,0    |||
+  4 |               | result   |  0.10377 | -2.54932 | o  | 6,0,0    |||
+----|---------------|----------|----------|----------|----|----------|----------|----------|---------
+
+
+connection definition section :
+
+target | site    | source:weight
+-------|---------|------------------------------------------------------------------------------------------------------------
+     3 |         | 2:-4.83963, 1: 4.92521
+     4 |         | 3:11.11523, 2: 4.53903, 1:-4.67122
+-------|---------|------------------------------------------------------------------------------------------------------------
